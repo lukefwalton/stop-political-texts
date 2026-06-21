@@ -7,7 +7,7 @@ struct AboutView: View {
                 Text("Built by Luke F. Walton, founder of Surmado. This is a personal project, not a Surmado product.")
             }
             Section {
-                Text("Paid once. No ads. No tracking. No data business.")
+                Text("Free. No ads. No tracking. No data business.")
                     .foregroundStyle(.secondary)
             }
 

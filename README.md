@@ -147,8 +147,8 @@ design inspiration (see Acknowledgements below).
 ## License
 
 **MIT — take it.** Open source under the [MIT License](LICENSE). Fork it, steal
-it, improve it, ship your own App Store build. The $0.99 App Store release
-here is paid once to help cover Apple's developer fee — not a data business.
+it, improve it, ship your own App Store build. The App Store release here is
+**free** — a public utility, not a data business.
 Contributions welcome under [CONTRIBUTING.md](CONTRIBUTING.md) with a lightweight
 [DCO](DCO.md) sign-off.
 

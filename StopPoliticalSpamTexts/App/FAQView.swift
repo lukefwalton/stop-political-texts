@@ -9,8 +9,8 @@ struct FAQView: View {
 
     private let items: [QA] = [
         QA(
-            question: "Why is it $0.99?",
-            answer: "Because Apple charges me $100 a year to publish apps. The 99 cents helps cover that, nothing more. You pay once, and there is no data business behind it."
+            question: "Why is it free?",
+            answer: "It's a public utility. I pay Apple's developer fee myself so anyone can use it. No ads, no subscription, no data business — ever."
         ),
         QA(
             question: "Do you see my texts?",

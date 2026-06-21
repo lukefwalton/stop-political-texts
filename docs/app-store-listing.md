@@ -5,9 +5,9 @@ field. Keep this in sync with the app's actual UI and `PRIVACY.md`.
 
 ## Before you submit (read once)
 
-- **Price** is set in App Store Connect, not in the description. Apple shows it
-  on the product page and it varies by region, so the description omits it on
-  purpose.
+- **Price** is set in App Store Connect, not in the description. Set to **Free**
+  ($0). Apple shows regional pricing on the product page; the description omits
+  price on purpose.
 - **The Privacy Policy URL must be publicly reachable at submission.** This app
   lives in its own repository (`stop-political-texts`). Make sure the repo is
   public — and `PRIVACY.md` reachable at the URL below — before submitting, or

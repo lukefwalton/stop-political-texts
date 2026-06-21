@@ -3,10 +3,10 @@
 Short answers to the things people ask most about this privacy-first iOS SMS
 filter for political campaign texts. These mirror the in-app FAQ.
 
-### Why is it $0.99?
+### Why is it free?
 
-Because Apple charges $100 a year to publish apps. The 99 cents helps cover
-that, nothing more. You pay once, and there is no data business behind it.
+It's a public utility. Luke pays Apple's developer fee personally so anyone can
+use it. No ads, no subscription, no data business — ever.
 
 ### Do you see my texts?
 
