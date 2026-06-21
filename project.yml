@@ -1,0 +1,83 @@
+# XcodeGen project definition.
+# Generate the Xcode project with:  xcodegen generate
+# (install via `brew install xcodegen`). Then set your DEVELOPMENT_TEAM and the
+# App Group capability is already wired through the entitlements files.
+
+name: StopPoliticalSpamTexts
+options:
+  bundleIdPrefix: com.lukewalton
+  projectFormat: xcode15_0
+  deploymentTarget:
+    iOS: "16.1"
+  createIntermediateGroups: true
+
+settings:
+  base:
+    MARKETING_VERSION: "1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    SWIFT_VERSION: "5.0"
+    TARGETED_DEVICE_FAMILY: "1,2"
+    CODE_SIGN_STYLE: Automatic
+
+# Local Swift Package: the LFW design system that gives the app its
+# onboarding/chrome vocabulary. Vendored into this repo (a copy of the package
+# shared across the original monorepo); path is relative to this project.yml.
+packages:
+  LFWDesignSystem:
+    path: lfwdesignsystem
+
+targets:
+  StopPoliticalSpamTexts:
+    type: application
+    platform: iOS
+    sources:
+      - path: StopPoliticalSpamTexts/App
+      - path: StopPoliticalSpamTexts/Classifier
+      - path: StopPoliticalSpamTexts/Storage
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.lukewalton.stoppoliticalspamtexts
+        INFOPLIST_FILE: StopPoliticalSpamTexts/App/Info.plist
+        CODE_SIGN_ENTITLEMENTS: StopPoliticalSpamTexts/App/StopPoliticalSpamTexts.entitlements
+        GENERATE_INFOPLIST_FILE: NO
+    dependencies:
+      - target: StopPoliticalSpamTextsMessageFilter
+        embed: true
+      - package: LFWDesignSystem
+
+  StopPoliticalSpamTextsMessageFilter:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: StopPoliticalSpamTextsMessageFilter
+      - path: StopPoliticalSpamTexts/Classifier
+      - path: StopPoliticalSpamTexts/Storage
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.lukewalton.stoppoliticalspamtexts.messagefilter
+        INFOPLIST_FILE: StopPoliticalSpamTextsMessageFilter/Info.plist
+        CODE_SIGN_ENTITLEMENTS: StopPoliticalSpamTextsMessageFilter/StopPoliticalSpamTextsMessageFilter.entitlements
+        GENERATE_INFOPLIST_FILE: NO
+
+  StopPoliticalSpamTextsTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: StopPoliticalSpamTextsTests
+    dependencies:
+      - target: StopPoliticalSpamTexts
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.lukewalton.stoppoliticalspamtexts.tests
+        GENERATE_INFOPLIST_FILE: YES
+
+schemes:
+  StopPoliticalSpamTexts:
+    build:
+      targets:
+        StopPoliticalSpamTexts: all
+    test:
+      targets:
+        - StopPoliticalSpamTextsTests
+    run:
+      config: Debug

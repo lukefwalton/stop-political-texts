@@ -1,0 +1,29 @@
+Stop Political Spam Texts
+Copyright (c) 2026 Luke Walton
+
+This project is licensed under the MIT License. See LICENSE for details.
+
+No third-party code, SDKs, datasets, or asset bundles are currently included in
+the app.
+
+Design acknowledgements:
+
+- Veto, an MIT-licensed open-source iOS message filter:
+  https://github.com/signalblur/Veto
+- Bouncer, an MIT-licensed open-source iOS message filter:
+  https://github.com/afterxleep/Bouncer
+
+These projects informed several high-level design patterns, including
+allow-before-deny precedence, offline privacy checks, file protection choices for
+extension-readable settings, and Unicode diacritic folding during normalization.
+No code was copied.
+
+Public-domain government references:
+
+- FEC disclaimer rules:
+  https://www.fec.gov/help-candidates-and-committees/advertising-and-disclaimers/
+- FCC political robotext rules:
+  https://www.fcc.gov/consumers/guides/political-campaign-robocalls-and-robotexts-rules
+
+These references inform classifier vocabulary and political text context. No
+copyrighted or restrictively licensed datasets are used.
