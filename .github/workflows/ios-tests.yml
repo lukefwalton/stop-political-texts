@@ -1,0 +1,82 @@
+name: iOS Tests
+
+# Builds the app + message-filter extension and runs the Swift unit suite
+# (classifier, normalizer, URL extractor, sender analyzer, config migration) on
+# a macOS runner. The Xcode project is generated from project.yml by XcodeGen,
+# and the build links the vendored lfwdesignsystem Swift Package at the repo
+# root.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ios-tests-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  unit-tests:
+    name: Swift unit tests
+    runs-on: macos-14
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install XcodeGen
+        run: brew install xcodegen
+
+      - name: Generate Xcode project
+        run: xcodegen generate
+
+      - name: Toolchain + sims
+        run: |
+          set -euo pipefail
+          echo "::group::xcodebuild version"
+          xcodebuild -version
+          echo "::endgroup::"
+          echo "::group::available iPhone simulators"
+          xcrun simctl list devices available | grep -E "iPhone|iOS " || true
+          echo "::endgroup::"
+          echo "::group::vendored Swift package"
+          ls -la lfwdesignsystem
+          echo "::endgroup::"
+
+      # Build first, test second: a compile error fails here with the real
+      # swiftc error in this step's log instead of buried inside a combined
+      # `xcodebuild test` that also does simulator boot + install.
+      #
+      # EXCLUDED_ARCHS=x86_64: macos-14 runners are Apple Silicon and the iOS
+      # Simulator runs as arm64, so the x86_64 slice is never needed here.
+      - name: Build for testing
+        run: |
+          set -euo pipefail
+          xcodebuild build-for-testing \
+            -scheme StopPoliticalSpamTexts \
+            -destination 'generic/platform=iOS Simulator' \
+            -configuration Debug \
+            CODE_SIGNING_ALLOWED=NO \
+            COMPILER_INDEX_STORE_ENABLE=NO \
+            EXCLUDED_ARCHS=x86_64
+
+      - name: Run unit tests
+        run: |
+          set -euo pipefail
+          DEST='platform=iOS Simulator,name=iPhone 15'
+          if ! xcrun simctl list devices available | grep -q "iPhone 15 ("; then
+            UDID=$(xcrun simctl list devices available --json \
+              | python3 -c "import json,sys; r=json.load(sys.stdin)['devices']; ids=[d['udid'] for ds in r.values() for d in ds if d['name'].startswith('iPhone')]; print(ids[0] if ids else '')")
+            if [ -z "$UDID" ]; then
+              echo "::error::No iPhone simulator available on this runner"
+              xcrun simctl list devices available
+              exit 1
+            fi
+            DEST="id=$UDID"
+          fi
+          xcodebuild test-without-building \
+            -scheme StopPoliticalSpamTexts \
+            -destination "$DEST" \
+            CODE_SIGNING_ALLOWED=NO

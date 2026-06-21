@@ -1,0 +1,29 @@
+# Copy to project.local.yml and fill in your Apple Developer Team ID.
+# Find it at developer.apple.com → Membership → Team ID (10 characters).
+# Then: xcodegen generate && open StopPoliticalSpamTexts.xcodeproj
+#
+# If you don't own com.lukewalton.*, change bundleIdPrefix and bundle IDs below
+# to match App IDs you registered in the Developer portal. A fork is its own app
+# with its own App Store review and privacy disclosures; also change the App
+# Group id in the two .entitlements files so it stays under your prefix.
+
+settings:
+  base:
+    DEVELOPMENT_TEAM: YOUR_TEAM_ID_HERE
+
+# Uncomment to use your own bundle prefix instead of com.lukewalton:
+# options:
+#   bundleIdPrefix: com.yourname
+# targets:
+#   StopPoliticalSpamTexts:
+#     settings:
+#       base:
+#         PRODUCT_BUNDLE_IDENTIFIER: com.yourname.stoppoliticalspamtexts
+#   StopPoliticalSpamTextsMessageFilter:
+#     settings:
+#       base:
+#         PRODUCT_BUNDLE_IDENTIFIER: com.yourname.stoppoliticalspamtexts.messagefilter
+#   StopPoliticalSpamTextsTests:
+#     settings:
+#       base:
+#         PRODUCT_BUNDLE_IDENTIFIER: com.yourname.stoppoliticalspamtexts.tests

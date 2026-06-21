@@ -1,0 +1,23 @@
+name: Checks
+
+# Guardrail that doesn't need Xcode. Enforces the Message Filter Extension
+# privacy doctrine — no network calls, no analytics/crash SDKs, no logging of
+# message content — by grepping every source dir that ships inside the extension
+# target. scripts/privacy_check.sh also verifies its own scan list stays in sync
+# with the extension's sources in project.yml, so adding a shared source dir
+# can't silently reopen the coverage gap. Companion to ios-tests.yml, which
+# handles the actual iOS build/test.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  extension-privacy:
+    name: Extension privacy doctrine
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run extension privacy check
+        run: bash scripts/privacy_check.sh

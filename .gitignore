@@ -1,0 +1,45 @@
+# ── Generated / local Xcode project (XcodeGen) ─────────────────────────────
+*.xcodeproj/
+project.local.yml
+project.generated.yml
+
+# ── Signing & distribution (never commit) ───────────────────────────────────
+*.p12
+*.mobileprovision
+*.cer
+*.pem
+AuthKey_*.p8
+*.provisionprofile
+ExportOptionsLocal.plist
+
+# ── Build & export artifacts ────────────────────────────────────────────────
+DerivedData/
+build/
+.build/
+*.xcarchive
+*.ipa
+*.dSYM.zip
+
+# ── Secrets & env ───────────────────────────────────────────────────────────
+.env
+.env.*
+
+# ── Xcode / SwiftPM ─────────────────────────────────────────────────────────
+*.xcuserstate
+xcuserdata/
+*.xcscmblueprint
+*.xccheckout
+.swiftpm/
+Package.resolved
+
+# ── macOS ───────────────────────────────────────────────────────────────────
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ── Editors ─────────────────────────────────────────────────────────────────
+.idea/
+.vscode/
+
+# ── Logs ────────────────────────────────────────────────────────────────────
+*.log

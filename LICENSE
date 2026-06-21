@@ -1,0 +1,16 @@
+Copyright (c) 2026 Luke F. Walton
+
+All rights reserved.
+
+This repository is published by Luke F. Walton (LFW). The application source
+and the vendored `lfwdesignsystem` package are original work by the same author.
+
+You may view, clone, and build locally to verify the app's privacy claims and
+study how it works. No license is granted to copy, modify, merge, publish,
+distribute, sublicense, or sell copies of this software, or to create derivative
+works, without prior written permission.
+
+Support: GitHub Issues or luke@lukefwalton.com
+
+Third-party references (design inspiration, government vocabulary, build tools)
+are noted in NOTICE.
