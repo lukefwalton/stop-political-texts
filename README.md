@@ -18,9 +18,8 @@ Website: [lukefwalton.com](https://lukefwalton.com)
 
 ## Source
 
-Public repository, **copyright Luke F. Walton (LFW)** — including
-[`lfwdesignsystem/`](lfwdesignsystem). Not open source (no MIT or similar grant).
-You may read and build locally to verify privacy claims; see [LICENSE](LICENSE).
+**Open source (MIT).** The full code is public — fork it, steal it, ship your
+own build, improve the classifier. That's the point. See [LICENSE](LICENSE).
 Privacy details: [PRIVACY.md](PRIVACY.md).
 
 ## Why this exists
@@ -122,13 +121,14 @@ involved to keep doing its job.
 - **Your copy is self-contained.** Everything runs on your device, with no
   server or account behind it, so an installed copy keeps filtering on its own.
   There's nothing that can be switched off remotely.
-- **The source is public for audit.** You can read and build locally to verify
-  the no-network, no-tracking promises. See [LICENSE](LICENSE).
-- **The App Store build is the official release.** Support via
-  [Issues](https://github.com/lukefwalton/stop-political-texts/issues) or
-  [luke@lukefwalton.com](mailto:luke@lukefwalton.com).
+- **The code stays open.** MIT-licensed and public — fork it, reuse it, carry it
+  forward. Building your own copy takes a few minutes: `brew install xcodegen`,
+  `xcodegen generate`, set your signing team, run on your device.
+- **Anyone can ship a variant.** Please do. Change `bundleIdPrefix` in
+  `project.yml` and the App Group id to make it yours. A fork is its own app
+  with its own App Store review and privacy disclosures.
 
-The value here lives in your pocket and in inspectable code — not in a
+The value here lives in your pocket and in open code anyone can fork — not in a
 subscription or a server you have to trust someone to keep running.
 
 ## FAQ
@@ -146,11 +146,11 @@ design inspiration (see Acknowledgements below).
 
 ## License
 
-**Copyright (c) 2026 Luke F. Walton — all rights reserved.** See [LICENSE](LICENSE).
-The App Store build is the official release ($0.99, paid once — no subscription,
-no data business). [NOTICE](NOTICE) logs third-party references only.
-
-Going public? See [docs/publishing-source.md](docs/publishing-source.md).
+**MIT — take it.** Open source under the [MIT License](LICENSE). Fork it, steal
+it, improve it, ship your own App Store build. The $0.99 App Store release
+here is paid once to help cover Apple's developer fee — not a data business.
+Contributions welcome under [CONTRIBUTING.md](CONTRIBUTING.md) with a lightweight
+[DCO](DCO.md) sign-off.
 
 ## Acknowledgements
 

@@ -41,8 +41,8 @@ struct FAQView: View {
             answer: "Apple requires you to choose an SMS filter yourself in Settings, and iOS will not let an app open that exact screen. So there is one short trip to Settings, then you are done."
         ),
         QA(
-            question: "Is the source code public?",
-            answer: "Yes. The full source is published so you can verify every privacy promise for yourself. It is not open source — see the license in the repository."
+            question: "Is it open source?",
+            answer: "Yes — MIT License. Fork it, steal it, ship your own build. The full source is public so you can verify every privacy promise for yourself."
         )
     ]
 

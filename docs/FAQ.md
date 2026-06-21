@@ -56,7 +56,7 @@ approaches are privacy-friendly and local-first, but this app is narrower by
 design, and credits Bouncer and Veto as design inspiration (see the README
 acknowledgements).
 
-### Is the source code public?
+### Is it open source?
 
-Yes. The full source is published so you can verify every privacy promise for
-yourself. It is not open source — see the license in the repository.
+Yes — MIT License. Fork it, steal it, ship your own build. The full source is
+public so you can verify every privacy promise for yourself.

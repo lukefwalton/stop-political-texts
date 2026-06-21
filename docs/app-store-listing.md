@@ -70,9 +70,8 @@ The app does not distinguish between political parties, candidates, or ideologie
 Setup note:
 Apple requires you to enable SMS filtering manually in Settings. The app includes step-by-step setup instructions.
 
-Source:
-The full source is published so anyone can inspect how filtering works and verify
-the privacy promises. It is not open source — see the license in the repository.
+Open source:
+Stop Political Spam Texts is MIT-licensed. Fork it, steal it, improve it — anyone can inspect how it works or ship their own variant.
 
 ## Primary Category
 

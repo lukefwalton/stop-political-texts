@@ -12,7 +12,7 @@ struct AboutView: View {
             }
 
             Section {
-                Text("The full source is published so you can verify the privacy promises for yourself. It is not open source — see the license in the repository.")
+                Text("Open source under the MIT License. Fork it, steal it, improve it — the full code is public so you can verify every privacy promise for yourself.")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
