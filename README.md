@@ -14,7 +14,7 @@ Problems, bugs, or questions:
 - [GitHub Issues](https://github.com/lukefwalton/stop-political-texts/issues)
 - [luke@lukefwalton.com](mailto:luke@lukefwalton.com)
 
-Website: [lukefwalton.com](https://lukefwalton.com)
+Website: [lukefwalton.com/stop-political-spam-texts](https://lukefwalton.com/stop-political-spam-texts/)
 
 ## Source
 

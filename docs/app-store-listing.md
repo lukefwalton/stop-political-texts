@@ -8,10 +8,9 @@ field. Keep this in sync with the app's actual UI and `PRIVACY.md`.
 - **Price** is set in App Store Connect, not in the description. Set to **Free**
   ($0). Apple shows regional pricing on the product page; the description omits
   price on purpose.
-- **The Privacy Policy URL must be publicly reachable at submission.** This app
-  lives in its own repository (`stop-political-texts`). Make sure the repo is
-  public — and `PRIVACY.md` reachable at the URL below — before submitting, or
-  the reviewer's link returns 404.
+- **The Privacy Policy URL must be publicly reachable at submission.** Use
+  `https://lukefwalton.com/stop-political-spam-texts/privacy/` (deploy the site
+  after merging the product pages).
 - **Keep trademarked platform names** (ActBlue, WinRed, party committee names,
   etc.) out of keywords and marketing copy. The classifier handles them
   internally; Apple flags unauthorized trademarks in keywords.
@@ -91,16 +90,13 @@ Productivity (optional; leave blank if you prefer)
 
 ## Privacy Policy URL
 
-https://github.com/lukefwalton/stop-political-texts/blob/main/PRIVACY.md
-
-> Must be public at submission (see notes above). GitHub renders the `/blob/`
-> Markdown view, so a separate hosted page is not required.
+https://lukefwalton.com/stop-political-spam-texts/privacy/
 
 ## Support URL
 
-https://github.com/lukefwalton/stop-political-texts/issues
+https://lukefwalton.com/stop-political-spam-texts/
 
-> Email: luke@lukefwalton.com. Repo must be public at submission so this link works.
+> Email: luke@lukefwalton.com · GitHub Issues on the public repo also fine.
 
 ## App Privacy (App Store Connect questionnaire)
 

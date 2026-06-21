@@ -32,7 +32,7 @@ This is a personal project by Luke F. Walton and is not a Surmado product.
 
 Questions: [luke@lukefwalton.com](mailto:luke@lukefwalton.com), or a
 [GitHub Issue](https://github.com/lukefwalton/stop-political-texts/issues).
-Website: [lukefwalton.com](https://lukefwalton.com)
+Website: [lukefwalton.com/stop-political-spam-texts](https://lukefwalton.com/stop-political-spam-texts/)
 
 ---
 
