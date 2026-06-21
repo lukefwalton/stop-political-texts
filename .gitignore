@@ -1,0 +1,17 @@
+# The Xcode project is generated from project.yml by XcodeGen — never committed.
+*.xcodeproj/
+
+# Local signing overrides (team ID, bundle prefix) — see project.local.yml.example.
+project.local.yml
+
+# Xcode / SwiftPM build cruft
+DerivedData/
+build/
+.build/
+*.xcuserstate
+xcuserdata/
+*.xcscmblueprint
+*.xccheckout
+
+# macOS
+.DS_Store
