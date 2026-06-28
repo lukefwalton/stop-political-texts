@@ -143,9 +143,9 @@ private struct ActivateScreen: View {
 
     private let steps: [String] = [
         "Open **Settings**.",
-        "Go to **Messages**.",
-        "Tap **Unknown & Spam**.",
-        "Turn on **Filter Unknown Senders**.",
+        "Tap **Apps**, then **Messages**.",
+        "Scroll to **Unknown Senders**.",
+        "Tap **Text Message Filter**.",
         "Choose **Stop Political Spam Texts**."
     ]
 
