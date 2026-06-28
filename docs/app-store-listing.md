@@ -141,9 +141,9 @@ The message filtering extension does not make network requests and does not use 
 To test without receiving real SMS:
 
 1. Install the app and complete onboarding.
-2. Open Settings, then go to Apps > Messages > Unknown & Spam. (On older iOS: Settings > Messages > Unknown & Spam.)
-3. Turn on Filter Unknown Senders. (Some iOS versions label this Screen Unknown Senders.)
-4. Choose Stop Political Spam Texts as the SMS filter.
+2. Open Settings, then go to Apps > Messages and scroll to the Unknown Senders section. (On older iOS: Settings > Messages > Unknown & Spam.)
+3. Tap Text Message Filter.
+4. Choose Stop Political Spam Texts as the SMS filter. (In the list it may appear as Stop Political Spam.)
 5. Return to the app, open Home > Verify Filter, and tap Run verification.
 
 Expected: all built-in samples pass (16/16) with default settings (Filter on, Aggressive strictness, all categories on). Political samples show Outcome: Filtered → Junk; commerce/2FA samples show Allowed → Inbox.

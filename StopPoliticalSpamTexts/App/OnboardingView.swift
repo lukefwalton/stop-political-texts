@@ -143,9 +143,9 @@ private struct ActivateScreen: View {
 
     private let steps: [String] = [
         "Open **Settings**.",
-        "Go to **Messages**.",
-        "Tap **Unknown & Spam**.",
-        "Turn on **Filter Unknown Senders**.",
+        "Tap **Apps**, then **Messages**.",
+        "Scroll to **Unknown Senders**.",
+        "Tap **Text Message Filter**.",
         "Choose **Stop Political Spam Texts**."
     ]
 
@@ -184,6 +184,13 @@ private struct ActivateScreen: View {
                 )
                 .padding(.horizontal, 20)
                 .padding(.top, 26)
+
+                Text("On older iOS: Settings > Messages > Unknown & Spam, then turn on Filter Unknown Senders.")
+                    .font(.footnote)
+                    .foregroundStyle(BrandColor.paper.opacity(0.6))
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 24)
+                    .padding(.top, 14)
 
                 VStack(spacing: 8) {
                     Button(action: openSettings) {
