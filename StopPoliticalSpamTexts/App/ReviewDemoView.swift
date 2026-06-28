@@ -6,6 +6,7 @@ struct ReviewDemoView: View {
     @EnvironmentObject private var model: FilterConfigModel
     @State private var results: [ClassifierFixtureResult]?
     @State private var hasRun = false
+    var autoRunVerification = false
 
     private var passedCount: Int {
         results?.filter(\.passed).count ?? 0
@@ -29,7 +30,7 @@ struct ReviewDemoView: View {
                 }
                 .font(.headline)
 
-                if hasRun, let results = results {
+                if hasRun {
                     LabeledContent("Result") {
                         Label {
                             Text("\(passedCount)/\(totalCount) passed")
@@ -82,6 +83,16 @@ struct ReviewDemoView: View {
             }
         }
         .navigationTitle("Verify Filter")
+        .onAppear {
+            if autoRunVerification, !hasRun {
+                runVerification()
+            }
+            #if DEBUG
+            if autoRunVerification {
+                ScreenshotAutomation.markReady()
+            }
+            #endif
+        }
     }
 
     private func runVerification() {

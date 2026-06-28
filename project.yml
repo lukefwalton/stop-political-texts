@@ -1,7 +1,10 @@
 # XcodeGen project definition.
-# Generate the Xcode project with:  xcodegen generate
-# (install via `brew install xcodegen`). Then set your DEVELOPMENT_TEAM and the
-# App Group capability is already wired through the entitlements files.
+# Generate the Xcode project with:  bash scripts/generate.sh
+# (install xcodegen via `brew install xcodegen`; Ruby ships with macOS for the
+# local merge step). Set DEVELOPMENT_TEAM in
+# project.local.yml (copy from project.local.yml.example). Register the App Group
+# for your team when first signing on device — automatic signing handles this if
+# the entitlements below match SharedConfigStore.appGroupID.
 
 name: StopPoliticalSpamTexts
 options:
@@ -35,11 +38,15 @@ targets:
       - path: StopPoliticalSpamTexts/Classifier
       - path: StopPoliticalSpamTexts/Storage
       - path: StopPoliticalSpamTexts/Resources/Assets.xcassets
+    entitlements:
+      path: StopPoliticalSpamTexts/App/StopPoliticalSpamTexts.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.com.lukewalton.stoppoliticalspamtexts
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.lukewalton.stoppoliticalspamtexts
         INFOPLIST_FILE: StopPoliticalSpamTexts/App/Info.plist
-        CODE_SIGN_ENTITLEMENTS: StopPoliticalSpamTexts/App/StopPoliticalSpamTexts.entitlements
         GENERATE_INFOPLIST_FILE: NO
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
     dependencies:
@@ -54,11 +61,15 @@ targets:
       - path: StopPoliticalSpamTextsMessageFilter
       - path: StopPoliticalSpamTexts/Classifier
       - path: StopPoliticalSpamTexts/Storage
+    entitlements:
+      path: StopPoliticalSpamTextsMessageFilter/StopPoliticalSpamTextsMessageFilter.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.com.lukewalton.stoppoliticalspamtexts
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.lukewalton.stoppoliticalspamtexts.messagefilter
         INFOPLIST_FILE: StopPoliticalSpamTextsMessageFilter/Info.plist
-        CODE_SIGN_ENTITLEMENTS: StopPoliticalSpamTextsMessageFilter/StopPoliticalSpamTextsMessageFilter.entitlements
         GENERATE_INFOPLIST_FILE: NO
 
   StopPoliticalSpamTextsTests:

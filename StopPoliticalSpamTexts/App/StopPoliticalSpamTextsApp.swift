@@ -20,14 +20,38 @@ private struct RootView: View {
     @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
     @Environment(\.scenePhase) private var scenePhase
     @EnvironmentObject private var model: FilterConfigModel
+    @State private var screenshotPath = NavigationPath()
 
     var body: some View {
         ZStack {
             if hasCompletedOnboarding {
+                #if DEBUG
+                NavigationStack(path: $screenshotPath) {
+                    MainView()
+                        .navigationDestination(for: ScreenshotRoute.self) { route in
+                            switch route {
+                            case .verifyFilter:
+                                ReviewDemoView(autoRunVerification: true)
+                            case .testMessage:
+                                TestMessageView(
+                                    screenshotSample: (
+                                        body: "Election deadline tonight. Donate now to help our campaign win. Reply STOP to opt out.",
+                                        sender: "12345"
+                                    )
+                                )
+                            case .categories:
+                                CategoryTogglesView()
+                            }
+                        }
+                }
+                .transition(.opacity)
+                .task { await openScreenshotRouteIfNeeded() }
+                #else
                 NavigationStack {
                     MainView()
                 }
                 .transition(.opacity)
+                #endif
             } else {
                 OnboardingView()
                     .transition(.opacity)
@@ -39,6 +63,14 @@ private struct RootView: View {
                 model.handleSceneBecameActive()
             }
         }
+    }
+
+    @MainActor
+    private func openScreenshotRouteIfNeeded() async {
+        #if DEBUG
+        guard let route = ScreenshotRoute.fromLaunchArguments else { return }
+        screenshotPath.append(route)
+        #endif
     }
 }
 

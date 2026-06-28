@@ -67,5 +67,12 @@ struct MainView: View {
             }
         }
         .navigationTitle("Home")
+        .onAppear {
+            #if DEBUG
+            if ScreenshotRoute.fromLaunchArguments == nil {
+                ScreenshotAutomation.markReady()
+            }
+            #endif
+        }
     }
 }
