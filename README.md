@@ -7,6 +7,8 @@ senders** out of your main inbox. This happens entirely on device.
 > No account. No tracking. No server. No political profiling. Messages stay on
 > your device.
 
+**Download:** [Stop Political Spam Texts on the App Store](https://apps.apple.com/us/app/stop-political-spam-texts/id6782703267) (free)
+
 ## Support
 
 Problems, bugs, or questions:
@@ -14,7 +16,7 @@ Problems, bugs, or questions:
 - [GitHub Issues](https://github.com/lukefwalton/stop-political-texts/issues)
 - [luke@lukefwalton.com](mailto:luke@lukefwalton.com)
 
-Website: [lukefwalton.com/stop-political-spam-texts](https://lukefwalton.com/stop-political-spam-texts/)
+App Store: [Stop Political Spam Texts](https://apps.apple.com/us/app/stop-political-spam-texts/id6782703267) · Website: [lukefwalton.com/stop-political-spam-texts](https://lukefwalton.com/stop-political-spam-texts/)
 
 ## Source
 

@@ -26,5 +26,6 @@ Checklist before flipping visibility on GitHub.
 ## After going public
 
 - Do not commit `project.local.yml` or signing assets (`.p12`, `.mobileprovision`).
+- App Store: `https://apps.apple.com/us/app/stop-political-spam-texts/id6782703267`
 - App Store privacy URL: `https://github.com/lukefwalton/stop-political-texts/blob/main/PRIVACY.md`
 - Support URL: `https://github.com/lukefwalton/stop-political-texts/issues`

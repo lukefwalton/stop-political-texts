@@ -98,6 +98,12 @@ https://lukefwalton.com/stop-political-spam-texts/
 
 > Email: luke@lukefwalton.com · GitHub Issues on the public repo also fine.
 
+## App Store URL (live)
+
+https://apps.apple.com/us/app/stop-political-spam-texts/id6782703267
+
+App name in Connect: **Stop Political Spam Texts**
+
 ## App Privacy (App Store Connect questionnaire)
 
 - Data collection: **Data Not Collected**
