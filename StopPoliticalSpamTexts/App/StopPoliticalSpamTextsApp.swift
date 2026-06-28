@@ -20,14 +20,38 @@ private struct RootView: View {
     @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding = false
     @Environment(\.scenePhase) private var scenePhase
     @EnvironmentObject private var model: FilterConfigModel
+    @State private var screenshotPath = NavigationPath()
 
     var body: some View {
         ZStack {
             if hasCompletedOnboarding {
+                #if DEBUG
+                NavigationStack(path: $screenshotPath) {
+                    MainView()
+                        .navigationDestination(for: ScreenshotRoute.self) { route in
+                            switch route {
+                            case .verifyFilter:
+                                ReviewDemoView(autoRunVerification: true)
+                            case .testMessage:
+                                TestMessageView(
+                                    screenshotSample: (
+                                        body: "Election deadline tonight. Donate now to help our campaign win. Reply STOP to opt out.",
+                                        sender: "12345"
+                                    )
+                                )
+                            case .categories:
+                                CategoryTogglesView()
+                            }
+                        }
+                }
+                .transition(.opacity)
+                .task { await openScreenshotRouteIfNeeded() }
+                #else
                 NavigationStack {
                     MainView()
                 }
                 .transition(.opacity)
+                #endif
             } else {
                 OnboardingView()
                     .transition(.opacity)
@@ -40,7 +64,32 @@ private struct RootView: View {
             }
         }
     }
+
+    @MainActor
+    private func openScreenshotRouteIfNeeded() async {
+        #if DEBUG
+        guard let route = ScreenshotRoute.fromLaunchArguments else { return }
+        try? await Task.sleep(for: .milliseconds(600))
+        screenshotPath.append(route)
+        #endif
+    }
 }
+
+#if DEBUG
+private enum ScreenshotRoute: Hashable {
+    case verifyFilter
+    case testMessage
+    case categories
+
+    static var fromLaunchArguments: ScreenshotRoute? {
+        let args = ProcessInfo.processInfo.arguments
+        if args.contains("-OpenVerifyFilter") { return .verifyFilter }
+        if args.contains("-OpenTestMessage") { return .testMessage }
+        if args.contains("-OpenCategories") { return .categories }
+        return nil
+    }
+}
+#endif
 
 /// Observable wrapper over `SharedConfigStore`. Edits persist to the App Group
 /// immediately so the extension sees them on the next classification.

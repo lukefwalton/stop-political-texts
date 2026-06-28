@@ -7,6 +7,7 @@ struct TestMessageView: View {
     @State private var draft = ""
     @State private var sender = ""
     @State private var result: ClassificationResult?
+    var screenshotSample: (body: String, sender: String)?
 
     private let classifier = PoliticalTextClassifier()
 
@@ -71,6 +72,16 @@ struct TestMessageView: View {
             }
         }
         .navigationTitle("Test a Message")
+        .onAppear {
+            guard let screenshotSample, result == nil else { return }
+            draft = screenshotSample.body
+            sender = screenshotSample.sender
+            result = classifier.classify(
+                sender: screenshotSample.sender,
+                body: screenshotSample.body,
+                config: model.config
+            )
+        }
     }
 
     /// Human-readable names for matched rules. The raw score is never shown.
