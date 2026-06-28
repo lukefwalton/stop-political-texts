@@ -1,13 +1,7 @@
 import SwiftUI
 
 struct EnableInstructionsView: View {
-    private let steps: [String] = [
-        "Open Settings.",
-        "Tap Apps, then Messages.",
-        "Scroll to the Unknown Senders section.",
-        "Tap Text Message Filter.",
-        "Choose Stop Political Spam Texts."
-    ]
+    private let steps = SetupInstructions.plainSteps
 
     var body: some View {
         List {
@@ -24,16 +18,16 @@ struct EnableInstructionsView: View {
             }
 
             Section("Required setup") {
-                Text("Open Text Message Filter under Unknown Senders, then pick Stop Political Spam Texts.")
+                Text(SetupInstructions.requiredSetup)
                     .font(.subheadline)
             }
 
             Section("Path") {
                 VStack(alignment: .leading, spacing: 6) {
-                    Text("Settings > Apps > Messages > Unknown Senders > Text Message Filter")
+                    Text(SetupInstructions.currentPath)
                         .font(.subheadline)
                         .fontWeight(.semibold)
-                    Text("On older iOS: Settings > Messages > Unknown & Spam")
+                    Text(SetupInstructions.olderIOSPath)
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }
@@ -50,7 +44,7 @@ struct EnableInstructionsView: View {
                 }
             }
             Section {
-                Text("In the Text Message Filter list, Stop Political Spam Texts may appear as Stop Political Spam. Tap it so it shows a checkmark.")
+                Text(SetupInstructions.filterNameNote)
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
