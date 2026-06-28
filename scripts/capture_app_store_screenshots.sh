@@ -5,10 +5,40 @@ cd "$(dirname "$0")/.."
 
 bash scripts/generate.sh
 
-IPHONE_SIM_ID="${IPHONE_SIM_ID:-78FF7DB8-6D9F-4E11-A643-B7C79DC809E9}" # iPhone 15 Pro Max
-IPAD_SIM_ID="${IPAD_SIM_ID:-DE2884BB-F174-4483-B4BD-8002BB797379}"   # iPad Pro 12.9" (6th gen)
 BUNDLE="com.lukewalton.stoppoliticalspamtexts"
 OUT_ROOT="build/app-store-screenshots"
+
+# Resolve a simulator UDID by exact name, then prefix match. Override with IPHONE_SIM_ID / IPAD_SIM_ID.
+resolve_sim_id() {
+  local -a candidates=("$@")
+  xcrun simctl list devices available --json \
+    | python3 -c "
+import json, sys
+
+candidates = sys.argv[1:]
+data = json.load(sys.stdin)
+devices = [d for group in data.get('devices', {}).values() for d in group if d.get('isAvailable')]
+
+for name in candidates:
+    for d in devices:
+        if d['name'] == name:
+            print(d['udid'])
+            raise SystemExit(0)
+
+for name in candidates:
+    for d in devices:
+        if d['name'].startswith(name):
+            print(d['udid'])
+            raise SystemExit(0)
+
+print('No matching simulator. Tried: ' + ', '.join(candidates), file=sys.stderr)
+print('Install an iOS runtime with one of those devices, or set IPHONE_SIM_ID / IPAD_SIM_ID.', file=sys.stderr)
+raise SystemExit(1)
+" "${candidates[@]}"
+}
+
+IPHONE_SIM_ID="${IPHONE_SIM_ID:-$(resolve_sim_id "iPhone 15 Plus" "iPhone 14 Plus" "iPhone 15 Pro Max")}"
+IPAD_SIM_ID="${IPAD_SIM_ID:-$(resolve_sim_id "iPad Pro (12.9-inch) (6th generation)" "iPad Pro 12.9-inch (6th generation)")}"
 
 flatten_png() {
   local src="$1" dest="$2" height="$3" width="$4"
@@ -19,6 +49,23 @@ flatten_png() {
   if [[ "$height" != "0" && "$width" != "0" ]]; then
     sips -z "$height" "$width" "$dest" --out "$dest" >/dev/null
   fi
+}
+
+wait_for_app_ready() {
+  local sim_id="$1"
+  local max_attempts="${2:-180}"
+  local attempt=0
+
+  while (( attempt < max_attempts )); do
+    if [[ "$(xcrun simctl spawn "$sim_id" defaults read "$BUNDLE" ScreenshotReady 2>/dev/null || echo 0)" == "1" ]]; then
+      return 0
+    fi
+    sleep 0.25
+    (( attempt++ )) || true
+  done
+
+  echo "Timed out waiting for screenshot-ready signal" >&2
+  return 1
 }
 
 capture_suite() {
@@ -42,8 +89,8 @@ capture_suite() {
 
   local app="build/DerivedData-${label}/Build/Products/Debug-iphonesimulator/StopPoliticalSpamTexts.app"
   xcrun simctl boot "$sim_id" 2>/dev/null || true
+  xcrun simctl bootstatus "$sim_id" -b 2>/dev/null || true
   open -a Simulator --args -CurrentDeviceUDID "$sim_id"
-  sleep 2
 
   xcrun simctl uninstall "$sim_id" "$BUNDLE" 2>/dev/null || true
   xcrun simctl install "$sim_id" "$app"
@@ -53,9 +100,10 @@ capture_suite() {
     local name="$1"
     shift
     echo "Capturing $name..."
+    xcrun simctl spawn "$sim_id" defaults delete "$BUNDLE" ScreenshotReady 2>/dev/null || true
     xcrun simctl terminate "$sim_id" "$BUNDLE" 2>/dev/null || true
     xcrun simctl launch "$sim_id" "$BUNDLE" -- "$@" >/dev/null
-    sleep 3
+    wait_for_app_ready "$sim_id"
     local raw="/tmp/spt-${label}-${name}-raw.png"
     xcrun simctl io "$sim_id" screenshot "$raw"
     flatten_png "$raw" "$out_dir/${name}.png" "$flat_h" "$flat_w"

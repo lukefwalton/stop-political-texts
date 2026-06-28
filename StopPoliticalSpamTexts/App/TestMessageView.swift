@@ -81,6 +81,9 @@ struct TestMessageView: View {
                 body: screenshotSample.body,
                 config: model.config
             )
+            #if DEBUG
+            ScreenshotAutomation.markReady()
+            #endif
         }
     }
 

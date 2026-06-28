@@ -69,27 +69,10 @@ private struct RootView: View {
     private func openScreenshotRouteIfNeeded() async {
         #if DEBUG
         guard let route = ScreenshotRoute.fromLaunchArguments else { return }
-        try? await Task.sleep(for: .milliseconds(600))
         screenshotPath.append(route)
         #endif
     }
 }
-
-#if DEBUG
-private enum ScreenshotRoute: Hashable {
-    case verifyFilter
-    case testMessage
-    case categories
-
-    static var fromLaunchArguments: ScreenshotRoute? {
-        let args = ProcessInfo.processInfo.arguments
-        if args.contains("-OpenVerifyFilter") { return .verifyFilter }
-        if args.contains("-OpenTestMessage") { return .testMessage }
-        if args.contains("-OpenCategories") { return .categories }
-        return nil
-    }
-}
-#endif
 
 /// Observable wrapper over `SharedConfigStore`. Edits persist to the App Group
 /// immediately so the extension sees them on the next classification.

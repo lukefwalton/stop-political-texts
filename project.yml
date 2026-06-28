@@ -1,6 +1,7 @@
 # XcodeGen project definition.
 # Generate the Xcode project with:  bash scripts/generate.sh
-# (install xcodegen via `brew install xcodegen`). Set DEVELOPMENT_TEAM in
+# (install xcodegen via `brew install xcodegen`; Ruby ships with macOS for the
+# local merge step). Set DEVELOPMENT_TEAM in
 # project.local.yml (copy from project.local.yml.example). Register the App Group
 # for your team when first signing on device — automatic signing handles this if
 # the entitlements below match SharedConfigStore.appGroupID.

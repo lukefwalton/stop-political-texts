@@ -16,5 +16,12 @@ struct CategoryTogglesView: View {
             }
         }
         .navigationTitle("Categories")
+        .onAppear {
+            #if DEBUG
+            if ScreenshotRoute.fromLaunchArguments == .categories {
+                ScreenshotAutomation.markReady()
+            }
+            #endif
+        }
     }
 }

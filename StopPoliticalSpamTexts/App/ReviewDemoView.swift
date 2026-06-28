@@ -87,6 +87,11 @@ struct ReviewDemoView: View {
             if autoRunVerification, !hasRun {
                 runVerification()
             }
+            #if DEBUG
+            if autoRunVerification {
+                ScreenshotAutomation.markReady()
+            }
+            #endif
         }
     }
 

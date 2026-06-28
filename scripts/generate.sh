@@ -13,24 +13,30 @@ if grep -q 'YOUR_TEAM_ID_HERE' project.local.yml; then
   exit 1
 fi
 
+if ! command -v ruby >/dev/null 2>&1; then
+  echo "ruby not found (required to merge project.yml + project.local.yml)." >&2
+  exit 1
+fi
+
 # Merge project.yml + project.local.yml for XcodeGen (local file is gitignored).
-python3 - <<'PY'
-import yaml
-from pathlib import Path
+ruby -ryaml -e '
+require "yaml"
 
-def deep_merge(base, override):
-    for key, value in override.items():
-        if key in base and isinstance(base[key], dict) and isinstance(value, dict):
-            deep_merge(base[key], value)
-        else:
-            base[key] = value
+def deep_merge(base, override)
+  override.each do |key, value|
+    if base[key].is_a?(Hash) && value.is_a?(Hash)
+      deep_merge(base[key], value)
+    else
+      base[key] = value
+    end
+  end
+end
 
-root = Path(".")
-spec = yaml.safe_load(root.joinpath("project.yml").read_text())
-local = yaml.safe_load(root.joinpath("project.local.yml").read_text())
+spec = YAML.load_file("project.yml")
+local = YAML.load_file("project.local.yml")
 deep_merge(spec, local)
-root.joinpath("project.generated.yml").write_text(yaml.dump(spec, sort_keys=False))
-PY
+File.write("project.generated.yml", spec.to_yaml)
+'
 
 xcodegen generate --spec project.generated.yml
 rm -f project.generated.yml
