@@ -4,6 +4,8 @@ Stop Political Spam Texts is **MIT-licensed open source**. Fork it, steal it,
 ship your own variant, improve the classifier — please do. This is a public
 utility, not a walled garden.
 
+By participating you agree to abide by the [Code of Conduct](CODE_OF_CONDUCT.md).
+
 ## Support & feedback
 
 - **[GitHub Issues](https://github.com/lukefwalton/stop-political-texts/issues)** —
@@ -47,3 +49,5 @@ bash scripts/privacy_check.sh
 - No persistence of message bodies, senders, normalized text, or domains.
 
 See [LICENSE](LICENSE) and [DCO.md](DCO.md). Sign off commits with `git commit -s`.
+
+Found a security issue? Please report it privately — see [SECURITY.md](SECURITY.md).

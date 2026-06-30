@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Privacy policy
+    url: https://github.com/lukefwalton/stop-political-texts/blob/main/PRIVACY.md
+    about: How the app handles your data — short version, message content never leaves your phone.
+  - name: Report a security issue
+    url: https://github.com/lukefwalton/stop-political-texts/blob/main/SECURITY.md
+    about: Please report vulnerabilities privately rather than as a public issue.

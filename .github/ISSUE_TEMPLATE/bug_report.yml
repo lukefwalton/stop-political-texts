@@ -1,0 +1,49 @@
+name: Bug report
+description: Something in the app or message filter isn't working right.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for reporting a bug. Fill in what you can — it all helps.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What went wrong, and what did you expect instead?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open …
+        2. Tap …
+        3. See …
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Where does it happen?
+      options:
+        - The app (setup, testing a message, settings)
+        - The message filter (junk routing on real texts)
+        - Both
+        - Not sure
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: iOS version & device
+      placeholder: "e.g. iOS 17.5, iPhone 14"
+    validations:
+      required: false
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else?
+      description: Screenshots or other context. Please don't paste real message content you'd rather keep private.
+    validations:
+      required: false
