@@ -1,0 +1,51 @@
+name: Misclassification (false positive / negative)
+description: A text was filtered that shouldn't have been, or one slipped through that should have been junked.
+labels: ["classifier"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The classifier runs entirely on device, so we can't see what it saw.
+        Share whatever you're comfortable sharing — you can redact phone numbers
+        and personal details. Even a paraphrase helps tune the rules.
+  - type: dropdown
+    id: direction
+    attributes:
+      label: What went wrong?
+      options:
+        - False positive — a legitimate text was routed to Junk
+        - False negative — political spam reached my inbox
+    validations:
+      required: true
+  - type: textarea
+    id: message
+    attributes:
+      label: The message (redacted is fine)
+      description: Paste or paraphrase the text. Remove anything you don't want public.
+    validations:
+      required: true
+  - type: dropdown
+    id: sensitivity
+    attributes:
+      label: Filter strength
+      options:
+        - Normal
+        - Aggressive
+        - Not sure
+    validations:
+      required: false
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else?
+      description: Sender shape (short code vs 10-digit), links involved, custom terms you've added, etc.
+    validations:
+      required: false
+  - type: checkboxes
+    id: privacy-ack
+    attributes:
+      label: Before you submit
+      description: This is a privacy-first project — let's keep it that way in the issue tracker too.
+      options:
+        - label: I understand this issue is public, and I've removed phone numbers and any personal details from the message above. (Prefer to keep it private? Email luke@lukefwalton.com instead.)
+          required: true

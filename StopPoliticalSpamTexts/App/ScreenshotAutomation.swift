@@ -1,4 +1,6 @@
 #if DEBUG
+import Foundation
+
 /// DEBUG-only launch-argument routing for App Store screenshot capture.
 enum ScreenshotRoute: Hashable {
     case verifyFilter

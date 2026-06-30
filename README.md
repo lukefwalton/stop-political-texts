@@ -1,5 +1,11 @@
 # Stop Political Spam Texts (iOS)
 
+[![iOS Tests](https://github.com/lukefwalton/stop-political-texts/actions/workflows/ios-tests.yml/badge.svg)](https://github.com/lukefwalton/stop-political-texts/actions/workflows/ios-tests.yml)
+[![Checks](https://github.com/lukefwalton/stop-political-texts/actions/workflows/checks.yml/badge.svg)](https://github.com/lukefwalton/stop-political-texts/actions/workflows/checks.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+![Platform: iOS 16.1+](https://img.shields.io/badge/Platform-iOS%2016.1%2B-lightgrey.svg)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/lukefwalton/stop-political-texts)
+
 A privacy-first iOS app that routes obvious political campaign, donation,
 polling, PAC, ballot-measure, proposition, and election texts from **unknown
 senders** out of your main inbox. This happens entirely on device.
