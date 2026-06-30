@@ -41,3 +41,11 @@ body:
       description: Sender shape (short code vs 10-digit), links involved, custom terms you've added, etc.
     validations:
       required: false
+  - type: checkboxes
+    id: privacy-ack
+    attributes:
+      label: Before you submit
+      description: This is a privacy-first project — let's keep it that way in the issue tracker too.
+      options:
+        - label: I understand this issue is public, and I've removed phone numbers and any personal details from the message above. (Prefer to keep it private? Email luke@lukefwalton.com instead.)
+          required: true
