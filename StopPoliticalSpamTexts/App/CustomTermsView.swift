@@ -18,6 +18,8 @@ struct CustomTermsView: View {
                         if model.addBlockedTerm(newBlocked) {
                             LFWHaptics.impact()
                             newBlocked = ""
+                        } else {
+                            LFWHaptics.warning()
                         }
                     }
                     .disabled(newBlocked.trimmingCharacters(in: .whitespaces).isEmpty
@@ -39,6 +41,8 @@ struct CustomTermsView: View {
                         if model.addAllowedTerm(newAllowed) {
                             LFWHaptics.impact()
                             newAllowed = ""
+                        } else {
+                            LFWHaptics.warning()
                         }
                     }
                     .disabled(newAllowed.trimmingCharacters(in: .whitespaces).isEmpty

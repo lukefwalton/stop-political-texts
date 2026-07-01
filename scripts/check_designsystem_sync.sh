@@ -4,9 +4,12 @@
 #
 # The design system is copied into every app repo (see scripts/sync_designsystem.sh).
 # This guard recomputes a checksum of the vendored package and compares it to the
-# committed lfwdesignsystem/CHECKSUMS.txt. It fails if anyone hand-edited the
-# vendored copy without going through the canonical repo + sync script — which is
-# how the four copies would silently drift apart.
+# committed lfwdesignsystem/CHECKSUMS.txt. It is an ACCIDENTAL-DRIFT guard: it
+# fails on a hand-edit to the vendored copy that doesn't also regenerate the
+# manifest. It does NOT prove the copy matches the canonical upstream — a
+# deliberate edit that regenerates CHECKSUMS.txt in the same commit still passes.
+# Canonical parity is enforced by process (edit canonical, run the sync script),
+# not by this check.
 #
 # Self-contained: it does NOT need the other repos present, so it runs on a plain
 # Ubuntu CI runner. To legitimately change the design system: edit it in the
@@ -30,8 +33,8 @@ actual="$(cd "$DS" && find "${SYNC_ITEMS[@]}" -type f 2>/dev/null \
 
 if ! diff <(printf '%s\n' "$actual") "$MANIFEST" >/dev/null 2>&1; then
   echo "::error::vendored lfwdesignsystem does not match CHECKSUMS.txt (version $(cat "$DS/VERSION" 2>/dev/null || echo '?'))."
-  echo "The design system drifted from canonical. Edit it in a-new-word-every-day,"
-  echo "run scripts/sync_designsystem.sh, and commit the result. Offending files:"
+  echo "The vendored design system no longer matches its committed manifest. Edit it"
+  echo "in a-new-word-every-day, run scripts/sync_designsystem.sh, commit. Offending files:"
   diff <(printf '%s\n' "$actual") "$MANIFEST" || true
   exit 1
 fi
