@@ -1,4 +1,5 @@
 import SwiftUI
+import LFWDesignSystem
 
 struct MainView: View {
     @EnvironmentObject private var model: FilterConfigModel
@@ -30,7 +31,9 @@ struct MainView: View {
             }
 
             Section("Status") {
-                Toggle("Filter", isOn: $model.config.enabled)
+                Toggle("Filter", isOn: Binding(
+                    get: { model.config.enabled },
+                    set: { model.config.enabled = $0; LFWHaptics.selection() }))
                 NavigationLink {
                     EnableInstructionsView()
                 } label: {

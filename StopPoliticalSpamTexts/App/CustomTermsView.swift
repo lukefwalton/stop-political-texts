@@ -1,4 +1,5 @@
 import SwiftUI
+import LFWDesignSystem
 
 struct CustomTermsView: View {
     @EnvironmentObject private var model: FilterConfigModel
@@ -9,13 +10,17 @@ struct CustomTermsView: View {
         Form {
             Section {
                 ForEach(model.config.customBlockedTerms, id: \.self) { Text($0) }
-                    .onDelete { model.removeBlockedTerms(at: $0) }
+                    .onDelete { LFWHaptics.impact(); model.removeBlockedTerms(at: $0) }
                 HStack {
                     TextField("Add a term to block", text: $newBlocked)
                         .autocorrectionDisabled()
                     Button("Add") {
-                        model.addBlockedTerm(newBlocked)
-                        newBlocked = ""
+                        if model.addBlockedTerm(newBlocked) {
+                            LFWHaptics.impact()
+                            newBlocked = ""
+                        } else {
+                            LFWHaptics.warning()
+                        }
                     }
                     .disabled(newBlocked.trimmingCharacters(in: .whitespaces).isEmpty
                               || model.config.customBlockedTerms.count >= FilterConfigLimits.maxCustomTerms)
@@ -28,13 +33,17 @@ struct CustomTermsView: View {
 
             Section {
                 ForEach(model.config.customAllowedTerms, id: \.self) { Text($0) }
-                    .onDelete { model.removeAllowedTerms(at: $0) }
+                    .onDelete { LFWHaptics.impact(); model.removeAllowedTerms(at: $0) }
                 HStack {
                     TextField("Add a term to allow", text: $newAllowed)
                         .autocorrectionDisabled()
                     Button("Add") {
-                        model.addAllowedTerm(newAllowed)
-                        newAllowed = ""
+                        if model.addAllowedTerm(newAllowed) {
+                            LFWHaptics.impact()
+                            newAllowed = ""
+                        } else {
+                            LFWHaptics.warning()
+                        }
                     }
                     .disabled(newAllowed.trimmingCharacters(in: .whitespaces).isEmpty
                               || model.config.customAllowedTerms.count >= FilterConfigLimits.maxCustomTerms)
