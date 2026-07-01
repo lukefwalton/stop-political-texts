@@ -56,13 +56,16 @@ public struct LFWEmptyState<Actions: View>: View {
                         .fixedSize(horizontal: false, vertical: true)
                 }
             }
+            // Combine only the title + message into a single VoiceOver label. The
+            // glyph is already hidden, and `actions` stays OUTSIDE this combine so
+            // a CTA in the action slot remains separately focusable and actionable.
+            .accessibilityElement(children: .combine)
 
             actions
                 .padding(.top, 4)
         }
         .padding(24)
         .frame(maxWidth: .infinity)
-        .accessibilityElement(children: .combine)
     }
 }
 

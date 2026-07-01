@@ -15,9 +15,10 @@ struct CustomTermsView: View {
                     TextField("Add a term to block", text: $newBlocked)
                         .autocorrectionDisabled()
                     Button("Add") {
-                        LFWHaptics.impact()
-                        model.addBlockedTerm(newBlocked)
-                        newBlocked = ""
+                        if model.addBlockedTerm(newBlocked) {
+                            LFWHaptics.impact()
+                            newBlocked = ""
+                        }
                     }
                     .disabled(newBlocked.trimmingCharacters(in: .whitespaces).isEmpty
                               || model.config.customBlockedTerms.count >= FilterConfigLimits.maxCustomTerms)
@@ -35,9 +36,10 @@ struct CustomTermsView: View {
                     TextField("Add a term to allow", text: $newAllowed)
                         .autocorrectionDisabled()
                     Button("Add") {
-                        LFWHaptics.impact()
-                        model.addAllowedTerm(newAllowed)
-                        newAllowed = ""
+                        if model.addAllowedTerm(newAllowed) {
+                            LFWHaptics.impact()
+                            newAllowed = ""
+                        }
                     }
                     .disabled(newAllowed.trimmingCharacters(in: .whitespaces).isEmpty
                               || model.config.customAllowedTerms.count >= FilterConfigLimits.maxCustomTerms)

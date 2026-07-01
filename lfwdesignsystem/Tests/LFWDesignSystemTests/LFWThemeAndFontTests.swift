@@ -35,6 +35,22 @@ final class LFWThemeAndFontTests: XCTestCase {
         XCTAssertEqual(original, decoded)
     }
 
+    func test_themeConfig_unknownRawValuesFallBackToDefaults() throws {
+        // App/widget version skew or a downgrade can persist a typeface/palette
+        // this build doesn't know. Decoding must fall back to defaults, not throw
+        // (which would reset every saved choice), while keeping the known fields.
+        let json = Data(#"{"typeface":"nope","palette":"bogus","accentHueShift":15}"#.utf8)
+        let decoded = try JSONDecoder().decode(LFWThemeConfig.self, from: json)
+        XCTAssertEqual(decoded.typeface, .fraunces)
+        XCTAssertEqual(decoded.palette, .deepSea)
+        XCTAssertEqual(decoded.accentHueShift, 15)
+    }
+
+    func test_themeConfig_missingFieldsUseDefaults() throws {
+        let decoded = try JSONDecoder().decode(LFWThemeConfig.self, from: Data("{}".utf8))
+        XCTAssertEqual(decoded, .default)
+    }
+
     func test_allTypefacesAndPalettesEnumerated() {
         XCTAssertEqual(LFWTypeface.allCases.count, 7)
         XCTAssertEqual(LFWTypeface.allCases.map(\.bundledFileName).count, 7)

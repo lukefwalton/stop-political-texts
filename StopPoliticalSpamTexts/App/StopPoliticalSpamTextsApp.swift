@@ -130,16 +130,22 @@ final class FilterConfigModel: ObservableObject {
         saveFailed = !store.save(toSave)
     }
 
-    func addBlockedTerm(_ term: String) {
+    /// Returns whether the term was actually added (false if it was blank,
+    /// duplicate, or over the cap) so callers can match feedback to the outcome.
+    @discardableResult
+    func addBlockedTerm(_ term: String) -> Bool {
         let trimmed = term.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard isValidNewTerm(trimmed, in: config.customBlockedTerms) else { return }
+        guard isValidNewTerm(trimmed, in: config.customBlockedTerms) else { return false }
         config.customBlockedTerms.append(trimmed)
+        return true
     }
 
-    func addAllowedTerm(_ term: String) {
+    @discardableResult
+    func addAllowedTerm(_ term: String) -> Bool {
         let trimmed = term.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard isValidNewTerm(trimmed, in: config.customAllowedTerms) else { return }
+        guard isValidNewTerm(trimmed, in: config.customAllowedTerms) else { return false }
         config.customAllowedTerms.append(trimmed)
+        return true
     }
 
     func removeBlockedTerms(at offsets: IndexSet) {
