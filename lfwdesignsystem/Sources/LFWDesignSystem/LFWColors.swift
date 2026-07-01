@@ -1,8 +1,8 @@
 import SwiftUI
 
-/// The shared palette every app in the family draws from. Originally borrowed
-/// from a Surmado-era brand standard; carried forward here as the personal
-/// "LFW" palette. Plain colors in code — no bundled fonts, logos, or assets.
+/// The shared palette every app in the family draws from. Carried forward from
+/// an earlier brand standard as the personal "LFW" palette. Plain colors in
+/// code — no bundled fonts, logos, or assets.
 ///
 /// Apps are free to declare *additional* accents locally (e.g. Jazz Hands'
 /// HUD-only neon set) — but anything that wants to feel like part of the
