@@ -50,19 +50,23 @@ public enum LFWHaptics {
     }
 
     /// A positive verdict — an operation succeeded (workout saved, message allowed).
-    public static func success() { notify(.success) }
+    public static func success() {
+        #if canImport(UIKit)
+        UINotificationFeedbackGenerator().notificationOccurred(.success)
+        #endif
+    }
 
     /// A cautionary verdict — a soft limit or non-fatal block (term cap reached).
-    public static func warning() { notify(.warning) }
+    public static func warning() {
+        #if canImport(UIKit)
+        UINotificationFeedbackGenerator().notificationOccurred(.warning)
+        #endif
+    }
 
     /// A negative verdict — something failed (parse error, save failed).
-    public static func failure() { notify(.error) }
-
-    #if canImport(UIKit)
-    private static func notify(_ type: UINotificationFeedbackGenerator.FeedbackType) {
-        UINotificationFeedbackGenerator().notificationOccurred(type)
+    public static func failure() {
+        #if canImport(UIKit)
+        UINotificationFeedbackGenerator().notificationOccurred(.error)
+        #endif
     }
-    #else
-    private static func notify(_ type: Int) {}
-    #endif
 }

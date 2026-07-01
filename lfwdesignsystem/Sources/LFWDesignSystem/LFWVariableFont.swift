@@ -42,7 +42,15 @@ public enum LFWVariableFont {
     /// the typography layer can fall back to a system face instead of silently
     /// rendering the system font under a custom name.
     public static func isRegistered(_ family: String) -> Bool {
-        resolvedName(for: family) != nil
+        #if canImport(UIKit)
+        return resolvedName(for: family) != nil
+        #else
+        // Off UIKit there is no registered custom font, so report false: the
+        // typography layer then uses its system-face fallback (correct role
+        // weight/design) instead of the variable-font path, which would degrade
+        // to a plain `.system(size:)` and drop those semantics.
+        return false
+        #endif
     }
 
     /// PostScript name to pass to Core Text / `UIFontDescriptor` for a bundled
@@ -144,8 +152,12 @@ final class LFWVariableFontCache {
     }
 
     private func cacheKey(name: String, size: CGFloat, axes: [Int: CGFloat]) -> String {
+        // Axis values are quantized to whole units (matching the rounding applied
+        // when the font is built) so an animating axis reuses a bounded set of
+        // fonts. Size is NOT animated, so it's keyed at full precision — otherwise
+        // 17.2 and 17.8 would collide onto one cached font at the wrong point size.
         let axisPart = axes.keys.sorted().map { "\($0):\(Int(axes[$0]!.rounded()))" }.joined(separator: ",")
-        return "\(name)|\(Int(size.rounded()))|\(axisPart)"
+        return "\(name)|\(size)|\(axisPart)"
     }
 }
 #endif

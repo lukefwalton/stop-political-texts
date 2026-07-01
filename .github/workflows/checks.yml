@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Design system in sync (vendored ↔ canonical)
+      - name: Vendored design system integrity (accidental-drift guard)
         run: bash scripts/check_designsystem_sync.sh
       - name: Run extension privacy check
         run: bash scripts/privacy_check.sh
