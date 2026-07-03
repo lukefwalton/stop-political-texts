@@ -40,4 +40,25 @@ public enum LFWColors {
 
     /// The conventional app-wide tint.
     public static let tint = ocean
+
+    // MARK: - Semantic status colors
+    //
+    // The family palette is intentionally cool (blues) with `gold`/`kelp` accents,
+    // so apps historically reached for system `.red`/`.orange`/`.green` to signal
+    // success/warning/error — which reads off-brand and drifts between apps (one
+    // app's "fail" is `.orange`, another's is `.red`). These three tokens give
+    // status one shared, on-palette vocabulary, tuned to stay legible as a small
+    // icon or label on both a light `paper` surface and a dark themed background.
+
+    /// Positive / success / "done" affordance. A slightly deeper seafoam than
+    /// `kelp` so it still holds contrast as text on a light surface.
+    public static let success = Color(lfwHex: 0x2E9E74)
+
+    /// Caution / "needs attention" affordance. A warm amber, kept distinct from
+    /// the decorative `gold` kicker so warnings don't read as brand furniture.
+    public static let warning = Color(lfwHex: 0xE0912F)
+
+    /// Error / destructive / "failed" affordance. A muted rose-red that sits with
+    /// the cool palette rather than a pure system red.
+    public static let danger = Color(lfwHex: 0xD1495B)
 }
