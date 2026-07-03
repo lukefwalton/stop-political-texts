@@ -25,7 +25,7 @@ struct MainView: View {
                         CommonFixesView()
                     } label: {
                         Label("Settings issue detected", systemImage: "exclamationmark.triangle")
-                            .foregroundStyle(.orange)
+                            .foregroundStyle(LFWColors.warning)
                     }
                 }
             }

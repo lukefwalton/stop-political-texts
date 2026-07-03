@@ -1,4 +1,5 @@
 import SwiftUI
+import LFWDesignSystem
 
 /// Runs the built-in sample corpus through the same classifier the SMS filter
 /// extension uses. Lets App Review verify behavior without receiving real texts.
@@ -39,7 +40,7 @@ struct ReviewDemoView: View {
                                   ? "checkmark.circle.fill"
                                   : "xmark.circle.fill")
                         }
-                        .foregroundStyle(passedCount == totalCount ? .green : .orange)
+                        .foregroundStyle(passedCount == totalCount ? LFWColors.success : LFWColors.warning)
                     }
 
                     if !model.config.enabled {
@@ -60,7 +61,7 @@ struct ReviewDemoView: View {
                                 Image(systemName: result.passed
                                       ? "checkmark.circle.fill"
                                       : "xmark.circle.fill")
-                                    .foregroundStyle(result.passed ? .green : .red)
+                                    .foregroundStyle(result.passed ? LFWColors.success : LFWColors.danger)
                                 Text(result.fixture.label)
                                     .font(.headline)
                             }
