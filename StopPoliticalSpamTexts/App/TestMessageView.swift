@@ -1,4 +1,5 @@
 import SwiftUI
+import LFWDesignSystem
 
 /// Runs the *exact* classifier the extension uses. Input is held only in view
 /// state and is never persisted.
@@ -54,7 +55,7 @@ struct TestMessageView: View {
                                   ? "xmark.shield.fill"
                                   : "checkmark.shield.fill")
                         }
-                        .foregroundStyle(result.isFiltered ? .red : .green)
+                        .foregroundStyle(result.isFiltered ? LFWColors.danger : LFWColors.success)
                         .accessibilityLabel(result.isFiltered
                                             ? "Outcome: filtered to Junk"
                                             : "Outcome: allowed to inbox")

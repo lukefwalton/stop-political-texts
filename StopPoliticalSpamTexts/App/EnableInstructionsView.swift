@@ -1,4 +1,5 @@
 import SwiftUI
+import LFWDesignSystem
 
 struct EnableInstructionsView: View {
     private let steps = SetupInstructions.plainSteps
@@ -35,12 +36,9 @@ struct EnableInstructionsView: View {
 
             Section("Steps") {
                 ForEach(Array(steps.enumerated()), id: \.offset) { index, step in
-                    HStack(alignment: .top, spacing: 12) {
-                        Text("\(index + 1)")
-                            .font(.headline)
-                            .frame(width: 24)
-                        Text(step)
-                    }
+                    // Shared numbered-step row (gold badge) so this setup screen matches
+                    // the onboarding's step treatment instead of a plain numbered list.
+                    LFWStepRow(number: index + 1, title: step)
                 }
             }
             Section {
