@@ -17,10 +17,15 @@ final class LFWColorsTests: XCTestCase {
         // Lock in the brand colors so a typo can't silently change them.
         // (One sample per role — enough to catch a paste mistake without
         // turning the suite into a snapshot of every hex literal.)
-        XCTAssertEqual(describeRGB(LFWColors.ocean),   "0.114,0.459,0.737")
-        XCTAssertEqual(describeRGB(LFWColors.gold),    "1.000,0.804,0.204")
-        XCTAssertEqual(describeRGB(LFWColors.deepSea), "0.000,0.165,0.255")
-        XCTAssertEqual(describeRGB(LFWColors.paper),   "0.937,0.976,0.996")
+        // Green leads the brand; `ocean` is now the ukiyo-e Prussian blue,
+        // not the old generic web blue.
+        XCTAssertEqual(describeRGB(LFWColors.forest),    "0.122,0.200,0.169")
+        XCTAssertEqual(describeRGB(LFWColors.verdigris), "0.243,0.557,0.431")
+        XCTAssertEqual(describeRGB(LFWColors.ocean),     "0.122,0.369,0.549")
+        XCTAssertEqual(describeRGB(LFWColors.ukiyoBlue), "0.141,0.314,0.439")
+        XCTAssertEqual(describeRGB(LFWColors.gold),      "1.000,0.804,0.204")
+        XCTAssertEqual(describeRGB(LFWColors.deepSea),   "0.000,0.165,0.255")
+        XCTAssertEqual(describeRGB(LFWColors.paper),     "0.937,0.976,0.996")
     }
 
     private func describeRGB(_ color: Color) -> String {
