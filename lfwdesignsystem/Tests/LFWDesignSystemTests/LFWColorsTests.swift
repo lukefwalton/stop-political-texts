@@ -24,7 +24,7 @@ final class LFWColorsTests: XCTestCase {
         XCTAssertEqual(describeRGB(LFWColors.ocean),     "0.122,0.369,0.549")
         XCTAssertEqual(describeRGB(LFWColors.ukiyoBlue), "0.141,0.314,0.439")
         XCTAssertEqual(describeRGB(LFWColors.mist),      "0.498,0.659,0.714")
-        XCTAssertEqual(describeRGB(LFWColors.gold),      "1.000,0.804,0.204")
+        XCTAssertEqual(describeRGB(LFWColors.gold),      "0.973,0.710,0.000") // yamabuki 山吹
         XCTAssertEqual(describeRGB(LFWColors.deepSea),   "0.000,0.165,0.255")
         XCTAssertEqual(describeRGB(LFWColors.paper),     "0.937,0.976,0.996")
     }

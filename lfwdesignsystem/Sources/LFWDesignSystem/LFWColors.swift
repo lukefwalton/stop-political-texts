@@ -60,9 +60,10 @@ public enum LFWColors {
     /// Muted seafoam for gradient blobs / "ok" affordances.
     public static let kelp = Color(lfwHex: 0x60C3A3)
 
-    /// The kicker color. Used for eyebrows, hero stroke borders, page dots,
-    /// and small icon accents inside cards.
-    public static let gold = Color(lfwHex: 0xFFCD34)
+    /// The kicker color — *yamabuki* (山吹), the traditional Japanese golden yellow.
+    /// Used for eyebrows, hero stroke borders, page dots, and small icon accents
+    /// inside cards.
+    public static let gold = Color(lfwHex: 0xF8B500)
 
     /// Cool slate. Reserved for secondary text/affordances against `paper`.
     public static let steel = Color(lfwHex: 0x3A5068)
