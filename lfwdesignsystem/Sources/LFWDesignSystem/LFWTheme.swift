@@ -151,10 +151,13 @@ public enum LFWPalette: String, Codable, CaseIterable, Identifiable, Sendable {
                 primaryText: Color(lfwHex: 0x4A3B2A), secondaryText: Color(lfwHex: 0x7A6650),
                 accent: Color(lfwHex: 0xB2562E))
         case .forest:
-            // The flagship theme: the brand green gradient (`forest` → `verdigris`)
-            // with a warm `gold` accent for restraint. This is the default.
+            // The flagship theme (the default): a deep `forest` → emerald gradient
+            // with a warm `gold` accent. The bottom stops at a deep emerald (not the
+            // brighter `verdigris` tint) so `paper` primary/secondary text drawn
+            // directly over the gradient keeps AA contrast — the app renders text on
+            // this background, not only on cards.
             return LFWPaletteColors(
-                backgroundTop: LFWColors.forest, backgroundBottom: LFWColors.verdigris,
+                backgroundTop: LFWColors.forest, backgroundBottom: Color(lfwHex: 0x2E6B50),
                 surface: LFWColors.paper.opacity(0.08),
                 primaryText: LFWColors.paper, secondaryText: LFWColors.paper.opacity(0.72),
                 accent: LFWColors.gold)

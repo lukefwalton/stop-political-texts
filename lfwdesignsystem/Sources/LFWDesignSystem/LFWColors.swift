@@ -23,7 +23,8 @@ public enum LFWColors {
 
     /// The interactive green — a mid verdigris (after *rokushō* 緑青, the ukiyo-e
     /// pigment). Bright enough to read as a tint on dark surfaces, deep enough to
-    /// stay tasteful. The app-wide tint and the Forest theme's gradient bottom.
+    /// stay tasteful. The app-wide tint and the green used for accents. (The Forest
+    /// theme's gradient bottom is a deeper emerald so text stays legible over it.)
     public static let verdigris = Color(lfwHex: 0x3E8E6E)
 
     // MARK: - Blue — secondary, one ukiyo-e lineage
