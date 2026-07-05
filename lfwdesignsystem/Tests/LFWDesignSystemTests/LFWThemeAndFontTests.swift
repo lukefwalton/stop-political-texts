@@ -22,9 +22,10 @@ final class LFWThemeAndFontTests: XCTestCase {
 
     // MARK: Theme config
 
-    func test_themeConfig_defaultIsFraunchesDeepSea() {
+    func test_themeConfig_defaultIsFrauncesForest() {
+        // Green leads the brand, so the default theme is Forest (not Deep Sea).
         XCTAssertEqual(LFWThemeConfig.default.typeface, .fraunces)
-        XCTAssertEqual(LFWThemeConfig.default.palette, .deepSea)
+        XCTAssertEqual(LFWThemeConfig.default.palette, .forest)
         XCTAssertEqual(LFWThemeConfig.default.accentHueShift, 0)
     }
 
@@ -42,7 +43,7 @@ final class LFWThemeAndFontTests: XCTestCase {
         let json = Data(#"{"typeface":"nope","palette":"bogus","accentHueShift":15}"#.utf8)
         let decoded = try JSONDecoder().decode(LFWThemeConfig.self, from: json)
         XCTAssertEqual(decoded.typeface, .fraunces)
-        XCTAssertEqual(decoded.palette, .deepSea)
+        XCTAssertEqual(decoded.palette, .forest)
         XCTAssertEqual(decoded.accentHueShift, 15)
     }
 

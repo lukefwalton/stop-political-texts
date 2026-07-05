@@ -87,12 +87,12 @@ public enum LFWTypeface: String, Codable, CaseIterable, Identifiable, Sendable {
 /// "Deep Sea" is literally the existing onboarding gradient. Not a free color
 /// wheel — presets plus an optional accent-hue nudge.
 public enum LFWPalette: String, Codable, CaseIterable, Identifiable, Sendable {
-    case deepSea
+    case forest   // the flagship green theme — brand primary + the default
+    case deepSea  // the ukiyo-e blue theme — secondary
     case paper
     case dusk
     case sepia
     case highContrast
-    case forest
     case dawn
     case grape
 
@@ -151,11 +151,16 @@ public enum LFWPalette: String, Codable, CaseIterable, Identifiable, Sendable {
                 primaryText: Color(lfwHex: 0x4A3B2A), secondaryText: Color(lfwHex: 0x7A6650),
                 accent: Color(lfwHex: 0xB2562E))
         case .forest:
+            // The flagship theme (the default): a deep `forest` → emerald gradient
+            // with a warm `gold` accent. The bottom stops at a deep emerald (not the
+            // brighter `verdigris` tint) so `paper` primary/secondary text drawn
+            // directly over the gradient keeps AA contrast — the app renders text on
+            // this background, not only on cards.
             return LFWPaletteColors(
-                backgroundTop: Color(lfwHex: 0x0C2A22), backgroundBottom: Color(lfwHex: 0x1C5C44),
+                backgroundTop: LFWColors.forest, backgroundBottom: Color(lfwHex: 0x2E6B50),
                 surface: LFWColors.paper.opacity(0.08),
                 primaryText: LFWColors.paper, secondaryText: LFWColors.paper.opacity(0.72),
-                accent: Color(lfwHex: 0xC7E66B))
+                accent: LFWColors.gold)
         case .dawn:
             return LFWPaletteColors(
                 backgroundTop: Color(lfwHex: 0xFFE3D3), backgroundBottom: Color(lfwHex: 0xF7C0C8),
@@ -201,14 +206,15 @@ public struct LFWThemeConfig: Codable, Equatable, Sendable {
     public var accentHueShift: Double
 
     public init(typeface: LFWTypeface = .fraunces,
-                palette: LFWPalette = .deepSea,
+                palette: LFWPalette = .forest,
                 accentHueShift: Double = 0) {
         self.typeface = typeface
         self.palette = palette
         self.accentHueShift = accentHueShift
     }
 
-    /// The family default: Fraunces + Deep Sea, no hue shift.
+    /// The family default: Fraunces + Forest, no hue shift. Green leads the brand,
+    /// so the default theme is green; Deep Sea (ocean) remains a selectable choice.
     public static let `default` = LFWThemeConfig()
 
     private enum CodingKeys: String, CodingKey {
@@ -223,7 +229,7 @@ public struct LFWThemeConfig: Codable, Equatable, Sendable {
         let rawTypeface = (try? c.decodeIfPresent(String.self, forKey: .typeface)) ?? nil
         let rawPalette = (try? c.decodeIfPresent(String.self, forKey: .palette)) ?? nil
         typeface = rawTypeface.flatMap(LFWTypeface.init(rawValue:)) ?? .fraunces
-        palette = rawPalette.flatMap(LFWPalette.init(rawValue:)) ?? .deepSea
+        palette = rawPalette.flatMap(LFWPalette.init(rawValue:)) ?? .forest
         accentHueShift = ((try? c.decodeIfPresent(Double.self, forKey: .accentHueShift)) ?? nil) ?? 0
     }
 
