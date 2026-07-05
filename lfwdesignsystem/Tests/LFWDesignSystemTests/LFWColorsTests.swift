@@ -23,9 +23,26 @@ final class LFWColorsTests: XCTestCase {
         XCTAssertEqual(describeRGB(LFWColors.verdigris), "0.243,0.557,0.431")
         XCTAssertEqual(describeRGB(LFWColors.ocean),     "0.122,0.369,0.549")
         XCTAssertEqual(describeRGB(LFWColors.ukiyoBlue), "0.141,0.314,0.439")
+        XCTAssertEqual(describeRGB(LFWColors.mist),      "0.498,0.659,0.714")
         XCTAssertEqual(describeRGB(LFWColors.gold),      "1.000,0.804,0.204")
         XCTAssertEqual(describeRGB(LFWColors.deepSea),   "0.000,0.165,0.255")
         XCTAssertEqual(describeRGB(LFWColors.paper),     "0.937,0.976,0.996")
+    }
+
+    func test_tint_isVerdigris() {
+        // The app-wide tint is the semantic alias most consumers inherit; lock it
+        // to the green so a future edit can't silently flip the brand back to blue.
+        XCTAssertEqual(describeRGB(LFWColors.tint), describeRGB(LFWColors.verdigris))
+    }
+
+    func test_forestPalette_isBrandGreenAndDefault() {
+        // Forest is the default theme, and its gradient bottom is a deliberate deep
+        // emerald (not the brighter `verdigris` tint) so `paper` text keeps AA
+        // contrast drawn directly over the gradient. Lock the load-bearing stops.
+        let c = LFWPalette.forest.colors
+        XCTAssertEqual(describeRGB(c.backgroundTop),    describeRGB(LFWColors.forest))
+        XCTAssertEqual(describeRGB(c.backgroundBottom), "0.180,0.420,0.314") // #2E6B50
+        XCTAssertEqual(describeRGB(c.accent),           describeRGB(LFWColors.gold))
     }
 
     private func describeRGB(_ color: Color) -> String {
