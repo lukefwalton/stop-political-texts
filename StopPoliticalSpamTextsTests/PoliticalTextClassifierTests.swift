@@ -305,6 +305,81 @@ final class PoliticalTextClassifierTests: XCTestCase {
         XCTAssertTrue(filtered(message, strictness: .normal))
     }
 
+    // MARK: - Evasion hardening (one end-to-end case per technique; the eval
+    // corpus in StopPoliticalSpamTextsTests/Eval covers each in depth)
+
+    func testLeetEvasionFilters() {
+        let message = "D0nate before m1dnight to help Dem0crats."
+        XCTAssertTrue(filtered(message, strictness: .normal))
+        XCTAssertTrue(filtered(message, strictness: .aggressive))
+    }
+
+    func testHomoglyphEvasionFilters() {
+        // Cyrillic о (U+043E) and е (U+0435) inside Latin words.
+        let message = "D\u{043E}nate before midnight to help D\u{0435}mocrats."
+        XCTAssertTrue(filtered(message, strictness: .normal))
+    }
+
+    func testHomoglyphSpoofedDomainIsHardPolitical() {
+        // Cyrillic а/с in "асtblue.com" fold before URL extraction, so the
+        // spoofed host hits the political-domain list at full strength.
+        let result = classifier.classify(
+            sender: nil,
+            body: "Give now at \u{0430}\u{0441}tblue.com",
+            config: config(strictness: .normal)
+        )
+        XCTAssertTrue(result.isFiltered)
+        XCTAssertEqual(result.reason, "hard_political")
+    }
+
+    func testZeroWidthEvasionFilters() {
+        let message = "Do\u{200B}nate before midnight to help Demo\u{200B}crats."
+        XCTAssertTrue(filtered(message, strictness: .normal))
+    }
+
+    func testPunctuationStuffingEvasionFilters() {
+        let message = "D.o.n.a.t.e before midnight to help D.e.m.o.c.r.a.t.s."
+        XCTAssertTrue(filtered(message, strictness: .normal))
+    }
+
+    func testSpacedLetterEvasionFilters() {
+        let message = "D O N A T E before midnight to help D E M O C R A T S."
+        XCTAssertTrue(filtered(message, strictness: .normal))
+    }
+
+    func testRepeatedCharEvasionFilters() {
+        let message = "Dooonate before midnight to help Demooocrats."
+        XCTAssertTrue(filtered(message, strictness: .normal))
+    }
+
+    func testFullwidthEvasionFilters() {
+        let message = "ＤＯＮＡＴＥ before midnight to help ＤＥＭＯＣＲＡＴＳ."
+        XCTAssertTrue(filtered(message, strictness: .normal))
+    }
+
+    func testDeobfuscatedMatchIsMarked() {
+        let result = classifier.classify(
+            sender: nil,
+            body: "D0nate before m1dnight to help Dem0crats.",
+            config: config(strictness: .normal)
+        )
+        XCTAssertTrue(result.isFiltered)
+        XCTAssertTrue(result.matchedRules.contains("deobfuscated"))
+    }
+
+    func testHardeningDoesNotBreakLeetLookalikeAuthText() {
+        // A typo'd auth code must not become a false positive: digits are
+        // never folded, and the allowlist reads the canonical view.
+        XCTAssertFalse(filtered("Your c0de is 123456.", strictness: .aggressive))
+    }
+
+    func testHardeningDoesNotBreakAdversarialLookingNegatives() {
+        XCTAssertFalse(filtered("Sooooo excited for tonight!!! See you there.", strictness: .aggressive))
+        XCTAssertFalse(filtered("V.I.P. sale ends tonight — 50% off everything.", strictness: .aggressive))
+        XCTAssertFalse(filtered("F Y I the meeting moved to 3pm.", strictness: .aggressive))
+        XCTAssertFalse(filtered("Schedule posted at www.example.com — see you Saturday!!!", strictness: .aggressive))
+    }
+
     func testPartyCommitteeDomainFilters() {
         XCTAssertTrue(filtered("Give now at dscc.org", strictness: .aggressive))
         XCTAssertTrue(filtered("Donate at nrsc.org", strictness: .aggressive))
