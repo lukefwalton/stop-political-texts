@@ -11,7 +11,8 @@ name: Checks
 on:
   pull_request:
   push:
-    branches: [main]
+    # claude/** gives remote-session branches CI signal before a PR exists.
+    branches: [main, "claude/**"]
 
 jobs:
   extension-privacy:
