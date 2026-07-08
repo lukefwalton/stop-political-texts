@@ -1,6 +1,6 @@
 # Copy to project.local.yml and fill in your Apple Developer Team ID.
 # Find it at developer.apple.com → Membership → Team ID (10 characters).
-# Then: xcodegen generate && open StopPoliticalSpamTexts.xcodeproj
+# Then: bash scripts/generate.sh && open StopPoliticalSpamTexts.xcodeproj
 #
 # If you don't own com.lukewalton.*, change bundleIdPrefix and bundle IDs below
 # to match App IDs you registered in the Developer portal. A fork is its own app

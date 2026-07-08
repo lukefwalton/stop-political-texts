@@ -69,7 +69,9 @@ The Xcode project is generated from `project.yml` with
 
 ```bash
 brew install xcodegen
-xcodegen generate
+cp project.local.yml.example project.local.yml
+# Edit project.local.yml — set DEVELOPMENT_TEAM (never commit this file).
+bash scripts/generate.sh
 open StopPoliticalSpamTexts.xcodeproj
 ```
 
@@ -131,7 +133,7 @@ involved to keep doing its job.
   There's nothing that can be switched off remotely.
 - **The code stays open.** MIT-licensed and public — fork it, reuse it, carry it
   forward. Building your own copy takes a few minutes: `brew install xcodegen`,
-  `xcodegen generate`, set your signing team, run on your device.
+  `bash scripts/generate.sh`, set your signing team, run on your device.
 - **Anyone can ship a variant.** Please do. Change `bundleIdPrefix` in
   `project.yml` and the App Group id to make it yours. A fork is its own app
   with its own App Store review and privacy disclosures.

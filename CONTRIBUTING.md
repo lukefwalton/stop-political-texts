@@ -32,7 +32,7 @@ write your own App Store privacy disclosures. MIT permits this explicitly.
 brew install xcodegen
 cp project.local.yml.example project.local.yml
 # Edit project.local.yml — set DEVELOPMENT_TEAM (never commit this file).
-xcodegen generate
+bash scripts/generate.sh
 open StopPoliticalSpamTexts.xcodeproj
 ```
 

@@ -104,6 +104,12 @@ https://apps.apple.com/us/app/stop-political-spam-texts/id6782703267
 
 App name in Connect: **Stop Political Spam Texts**
 
+## What's New (v1.2)
+
+Stronger filtering against obfuscated political spam. Refreshed look with a cleaner setup flow, updated app icon, and small usability improvements throughout.
+
+> Paste into App Store Connect when submitting build 4. Current marketing version: **1.2**.
+
 ## App Privacy (App Store Connect questionnaire)
 
 - Data collection: **Data Not Collected**
