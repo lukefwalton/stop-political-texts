@@ -77,6 +77,13 @@ targets:
     platform: iOS
     sources:
       - path: StopPoliticalSpamTextsTests
+        excludes:
+          - "Eval/Resources/**"
+      # Eval corpus + baseline JSON, copied into the test bundle (loaded via
+      # Bundle(for:) in EvalCase.swift). Test-target only: the corpus must
+      # never ship inside the app or the extension.
+      - path: StopPoliticalSpamTextsTests/Eval/Resources
+        buildPhase: resources
     dependencies:
       - target: StopPoliticalSpamTexts
     settings:

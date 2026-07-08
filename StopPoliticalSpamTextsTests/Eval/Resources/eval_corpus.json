@@ -1,0 +1,3080 @@
+{
+  "schemaVersion": 1,
+  "cases": [
+    {
+      "id": "pos_fund_dem_001",
+      "body": "Democrats need your help. Donate before midnight to flip the seat.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "dem",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_fund_rep_001",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_fund_rep_001",
+      "body": "Republicans need your help. Donate before midnight to flip the seat.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "rep",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_fund_dem_001",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_fund_dem_002",
+      "body": "DNC deadline tonight: chip in $5 before midnight.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "dem",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_fund_rep_002",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_fund_rep_002",
+      "body": "RNC deadline tonight: chip in $5 before midnight.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "rep",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_fund_dem_002",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_fund_dem_003",
+      "body": "ActBlue: 400% match expires at midnight. Rush $10 now.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "dem",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_fund_rep_003",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_fund_rep_003",
+      "body": "WinRed: 400% match expires at midnight. Rush $10 now.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "rep",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_fund_dem_003",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_fund_dem_004",
+      "body": "Paid for by House Democrats. Contribute before the FEC deadline.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "dem",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_fund_rep_004",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_fund_rep_004",
+      "body": "Paid for by House Republicans. Contribute before the FEC deadline.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "rep",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_fund_dem_004",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_fund_dem_005",
+      "body": "URGENT: Democrats are $8,450 short of the goal. Chip in before midnight?",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "dem",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_fund_rep_005",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_fund_rep_005",
+      "body": "URGENT: Republicans are $8,450 short of the goal. Chip in before midnight?",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "rep",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_fund_dem_005",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_fund_dem_006",
+      "body": "The blue wave needs grassroots donors. Donate $25 today.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "dem",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_fund_rep_006",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_fund_rep_006",
+      "body": "The red wave needs grassroots donors. Donate $25 today.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "rep",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_fund_dem_006",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_fund_dem_007",
+      "body": "Triple match active for Senate Democrats. Give now at dscc.org",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "dem",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_fund_rep_007",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped). Party-committee domain."
+    },
+    {
+      "id": "pos_fund_rep_007",
+      "body": "Triple match active for Senate Republicans. Give now at nrsc.org",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "rep",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_fund_dem_007",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped). Party-committee domain."
+    },
+    {
+      "id": "pos_fund_dem_008",
+      "body": "Final notice: the Democrats fundraising deadline is midnight. Donate now.",
+      "sender": "22762",
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "dem",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_fund_rep_008",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped). Short-code sender."
+    },
+    {
+      "id": "pos_fund_rep_008",
+      "body": "Final notice: the Republicans fundraising deadline is midnight. Donate now.",
+      "sender": "22762",
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "rep",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_fund_dem_008",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped). Short-code sender."
+    },
+    {
+      "id": "pos_gotv_dem_001",
+      "body": "Election Day is tomorrow. Democrats need your vote — find your polling place.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_gotv",
+      "party": "dem",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_gotv_rep_001",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_gotv_rep_001",
+      "body": "Election Day is tomorrow. Republicans need your vote — find your polling place.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_gotv",
+      "party": "rep",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_gotv_dem_001",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_gotv_dem_002",
+      "body": "Early voting starts Monday. Make a plan to vote for Democratic candidates.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_gotv",
+      "party": "dem",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_gotv_rep_002",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_gotv_rep_002",
+      "body": "Early voting starts Monday. Make a plan to vote for Republican candidates.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_gotv",
+      "party": "rep",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_gotv_dem_002",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_gotv_dem_003",
+      "body": "DCCC: polls open at 7am. Can we count on you?",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_gotv",
+      "party": "dem",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_gotv_rep_003",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_gotv_rep_003",
+      "body": "NRCC: polls open at 7am. Can we count on you?",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_gotv",
+      "party": "rep",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_gotv_dem_003",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_gotv_dem_004",
+      "body": "Get out the vote! Democrats are counting on your ballot by Nov 5.",
+      "sender": "5551234567",
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_gotv",
+      "party": "dem",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_gotv_rep_004",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped). 10-digit sender."
+    },
+    {
+      "id": "pos_gotv_rep_004",
+      "body": "Get out the vote! Republicans are counting on your ballot by Nov 5.",
+      "sender": "5551234567",
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_gotv",
+      "party": "rep",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_gotv_dem_004",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped). 10-digit sender."
+    },
+    {
+      "id": "pos_survey_dem_001",
+      "body": "Official survey: do you approve of the Democratic agenda? Reply YES or NO.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_survey",
+      "party": "dem",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_survey_rep_001",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_survey_rep_001",
+      "body": "Official survey: do you approve of the Republican agenda? Reply YES or NO.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_survey",
+      "party": "rep",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_survey_dem_001",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_survey_dem_002",
+      "body": "Who has your vote in the primary? Take our survey. — Team Blue",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_survey",
+      "party": "dem",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_survey_rep_002",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_survey_rep_002",
+      "body": "Who has your vote in the primary? Take our survey. — Team Red",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_survey",
+      "party": "rep",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_survey_dem_002",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_survey_dem_003",
+      "body": "Democrats: who are you voting for? Official poll inside.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_survey",
+      "party": "dem",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_survey_rep_003",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_survey_rep_003",
+      "body": "Republicans: who are you voting for? Official poll inside.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_survey",
+      "party": "rep",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_survey_dem_003",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_mob_dem_001",
+      "body": "Join Democrats at the rally on Saturday. Sign the petition now.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_mobilization",
+      "party": "dem",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_mob_rep_001",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_mob_rep_001",
+      "body": "Join Republicans at the rally on Saturday. Sign the petition now.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_mobilization",
+      "party": "rep",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_mob_dem_001",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_mob_dem_002",
+      "body": "Volunteer to phone bank for Senate Democrats this weekend.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_mobilization",
+      "party": "dem",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_mob_rep_002",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_mob_rep_002",
+      "body": "Volunteer to phone bank for Senate Republicans this weekend.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_mobilization",
+      "party": "rep",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_mob_dem_002",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_mob_dem_003",
+      "body": "Town hall tonight: stand with House Democrats against the bill.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_mobilization",
+      "party": "dem",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_mob_rep_003",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_mob_rep_003",
+      "body": "Town hall tonight: stand with House Republicans against the bill.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_mobilization",
+      "party": "rep",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_mob_dem_003",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_mob_dem_004",
+      "body": "DNC rally tonight: doors open at 6pm.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_mobilization",
+      "party": "dem",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_mob_rep_004",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_mob_rep_004",
+      "body": "RNC rally tonight: doors open at 6pm.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_mobilization",
+      "party": "rep",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_mob_dem_004",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_ballot_dem_001",
+      "body": "Democrats say vote YES on Prop 22 — ballots due Tuesday.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "ballot_measure",
+      "party": "dem",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_ballot_rep_001",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_ballot_rep_001",
+      "body": "Republicans say vote YES on Prop 22 — ballots due Tuesday.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "ballot_measure",
+      "party": "rep",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_ballot_dem_001",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_ballot_dem_002",
+      "body": "Defeat Prop 8! Democrats urge a NO vote before Election Day.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "ballot_measure",
+      "party": "dem",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_ballot_rep_002",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_ballot_rep_002",
+      "body": "Defeat Prop 8! Republicans urge a NO vote before Election Day.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "ballot_measure",
+      "party": "rep",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_ballot_dem_002",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_ballot_dem_003",
+      "body": "Democrats launched a signature drive to put the initiative on the ballot. Volunteer today.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "ballot_measure",
+      "party": "dem",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_ballot_rep_003",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_ballot_rep_003",
+      "body": "Republicans launched a signature drive to put the initiative on the ballot. Volunteer today.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "ballot_measure",
+      "party": "rep",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_ballot_dem_003",
+      "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_ballot_np_001",
+      "body": "Vote YES on Measure 4 to protect our schools. Ballots due by mail Tuesday.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "ballot_measure",
+      "party": "nonpartisan",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic."
+    },
+    {
+      "id": "pos_ballot_np_002",
+      "body": "Signature drive Saturday: help qualify the initiative for the November ballot.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "ballot_measure",
+      "party": "nonpartisan",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic."
+    },
+    {
+      "id": "pos_ballot_np_003",
+      "body": "No on Prop 31! Volunteer for the canvass this weekend.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "ballot_measure",
+      "party": "nonpartisan",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic."
+    },
+    {
+      "id": "pos_ballot_np_004",
+      "body": "The recall election is on the ballot June 3. Vote no on the recall.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "ballot_measure",
+      "party": "nonpartisan",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic."
+    },
+    {
+      "id": "pos_ballot_np_005",
+      "body": "Protect Prop 13 — sign the petition before Friday.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "ballot_measure",
+      "party": "nonpartisan",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic."
+    },
+    {
+      "id": "pos_ballot_np_006",
+      "body": "Yes on Amendment 2: early voting begins Thursday.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "ballot_measure",
+      "party": "nonpartisan",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic."
+    },
+    {
+      "id": "pos_gotv_np_001",
+      "body": "Get out the vote! Volunteer for our voter drive this Saturday.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_gotv",
+      "party": "nonpartisan",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic."
+    },
+    {
+      "id": "pos_mob_np_001",
+      "body": "Rally at the state Capitol before the vote Tuesday. Sign the petition.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "allowed"
+      },
+      "category": "political_mobilization",
+      "party": "nonpartisan",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic. Aggressive-only by design: mobilization + election terms score 5."
+    },
+    {
+      "id": "pos_gotv_np_002",
+      "body": "Canvass with us Saturday to get out the vote before Election Day.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_gotv",
+      "party": "nonpartisan",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic."
+    },
+    {
+      "id": "pos_mob_np_002",
+      "body": "Phone bank tonight: call voters about the special election.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "allowed"
+      },
+      "category": "political_mobilization",
+      "party": "nonpartisan",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic. Aggressive-only by design: mobilization + election terms score 5."
+    },
+    {
+      "id": "pos_mob_np_003",
+      "body": "Pledge to vote early — reply YES to get your polling place.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_mobilization",
+      "party": "nonpartisan",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic."
+    },
+    {
+      "id": "pos_survey_np_001",
+      "body": "Official poll: do you support the new ballot measure? Reply YES or NO.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_survey",
+      "party": "nonpartisan",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic."
+    },
+    {
+      "id": "pos_survey_np_002",
+      "body": "Take our survey on the upcoming election — 2 minutes.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_survey",
+      "party": "nonpartisan",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic."
+    },
+    {
+      "id": "pos_survey_np_003",
+      "body": "Are you voting in the primary? Take this survey.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_survey",
+      "party": "nonpartisan",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic."
+    },
+    {
+      "id": "pos_fund_np_001",
+      "body": "Chip in $10 to fund the recall campaign: bit.ly/recall",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "nonpartisan",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic. URL shortener boost."
+    },
+    {
+      "id": "pos_fund_np_002",
+      "body": "Donation deadline midnight — help us defend the ballot initiative.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "nonpartisan",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic."
+    },
+    {
+      "id": "pos_fund_issue_001",
+      "body": "Clean Water PAC: chip in $10 before the midnight deadline.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "issue",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic."
+    },
+    {
+      "id": "pos_fund_issue_002",
+      "body": "Paid for by Citizens for Safe Streets. Not authorized by any candidate or candidate's committee.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "allowed"
+      },
+      "category": "political_fundraising",
+      "party": "issue",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic. Aggressive-only by design: FEC disclaimer alone scores 4."
+    },
+    {
+      "id": "pos_fund_issue_003",
+      "body": "Liberty Action PAC needs grassroots supporters. Donate today.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "issue",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic."
+    },
+    {
+      "id": "pos_fund_issue_004",
+      "body": "Our super PAC hit 90% of its goal — contribute before midnight.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "issue",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic."
+    },
+    {
+      "id": "pos_mob_issue_001",
+      "body": "Second Chance PAC: sign the petition and pledge your vote.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_mobilization",
+      "party": "issue",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic."
+    },
+    {
+      "id": "pos_survey_issue_001",
+      "body": "Wildlife Defense Fund PAC survey: reply YES if you support the ballot initiative.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_survey",
+      "party": "issue",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic."
+    },
+    {
+      "id": "neg_auth_001",
+      "body": "Your verification code is 482913.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "auth",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_auth_002",
+      "body": "Use login code 55321 to finish signing in.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "auth",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_auth_003",
+      "body": "Your one-time code is 9944. It expires in 10 minutes.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "auth",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_auth_004",
+      "body": "Password reset requested. Your code is 771204.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "auth",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_auth_005",
+      "body": "Your 2FA code: 003921.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "auth",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_auth_006",
+      "body": "Your PIN is 4421. Do not share it.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "auth",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_commerce_001",
+      "body": "Your order has shipped and arrives Thursday.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "commerce",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_commerce_002",
+      "body": "Your Uber is arriving in 3 minutes.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "commerce",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_commerce_003",
+      "body": "Prescription ready at Walgreens pharmacy.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "commerce",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_commerce_004",
+      "body": "Table reservation confirmed for 7:30pm.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "commerce",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_commerce_005",
+      "body": "Flight DL204 boarding gate changed to C7.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "commerce",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_commerce_006",
+      "body": "Fraud alert: did you spend $208.15 at Target? Reply YES or NO.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "commerce",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_commerce_007",
+      "body": "Your dentist appointment is tomorrow at 10am.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "commerce",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_commerce_008",
+      "body": "FedEx: package delivered to your front door.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "commerce",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_commerce_009",
+      "body": "Your DoorDash order is on the way.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "commerce",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_commerce_010",
+      "body": "Bank alert: card ending 5512 was declined.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "commerce",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_emergency_001",
+      "body": "Emergency alert: wildfire evacuation order for zone 4.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "emergency",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_emergency_002",
+      "body": "Amber alert issued in your county. Check local media.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "emergency",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_emergency_003",
+      "body": "Weather alert: flash flood warning until 9pm.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "emergency",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_emergency_004",
+      "body": "Public safety notice: boil water advisory lifted.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "emergency",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_charity_001",
+      "body": "Red Cross: your donation doubles until midnight tonight.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "charity_fundraising",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_charity_002",
+      "body": "The food bank needs canned goods this Saturday. Drop off 9-noon.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "charity_fundraising",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_charity_003",
+      "body": "Animal shelter fundraiser Sunday — adoption fees waived.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "charity_fundraising",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_charity_004",
+      "body": "Your Goodwill donation receipt is attached.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "charity_fundraising",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_charity_005",
+      "body": "United Way workplace giving drive starts Monday.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "charity_fundraising",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_charity_006",
+      "body": "Support the children's hospital — give before midnight and your gift is matched.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "charity_fundraising",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_charity_007",
+      "body": "Museum membership drive: contribute $50, get a free tote.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "charity_fundraising",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_charity_008",
+      "body": "Volunteer at the soup kitchen this weekend — sign up now.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "charity_fundraising",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_school_001",
+      "body": "St. Mary's building fund: contribute online this Sunday.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "religious_school_fundraiser",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_school_002",
+      "body": "PTA bake sale Friday — volunteers needed at 8am.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "religious_school_fundraiser",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_school_003",
+      "body": "Youth group car wash fundraiser Saturday 10-2.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "religious_school_fundraiser",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_school_004",
+      "body": "School auction deadline extended to Friday — donate an item.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "religious_school_fundraiser",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_school_005",
+      "body": "Choir trip fundraiser: chip in if you can.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "religious_school_fundraiser",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_school_006",
+      "body": "Sunday service moved to 10am in the gym.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "religious_school_fundraiser",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_retail_001",
+      "body": "FINAL HOURS: 50% off everything. Sale ends at midnight!",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "retail_urgency",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_retail_002",
+      "body": "Flash sale! Your 20% off code expires tonight.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "retail_urgency",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_retail_003",
+      "body": "Deal of the day: buy one get one free, today only.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "retail_urgency",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_retail_004",
+      "body": "Your cart is waiting — checkout by midnight for free shipping.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "retail_urgency",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_retail_005",
+      "body": "Last chance: rewards points expire Friday.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "retail_urgency",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_retail_006",
+      "body": "Price match guarantee ends this weekend — shop now.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "retail_urgency",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_retail_007",
+      "body": "New drop: limited edition sneakers, reply STOP to opt out.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "retail_urgency",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_retail_008",
+      "body": "Clearance event this weekend — everything must go!",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "retail_urgency",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_news_001",
+      "body": "AP Alert: Polls close at 8pm in tonight's primary.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "news_alert",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_news_002",
+      "body": "Breaking: Senate passes the spending bill 52-48.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "news_alert",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_news_003",
+      "body": "Local news: school board votes on the budget Thursday.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "news_alert",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_news_004",
+      "body": "Daily brief: turnout heavy in early voting across the county.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "news_alert",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_news_005",
+      "body": "Reminder: candidate debate airs tonight at 9 on channel 5.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "news_alert",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_news_006",
+      "body": "Election results certified by the county board.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "news_alert",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_civic_001",
+      "body": "DMV: your license renewal appointment is confirmed.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "civic_noncampaign",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_civic_002",
+      "body": "You are summoned for jury duty on Monday, March 3.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "civic_noncampaign",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_civic_003",
+      "body": "U.S. Census reminder: complete your household form online.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "civic_noncampaign",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_civic_004",
+      "body": "County Clerk: your voter registration is confirmed.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "civic_noncampaign",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_civic_005",
+      "body": "Your mail ballot has been received and counted. — County Elections",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "civic_noncampaign",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative. Known false positive: 'mail ballot' + 'ballot' pair to 6. Documents a real FP risk on official ballot-tracking notices; tracked in eval_baseline.json."
+    },
+    {
+      "id": "neg_civic_006",
+      "body": "Polling place lookup: text your address to find your location.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "civic_noncampaign",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_civic_007",
+      "body": "Library board meeting Tuesday 6pm — public comment welcome.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "civic_noncampaign",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_civic_008",
+      "body": "City water main work on Elm St Wednesday; expect low pressure.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "civic_noncampaign",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_union_001",
+      "body": "Local 100: vote on the contract ratification Thursday.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "union_nonpolitical",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_union_002",
+      "body": "Union hall meeting moved to Tuesday. Pizza provided.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "union_nonpolitical",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_union_003",
+      "body": "Strike authorization vote closes Friday at 5pm.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "union_nonpolitical",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_union_004",
+      "body": "Reminder: union dues deadline is Friday.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "union_nonpolitical",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_research_001",
+      "body": "Nielsen: take our survey about streaming habits for a $10 gift card.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "market_research",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_research_002",
+      "body": "How did we do? Rate your recent visit from 1-5.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "market_research",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_research_003",
+      "body": "Quick 3-question survey about your commute — win a gift card.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "market_research",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_research_004",
+      "body": "Your feedback matters: reply 1-5 to rate today's delivery.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "market_research",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_gotvcom_001",
+      "body": "Election Day Sale! 40% off mattresses, this Tuesday only.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "gotv_adjacent_commercial",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_gotvcom_002",
+      "body": "Cast your vote for our next ice cream flavor!",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "gotv_adjacent_commercial",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_gotvcom_003",
+      "body": "Poll: which sneaker should we restock? Reply 1 or 2.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "gotv_adjacent_commercial",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "neg_gotvcom_004",
+      "body": "Vote for your favorite contestant tonight on channel 8.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "gotv_adjacent_commercial",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative."
+    },
+    {
+      "id": "bnd_001",
+      "body": "Check out this magazine article on home design.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "boundary",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic boundary case. maga inside magazine."
+    },
+    {
+      "id": "bnd_002",
+      "body": "DNCE tickets go on sale Friday.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "boundary",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic boundary case. dnc inside DNCE."
+    },
+    {
+      "id": "bnd_003",
+      "body": "The package arrived damaged — send a photo for a refund.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "boundary",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic boundary case. pac inside package."
+    },
+    {
+      "id": "bnd_004",
+      "body": "The proper way to season cast iron.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "boundary",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic boundary case. prop inside proper."
+    },
+    {
+      "id": "bnd_005",
+      "body": "Harris Teeter: your grocery pickup is ready.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "boundary",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic boundary case. No candidate-name matching."
+    },
+    {
+      "id": "bnd_006",
+      "body": "Please vote in the HOA satisfaction survey.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "boundary",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic boundary case."
+    },
+    {
+      "id": "bnd_007",
+      "body": "The office campaign kickoff is tomorrow at 9.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "boundary",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic boundary case."
+    },
+    {
+      "id": "bnd_008",
+      "body": "Fantasy league poll closes at kickoff.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "boundary",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic boundary case."
+    },
+    {
+      "id": "bnd_009",
+      "body": "Recall notice: your vehicle's airbag inflator needs service.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "boundary",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic boundary case. Ballot noun without pairing must not score."
+    },
+    {
+      "id": "bnd_010",
+      "body": "Prop 65 warning: this product contains chemicals known to the state.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "boundary",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic boundary case. Ballot noun without pairing must not score."
+    },
+    {
+      "id": "bnd_011",
+      "body": "Rally point for the hike is the north trailhead at 8.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "boundary",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic boundary case."
+    },
+    {
+      "id": "bnd_012",
+      "body": "Your LinkedIn endorsement from Dana is live.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "boundary",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic boundary case."
+    },
+    {
+      "id": "bnd_013",
+      "body": "Congress Ave is closed for the marathon Saturday.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "boundary",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic boundary case."
+    },
+    {
+      "id": "bnd_014",
+      "body": "Primary care visit reminder: Dr. Lee, Thursday 2pm.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "boundary",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic boundary case."
+    },
+    {
+      "id": "bnd_015",
+      "body": "I devote my weekends to pivotal home projects.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "boundary",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic boundary case. vote inside devote/pivotal."
+    },
+    {
+      "id": "adv_leet_dem_001",
+      "body": "Dem0crats need your help. D0nate before m1dnight to flip the seat.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "dem",
+      "technique": "leet",
+      "baseId": "pos_fund_dem_001",
+      "pairId": "adv_leet_rep_001",
+      "note": "leet variant of pos_fund_dem_001; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_leet_rep_001",
+      "body": "Republ1cans need your help. D0nate before m1dnight to flip the seat.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "rep",
+      "technique": "leet",
+      "baseId": "pos_fund_rep_001",
+      "pairId": "adv_leet_dem_001",
+      "note": "leet variant of pos_fund_rep_001; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_leet_dem_002",
+      "body": "Electi0n Day is tomorrow. Dem0crats need your v0te — find your p0lling place.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_gotv",
+      "party": "dem",
+      "technique": "leet",
+      "baseId": "pos_gotv_dem_001",
+      "pairId": "adv_leet_rep_002",
+      "note": "leet variant of pos_gotv_dem_001; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_leet_rep_002",
+      "body": "Electi0n Day is tomorrow. Republ1cans need your v0te — find your p0lling place.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_gotv",
+      "party": "rep",
+      "technique": "leet",
+      "baseId": "pos_gotv_rep_001",
+      "pairId": "adv_leet_dem_002",
+      "note": "leet variant of pos_gotv_rep_001; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_leet_np_001",
+      "body": "V0te YES on Measure 4 to pr0tect our schools. Ball0ts due by mail Tuesday.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "ballot_measure",
+      "party": "nonpartisan",
+      "technique": "leet",
+      "baseId": "pos_ballot_np_001",
+      "pairId": null,
+      "note": "leet variant of pos_ballot_np_001; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_leet_np_002",
+      "body": "Take our surv3y on the upcoming electi0n — 2 minutes.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_survey",
+      "party": "nonpartisan",
+      "technique": "leet",
+      "baseId": "pos_survey_np_002",
+      "pairId": null,
+      "note": "leet variant of pos_survey_np_002; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_homoglyph_dem_001",
+      "body": "Dеmocrats need your help. Dоnate before midnight to flip the seat.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "dem",
+      "technique": "homoglyph",
+      "baseId": "pos_fund_dem_001",
+      "pairId": "adv_homoglyph_rep_001",
+      "note": "homoglyph variant of pos_fund_dem_001; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_homoglyph_rep_001",
+      "body": "Rеpublicans need your help. Dоnate before midnight to flip the seat.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "rep",
+      "technique": "homoglyph",
+      "baseId": "pos_fund_rep_001",
+      "pairId": "adv_homoglyph_dem_001",
+      "note": "homoglyph variant of pos_fund_rep_001; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_homoglyph_dem_002",
+      "body": "Give now at асtblue.com to help our team.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "dem",
+      "technique": "homoglyph",
+      "baseId": "pos_fund_dem_003",
+      "pairId": "adv_homoglyph_rep_002",
+      "note": "homoglyph variant of pos_fund_dem_003; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_homoglyph_rep_002",
+      "body": "Give now at winrеd.com to help our team.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "rep",
+      "technique": "homoglyph",
+      "baseId": "pos_fund_rep_003",
+      "pairId": "adv_homoglyph_dem_002",
+      "note": "homoglyph variant of pos_fund_rep_003; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_homoglyph_np_001",
+      "body": "Vоte YES on Mеasure 4 to protect our schools. Ballots due by mail Tuesday.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "ballot_measure",
+      "party": "nonpartisan",
+      "technique": "homoglyph",
+      "baseId": "pos_ballot_np_001",
+      "pairId": null,
+      "note": "homoglyph variant of pos_ballot_np_001; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_homoglyph_np_002",
+      "body": "Take our ѕurvey on the upcoming еlection — 2 minutes.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_survey",
+      "party": "nonpartisan",
+      "technique": "homoglyph",
+      "baseId": "pos_survey_np_002",
+      "pairId": null,
+      "note": "homoglyph variant of pos_survey_np_002; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_zero_width_dem_001",
+      "body": "Demo​crats need your help. Do​nate before midnight to flip the seat.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "dem",
+      "technique": "zero_width",
+      "baseId": "pos_fund_dem_001",
+      "pairId": "adv_zero_width_rep_001",
+      "note": "zero_width variant of pos_fund_dem_001; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_zero_width_rep_001",
+      "body": "Repub​licans need your help. Do​nate before midnight to flip the seat.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "rep",
+      "technique": "zero_width",
+      "baseId": "pos_fund_rep_001",
+      "pairId": "adv_zero_width_dem_001",
+      "note": "zero_width variant of pos_fund_rep_001; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_zero_width_dem_002",
+      "body": "Elec​tion Day is tomorrow. Demo​crats need your vo​te — find your pol​ling place.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_gotv",
+      "party": "dem",
+      "technique": "zero_width",
+      "baseId": "pos_gotv_dem_001",
+      "pairId": "adv_zero_width_rep_002",
+      "note": "zero_width variant of pos_gotv_dem_001; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_zero_width_rep_002",
+      "body": "Elec​tion Day is tomorrow. Repub​licans need your vo​te — find your pol​ling place.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_gotv",
+      "party": "rep",
+      "technique": "zero_width",
+      "baseId": "pos_gotv_rep_001",
+      "pairId": "adv_zero_width_dem_002",
+      "note": "zero_width variant of pos_gotv_rep_001; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_zero_width_np_001",
+      "body": "Vo​te YES on Mea​sure 4 to protect our schools. Ballots due by mail Tuesday.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "ballot_measure",
+      "party": "nonpartisan",
+      "technique": "zero_width",
+      "baseId": "pos_ballot_np_001",
+      "pairId": null,
+      "note": "zero_width variant of pos_ballot_np_001; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_zero_width_np_002",
+      "body": "Take our sur​vey on the upcoming elec​tion — 2 minutes.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_survey",
+      "party": "nonpartisan",
+      "technique": "zero_width",
+      "baseId": "pos_survey_np_002",
+      "pairId": null,
+      "note": "zero_width variant of pos_survey_np_002; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_punct_stuffing_dem_001",
+      "body": "D.e.m.o.c.r.a.t.s need your help. D.o.n.a.t.e before midnight to flip the seat.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "dem",
+      "technique": "punct_stuffing",
+      "baseId": "pos_fund_dem_001",
+      "pairId": "adv_punct_stuffing_rep_001",
+      "note": "punct_stuffing variant of pos_fund_dem_001; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_punct_stuffing_rep_001",
+      "body": "R.e.p.u.b.l.i.c.a.n.s need your help. D.o.n.a.t.e before midnight to flip the seat.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "rep",
+      "technique": "punct_stuffing",
+      "baseId": "pos_fund_rep_001",
+      "pairId": "adv_punct_stuffing_dem_001",
+      "note": "punct_stuffing variant of pos_fund_rep_001; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_punct_stuffing_dem_002",
+      "body": "E.l.e.c.t.i.o.n Day is tomorrow. D.e.m.o.c.r.a.t.s need your v.o.t.e — find your p.o.l.l.i.n.g place.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_gotv",
+      "party": "dem",
+      "technique": "punct_stuffing",
+      "baseId": "pos_gotv_dem_001",
+      "pairId": "adv_punct_stuffing_rep_002",
+      "note": "punct_stuffing variant of pos_gotv_dem_001; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_punct_stuffing_rep_002",
+      "body": "E.l.e.c.t.i.o.n Day is tomorrow. R.e.p.u.b.l.i.c.a.n.s need your v.o.t.e — find your p.o.l.l.i.n.g place.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_gotv",
+      "party": "rep",
+      "technique": "punct_stuffing",
+      "baseId": "pos_gotv_rep_001",
+      "pairId": "adv_punct_stuffing_dem_002",
+      "note": "punct_stuffing variant of pos_gotv_rep_001; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_punct_stuffing_np_001",
+      "body": "V.o.t.e YES on M.e.a.s.u.r.e 4 to protect our schools. Ballots due by mail Tuesday.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "ballot_measure",
+      "party": "nonpartisan",
+      "technique": "punct_stuffing",
+      "baseId": "pos_ballot_np_001",
+      "pairId": null,
+      "note": "punct_stuffing variant of pos_ballot_np_001; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_punct_stuffing_np_002",
+      "body": "Take our s.u.r.v.e.y on the upcoming e.l.e.c.t.i.o.n — 2 minutes.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_survey",
+      "party": "nonpartisan",
+      "technique": "punct_stuffing",
+      "baseId": "pos_survey_np_002",
+      "pairId": null,
+      "note": "punct_stuffing variant of pos_survey_np_002; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_spaced_letters_dem_001",
+      "body": "D E M O C R A T S need your help. D O N A T E before midnight to flip the seat.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "dem",
+      "technique": "spaced_letters",
+      "baseId": "pos_fund_dem_001",
+      "pairId": "adv_spaced_letters_rep_001",
+      "note": "spaced_letters variant of pos_fund_dem_001; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_spaced_letters_rep_001",
+      "body": "R E P U B L I C A N S need your help. D O N A T E before midnight to flip the seat.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "rep",
+      "technique": "spaced_letters",
+      "baseId": "pos_fund_rep_001",
+      "pairId": "adv_spaced_letters_dem_001",
+      "note": "spaced_letters variant of pos_fund_rep_001; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_spaced_letters_dem_002",
+      "body": "E L E C T I O N Day is tomorrow. D E M O C R A T S need your V O T E — find your P O L L I N G place.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_gotv",
+      "party": "dem",
+      "technique": "spaced_letters",
+      "baseId": "pos_gotv_dem_001",
+      "pairId": "adv_spaced_letters_rep_002",
+      "note": "spaced_letters variant of pos_gotv_dem_001; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_spaced_letters_rep_002",
+      "body": "E L E C T I O N Day is tomorrow. R E P U B L I C A N S need your V O T E — find your P O L L I N G place.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_gotv",
+      "party": "rep",
+      "technique": "spaced_letters",
+      "baseId": "pos_gotv_rep_001",
+      "pairId": "adv_spaced_letters_dem_002",
+      "note": "spaced_letters variant of pos_gotv_rep_001; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_spaced_letters_np_001",
+      "body": "V O T E YES on M E A S U R E 4 to protect our schools. Ballots due by mail Tuesday.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "ballot_measure",
+      "party": "nonpartisan",
+      "technique": "spaced_letters",
+      "baseId": "pos_ballot_np_001",
+      "pairId": null,
+      "note": "spaced_letters variant of pos_ballot_np_001; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_spaced_letters_np_002",
+      "body": "Take our S U R V E Y on the upcoming E L E C T I O N — 2 minutes.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_survey",
+      "party": "nonpartisan",
+      "technique": "spaced_letters",
+      "baseId": "pos_survey_np_002",
+      "pairId": null,
+      "note": "spaced_letters variant of pos_survey_np_002; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_char_repeat_dem_001",
+      "body": "Demooocrats need your help. Dooonate before midnight to flip the seat.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "dem",
+      "technique": "char_repeat",
+      "baseId": "pos_fund_dem_001",
+      "pairId": "adv_char_repeat_rep_001",
+      "note": "char_repeat variant of pos_fund_dem_001; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_char_repeat_rep_001",
+      "body": "Republicaaans need your help. Dooonate before midnight to flip the seat.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "rep",
+      "technique": "char_repeat",
+      "baseId": "pos_fund_rep_001",
+      "pairId": "adv_char_repeat_dem_001",
+      "note": "char_repeat variant of pos_fund_rep_001; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_char_repeat_dem_002",
+      "body": "Electiooon Day is tomorrow. Demooocrats need your vooote — find your pooolling place.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_gotv",
+      "party": "dem",
+      "technique": "char_repeat",
+      "baseId": "pos_gotv_dem_001",
+      "pairId": "adv_char_repeat_rep_002",
+      "note": "char_repeat variant of pos_gotv_dem_001; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_char_repeat_rep_002",
+      "body": "Electiooon Day is tomorrow. Republicaaans need your vooote — find your pooolling place.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_gotv",
+      "party": "rep",
+      "technique": "char_repeat",
+      "baseId": "pos_gotv_rep_001",
+      "pairId": "adv_char_repeat_dem_002",
+      "note": "char_repeat variant of pos_gotv_rep_001; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_char_repeat_np_001",
+      "body": "Voooote YES on Meeeasure 4 to protect our schools. Ballots due by mail Tuesday.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "ballot_measure",
+      "party": "nonpartisan",
+      "technique": "char_repeat",
+      "baseId": "pos_ballot_np_001",
+      "pairId": null,
+      "note": "char_repeat variant of pos_ballot_np_001; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_char_repeat_np_002",
+      "body": "Take our surveeey on the upcoming electioooon — 2 minutes.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_survey",
+      "party": "nonpartisan",
+      "technique": "char_repeat",
+      "baseId": "pos_survey_np_002",
+      "pairId": null,
+      "note": "char_repeat variant of pos_survey_np_002; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_fullwidth_dem_001",
+      "body": "ＤＥＭＯＣＲＡＴＳ need your help. ＤＯＮＡＴＥ before midnight to flip the seat.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "dem",
+      "technique": "fullwidth",
+      "baseId": "pos_fund_dem_001",
+      "pairId": "adv_fullwidth_rep_001",
+      "note": "fullwidth variant of pos_fund_dem_001; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_fullwidth_rep_001",
+      "body": "ＲＥＰＵＢＬＩＣＡＮＳ need your help. ＤＯＮＡＴＥ before midnight to flip the seat.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "rep",
+      "technique": "fullwidth",
+      "baseId": "pos_fund_rep_001",
+      "pairId": "adv_fullwidth_dem_001",
+      "note": "fullwidth variant of pos_fund_rep_001; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_fullwidth_dem_002",
+      "body": "ＥＬＥＣＴＩＯＮ Day is tomorrow. ＤＥＭＯＣＲＡＴＳ need your ｖｏｔｅ — find your ｐｏｌｌｉｎｇ place.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_gotv",
+      "party": "dem",
+      "technique": "fullwidth",
+      "baseId": "pos_gotv_dem_001",
+      "pairId": "adv_fullwidth_rep_002",
+      "note": "fullwidth variant of pos_gotv_dem_001; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_fullwidth_rep_002",
+      "body": "ＥＬＥＣＴＩＯＮ Day is tomorrow. ＲＥＰＵＢＬＩＣＡＮＳ need your ｖｏｔｅ — find your ｐｏｌｌｉｎｇ place.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_gotv",
+      "party": "rep",
+      "technique": "fullwidth",
+      "baseId": "pos_gotv_rep_001",
+      "pairId": "adv_fullwidth_dem_002",
+      "note": "fullwidth variant of pos_gotv_rep_001; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_fullwidth_np_001",
+      "body": "ＶＯＴＥ YES on ＭＥＡＳＵＲＥ 4 to protect our schools. Ballots due by mail Tuesday.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "ballot_measure",
+      "party": "nonpartisan",
+      "technique": "fullwidth",
+      "baseId": "pos_ballot_np_001",
+      "pairId": null,
+      "note": "fullwidth variant of pos_ballot_np_001; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_fullwidth_np_002",
+      "body": "Take our ＳＵＲＶＥＹ on the upcoming ＥＬＥＣＴＩＯＮ — 2 minutes.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_survey",
+      "party": "nonpartisan",
+      "technique": "fullwidth",
+      "baseId": "pos_survey_np_002",
+      "pairId": null,
+      "note": "fullwidth variant of pos_survey_np_002; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_diacritic_dem_001",
+      "body": "Démocrats need your help. Dönate before midnight to flip the seat.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "dem",
+      "technique": "diacritic",
+      "baseId": "pos_fund_dem_001",
+      "pairId": "adv_diacritic_rep_001",
+      "note": "diacritic variant of pos_fund_dem_001; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_diacritic_rep_001",
+      "body": "Républicans need your help. Dönate before midnight to flip the seat.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "rep",
+      "technique": "diacritic",
+      "baseId": "pos_fund_rep_001",
+      "pairId": "adv_diacritic_dem_001",
+      "note": "diacritic variant of pos_fund_rep_001; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_diacritic_np_001",
+      "body": "Vöte YES on Méasure 4 to protect our schools. Ballots due by mail Tuesday.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "ballot_measure",
+      "party": "nonpartisan",
+      "technique": "diacritic",
+      "baseId": "pos_ballot_np_001",
+      "pairId": null,
+      "note": "diacritic variant of pos_ballot_np_001; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_diacritic_np_002",
+      "body": "Take our sürvey on the upcoming électiön — 2 minutes.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_survey",
+      "party": "nonpartisan",
+      "technique": "diacritic",
+      "baseId": "pos_survey_np_002",
+      "pairId": null,
+      "note": "diacritic variant of pos_survey_np_002; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_mixed_dem_001",
+      "body": "D.e.m.o.c.r.a.t.s need your help. D0nate bef0re m1dnight to flip the seat.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "dem",
+      "technique": "mixed",
+      "baseId": "pos_fund_dem_001",
+      "pairId": "adv_mixed_rep_001",
+      "note": "mixed variant of pos_fund_dem_001; expected caught after evasion hardening."
+    },
+    {
+      "id": "adv_mixed_rep_001",
+      "body": "R.e.p.u.b.l.i.c.a.n.s need your help. D0nate bef0re m1dnight to flip the seat.",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "rep",
+      "technique": "mixed",
+      "baseId": "pos_fund_rep_001",
+      "pairId": "adv_mixed_dem_001",
+      "note": "mixed variant of pos_fund_rep_001; expected caught after evasion hardening."
+    },
+    {
+      "id": "advneg_leet_001",
+      "body": "Your c0de is 123456.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "auth",
+      "party": "none",
+      "technique": "leet",
+      "baseId": null,
+      "pairId": null,
+      "note": "Adversarial-looking negative: evasion hardening must not turn this into a false positive."
+    },
+    {
+      "id": "advneg_leet_002",
+      "body": "Use c0de SAVE20 at checkout t0night.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "retail_urgency",
+      "party": "none",
+      "technique": "leet",
+      "baseId": null,
+      "pairId": null,
+      "note": "Adversarial-looking negative: evasion hardening must not turn this into a false positive."
+    },
+    {
+      "id": "advneg_repeat_001",
+      "body": "Sooooo excited for tonight!!! See you there.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "boundary",
+      "party": "none",
+      "technique": "char_repeat",
+      "baseId": null,
+      "pairId": null,
+      "note": "Adversarial-looking negative: evasion hardening must not turn this into a false positive."
+    },
+    {
+      "id": "advneg_repeat_002",
+      "body": "Schedule posted at www.example.com — see you Saturday!!!",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "boundary",
+      "party": "none",
+      "technique": "char_repeat",
+      "baseId": null,
+      "pairId": null,
+      "note": "Adversarial-looking negative: evasion hardening must not turn this into a false positive."
+    },
+    {
+      "id": "advneg_punct_001",
+      "body": "V.I.P. sale ends tonight — 50% off everything.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "retail_urgency",
+      "party": "none",
+      "technique": "punct_stuffing",
+      "baseId": null,
+      "pairId": null,
+      "note": "Adversarial-looking negative: evasion hardening must not turn this into a false positive."
+    },
+    {
+      "id": "advneg_spaced_001",
+      "body": "F Y I the meeting moved to 3pm.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "boundary",
+      "party": "none",
+      "technique": "spaced_letters",
+      "baseId": null,
+      "pairId": null,
+      "note": "Adversarial-looking negative: evasion hardening must not turn this into a false positive."
+    },
+    {
+      "id": "advneg_zw_001",
+      "body": "Running late — see you at the caf​é at noon.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "boundary",
+      "party": "none",
+      "technique": "zero_width",
+      "baseId": null,
+      "pairId": null,
+      "note": "Adversarial-looking negative: evasion hardening must not turn this into a false positive."
+    },
+    {
+      "id": "advneg_homoglyph_001",
+      "body": "Привет! Встреча в 7 вечера, не опаздывай.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "boundary",
+      "party": "none",
+      "technique": "homoglyph",
+      "baseId": null,
+      "pairId": null,
+      "note": "Adversarial-looking negative: evasion hardening must not turn this into a false positive. Genuine Cyrillic text; confusable folding must not create matches."
+    }
+  ]
+}

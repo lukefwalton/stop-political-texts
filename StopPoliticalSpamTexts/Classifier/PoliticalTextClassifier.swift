@@ -79,8 +79,10 @@ struct PoliticalTextClassifier {
 
     /// Immutable inputs that the scoring + decide stages read but never mutate.
     /// `precheck` produces this once; later stages take it as a `let`.
+    /// `views` carries the canonical normalized text plus the de-obfuscated
+    /// matching view (nil for clean messages); see `MatchableText`.
     private struct ClassifyContext {
-        let text: String
+        let views: MatchableText
         let extracted: ExtractedURLs
         let senderShape: SenderShape
         let hardPolitical: Bool
@@ -94,6 +96,9 @@ struct PoliticalTextClassifier {
         var score: Int = 0
         var matches: [String] = []
         var customBlockMatched: Bool = false
+        /// True when some match only landed via the de-obfuscated view —
+        /// surfaced as a synthetic "deobfuscated" entry in `matchedRules`.
+        var usedDeobfuscation: Bool = false
     }
 
     /// `precheck` either short-circuits with a final result, or hands the
@@ -131,25 +136,29 @@ struct PoliticalTextClassifier {
             return .shortCircuit(.allow(reason: "empty_body"))
         }
 
-        // 3. Normalize.
+        // 3. Normalize, then build the de-obfuscated matching view.
         let text = Normalizer.normalize(rawBody)
+        let views = Deobfuscator.matchable(text)
 
-        // 4. Extract URLs / domains (in-memory only).
+        // 4. Extract URLs / domains (in-memory only). Canonical view only —
+        // de-obfuscation is lossy and must never rewrite hosts.
         let extracted = URLExtractor.extract(from: text)
 
         // 5. Sender shape.
         let senderShape = SenderAnalyzer.analyze(sender)
 
-        // 6. Hard political detection.
-        let hardPolitical = matchesHardPolitical(text: text, urls: extracted)
+        // 6. Hard political detection (both views: obfuscating "actblue" is
+        // itself spam intent, so a de-obfuscated hit filters at full strength).
+        let hardPolitical = matchesHardPolitical(views: views, urls: extracted)
 
-        // 7. Critical allowlist exits early unless hard political.
+        // 7. Critical allowlist exits early unless hard political. Canonical
+        // view only — the auth-code regex must see the original digits.
         if !hardPolitical, RuleSet.matchesCriticalAllowlist(text) {
             return .shortCircuit(.allow(reason: "critical_allowlist"))
         }
 
         return .proceed(ClassifyContext(
-            text: text,
+            views: views,
             extracted: extracted,
             senderShape: senderShape,
             hardPolitical: hardPolitical,
@@ -163,17 +172,19 @@ struct PoliticalTextClassifier {
         let enabled = RuleSet.enabledRules(context.config.categoryToggles)
 
         for rule in enabled where !rule.requiresPairing {
-            if rule.matches(context.text) {
+            if rule.matches(context.views) {
                 state.score += rule.weight
                 state.matches.append(rule.id)
+                if !rule.matches(context.views.text) { state.usedDeobfuscation = true }
             }
         }
 
         if hasPairingContext(state.matches) {
             for rule in enabled where rule.requiresPairing {
-                if rule.matches(context.text) {
+                if rule.matches(context.views) {
                     state.score += rule.weight
                     state.matches.append(rule.id)
+                    if !rule.matches(context.views.text) { state.usedDeobfuscation = true }
                 }
             }
         }
@@ -211,14 +222,19 @@ struct PoliticalTextClassifier {
         var state = state
 
         // 10. Custom blocked terms (+4 each). Boundary-aware so a user blocking
-        // "vote" does not also block "devote" / "pivotal".
+        // "vote" does not also block "devote" / "pivotal". Both views, so a
+        // user's blocked term can't be dodged with the same obfuscation
+        // tricks the built-in rules are hardened against.
         for term in context.config.customBlockedTerms {
             let needle = Normalizer.normalize(term)
             guard !needle.isEmpty else { continue }
-            if TermMatcher.matches(term: needle, in: context.text) {
+            if TermMatcher.matches(term: needle, in: context.views) {
                 state.score += Scoring.customTermWeight
                 state.matches.append("custom_block:\(term)")
                 state.customBlockMatched = true
+                if !TermMatcher.matches(term: needle, in: context.views.text) {
+                    state.usedDeobfuscation = true
+                }
             }
         }
 
@@ -228,7 +244,7 @@ struct PoliticalTextClassifier {
             for term in context.config.customAllowedTerms {
                 let needle = Normalizer.normalize(term)
                 guard !needle.isEmpty else { continue }
-                if TermMatcher.matches(term: needle, in: context.text) {
+                if TermMatcher.matches(term: needle, in: context.views) {
                     state.score = max(0, state.score - Scoring.customTermWeight)
                     state.matches.append("custom_allow:\(term)")
                 }
@@ -238,6 +254,11 @@ struct PoliticalTextClassifier {
     }
 
     private func decide(context: ClassifyContext, state: ScoringState) -> ClassificationResult {
+        var state = state
+        if state.usedDeobfuscation {
+            state.matches.append("deobfuscated")
+        }
+
         // 12. Hard political → filter, high confidence, score floor 8.
         if context.hardPolitical {
             return ClassificationResult(
@@ -280,16 +301,16 @@ struct PoliticalTextClassifier {
 
     // MARK: - Helpers
 
-    private func matchesHardPolitical(text: String, urls: ExtractedURLs) -> Bool {
+    private func matchesHardPolitical(views: MatchableText, urls: ExtractedURLs) -> Bool {
         if urls.matchesPoliticalDomain() { return true }
-        if RuleSet.hardPoliticalTerms.contains(where: { TermMatcher.matches(term: $0, in: text) }) {
+        if RuleSet.hardPoliticalTerms.contains(where: { TermMatcher.matches(term: $0, in: views) }) {
             return true
         }
         // stop2end paired with fundraising/political context is also hard.
-        if TermMatcher.matches(term: "stop2end", in: text),
+        if TermMatcher.matches(term: "stop2end", in: views),
            RuleSet.rules.contains(where: { rule in
                (rule.category == .fundraising || rule.category == .politicalOrganization)
-               && rule.matches(text)
+               && rule.matches(views)
            }) {
             return true
         }

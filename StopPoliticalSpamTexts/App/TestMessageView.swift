@@ -103,7 +103,8 @@ struct TestMessageView: View {
             "sender_shortcode": "Short code sender",
             "sender_10dlc": "10-digit sender",
             "url_shortener_strong": "Shortened link",
-            "url_shortener_political": "Shortened link"
+            "url_shortener_political": "Shortened link",
+            "deobfuscated": "Disguised wording"
         ]
         var seen = Set<String>()
         var names: [String] = []
