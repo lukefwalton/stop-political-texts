@@ -367,6 +367,18 @@ final class PoliticalTextClassifierTests: XCTestCase {
         XCTAssertTrue(result.matchedRules.contains("deobfuscated"))
     }
 
+    func testCanonicalMatchIsNotMarkedDeobfuscated() {
+        // The marker means "this match needed de-obfuscation" — a clean
+        // message that matches on the canonical view must never carry it.
+        let result = classifier.classify(
+            sender: nil,
+            body: "Donate before midnight to help Democrats.",
+            config: config(strictness: .normal)
+        )
+        XCTAssertTrue(result.isFiltered)
+        XCTAssertFalse(result.matchedRules.contains("deobfuscated"))
+    }
+
     func testHardeningDoesNotBreakLeetLookalikeAuthText() {
         // A typo'd auth code must not become a false positive: digits are
         // never folded, and the allowlist reads the canonical view.

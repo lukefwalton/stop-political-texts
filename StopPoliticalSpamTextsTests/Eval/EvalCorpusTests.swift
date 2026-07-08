@@ -189,20 +189,35 @@ final class EvalCorpusTests: XCTestCase {
     func testHarnessMatchesExtensionPipeline() throws {
         // The harness classifies via PoliticalTextClassifier directly; make
         // sure that is the same answer the extension's pipeline gives (mirrors
-        // ClassifierFixturesTests, one representative case per outcome).
-        let config = EvalHarness.config(strictness: .aggressive)
-        let store = InMemoryEvalConfigStore(config: config)
-        let sample = [cases.first { $0.expect.aggressive == .filtered },
-                      cases.first { $0.expect.aggressive == .allowed }].compactMap { $0 }
-        XCTAssertEqual(sample.count, 2)
-        for evalCase in sample {
-            let direct = PoliticalTextClassifier().classify(
-                sender: evalCase.sender, body: evalCase.body, config: config
-            ).isFiltered
-            let pipeline = MessageFilterPipeline.isFiltered(
-                sender: evalCase.sender, body: evalCase.body, configStore: store
-            )
-            XCTAssertEqual(direct, pipeline, "Pipeline drift on \(evalCase.id)")
+        // ClassifierFixturesTests). The samples cover the branches the
+        // classifier gained for evasion hardening — a plain positive, a plain
+        // negative, a positive that only matches via the de-obfuscated view,
+        // and a homoglyph-spoofed domain that goes hard-political — under
+        // both strictness modes.
+        let byID = Dictionary(uniqueKeysWithValues: cases.map { ($0.id, $0) })
+        let sampleIDs = [
+            "pos_fund_dem_001",      // plain positive
+            "neg_commerce_001",      // plain negative (commerce allowlist)
+            "adv_leet_dem_001",      // filters only via the de-obfuscated view
+            "adv_homoglyph_dem_002"  // spoofed domain -> hard political
+        ]
+        let samples = try sampleIDs.map { try XCTUnwrap(byID[$0], "missing sample case \($0)") }
+
+        for strictness in Strictness.allCases {
+            let config = EvalHarness.config(strictness: strictness)
+            let store = InMemoryEvalConfigStore(config: config)
+            for evalCase in samples {
+                let direct = PoliticalTextClassifier().classify(
+                    sender: evalCase.sender, body: evalCase.body, config: config
+                ).isFiltered
+                let pipeline = MessageFilterPipeline.isFiltered(
+                    sender: evalCase.sender, body: evalCase.body, configStore: store
+                )
+                XCTAssertEqual(
+                    direct, pipeline,
+                    "Pipeline drift on \(evalCase.id) (\(strictness.rawValue))"
+                )
+            }
         }
     }
 
