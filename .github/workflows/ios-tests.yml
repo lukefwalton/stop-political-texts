@@ -79,4 +79,10 @@ jobs:
           xcodebuild test-without-building \
             -scheme StopPoliticalSpamTexts \
             -destination "$DEST" \
-            CODE_SIGNING_ALLOWED=NO
+            CODE_SIGNING_ALLOWED=NO 2>&1 | tee /tmp/test.log
+
+      # Surface the classifier precision/recall table (printed by
+      # EvalCorpusTests.testPrintMetricsReport) even when the suite fails.
+      - name: Classifier eval metrics
+        if: always()
+        run: grep 'EVAL-METRICS |' /tmp/test.log || echo "no eval metrics emitted"
