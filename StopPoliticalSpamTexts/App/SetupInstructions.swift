@@ -41,4 +41,8 @@ enum SetupInstructions {
 
     /// Note that the filter name may be truncated in the picker list.
     static let filterNameNote = "In the Text Message Filter list, Stop Political Spam Texts may appear as Stop Political Spam. Tap it so it shows a checkmark."
+
+    /// Blunt one-liner on scope + destination, shared so the app and onboarding
+    /// set the same expectation: unknown senders only, sorted to Junk (not blocked).
+    static let scopeNote = "This only filters texts from unknown senders — never your contacts — and moves the likely-political ones to your Junk folder rather than blocking them."
 }

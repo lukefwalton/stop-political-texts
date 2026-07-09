@@ -54,6 +54,11 @@ What it does:
 - Lets you add your own blocked or allowed terms
 - Includes a message tester so you can see how the filter behaves
 
+What to expect (please read):
+- It works on texts from unknown senders only. Apple never sends messages from your contacts to filters like this, so people you know are never touched.
+- Filtered texts are moved to the Junk folder under Unknown Senders — they are sorted out of your main inbox, not blocked or deleted. They are still on your phone if you want to read them.
+- You must select the app as your SMS filter in Settings for any of this to happen. Turning on the switch inside the app is not enough on its own.
+
 Privacy:
 - No account
 - No ads
@@ -103,6 +108,13 @@ https://lukefwalton.com/stop-political-spam-texts/
 https://apps.apple.com/us/app/stop-political-spam-texts/id6782703267
 
 App name in Connect: **Stop Political Spam Texts**
+
+## What's New (v1.3)
+
+Clearer setup so you can tell it's actually on. A new "Still getting texts?" check tells you whether a message that got through is a setup issue or a rule gap, the home screen now leads with the one step that matters (selecting it in iOS Settings), and we spelled out what to expect: it filters unknown senders only and sorts them to Junk rather than blocking them.
+
+> Paste into App Store Connect when submitting the next build. Remember to bump
+> `MARKETING_VERSION` (project.yml) and `CURRENT_PROJECT_VERSION` for the build.
 
 ## What's New (v1.2)
 

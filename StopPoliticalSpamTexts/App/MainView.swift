@@ -1,8 +1,10 @@
 import SwiftUI
+import UIKit
 import LFWDesignSystem
 
 struct MainView: View {
     @EnvironmentObject private var model: FilterConfigModel
+    @Environment(\.openURL) private var openURL
 
     var body: some View {
         Form {
@@ -10,7 +12,7 @@ struct MainView: View {
                 VStack(alignment: .leading, spacing: 6) {
                     Text("Stop Political Spam Texts")
                         .font(.title2.bold())
-                    Text("Send campaign texts to Junk.")
+                    Text("Sends likely campaign texts from unknown senders to your Junk folder. Texts from your contacts are never touched.")
                         .font(.subheadline)
                     Text("Privacy. No login. No subscription.")
                         .font(.subheadline)
@@ -30,17 +32,44 @@ struct MainView: View {
                 }
             }
 
-            Section("Status") {
-                Toggle("Filter", isOn: Binding(
-                    get: { model.config.enabled },
-                    set: { model.config.enabled = $0; LFWHaptics.selection() }))
-                NavigationLink {
-                    EnableInstructionsView()
-                } label: {
-                    Text("Filter requires setup in iOS Settings")
+            // The step that actually makes filtering work lives in iOS Settings,
+            // not the in-app toggle below it. Lead with it so no one mistakes the
+            // toggle for the activation switch.
+            Section {
+                VStack(alignment: .leading, spacing: 8) {
+                    Label {
+                        Text("Turn on filtering in iOS Settings")
+                            .font(.headline)
+                    } icon: {
+                        Image(systemName: "gearshape.fill")
+                    }
+                    .foregroundStyle(BrandColor.gold)
+                    Text("This app only filters once you select it as your SMS filter. iOS won't let us do it for you — it's one short trip to Settings.")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }
+                .padding(.vertical, 4)
+                Button {
+                    if let url = URL(string: UIApplication.openSettingsURLString) {
+                        openURL(url)
+                    }
+                } label: {
+                    Label("Open Settings", systemImage: "arrow.up.forward.app")
+                }
+                NavigationLink("Setup steps") { EnableInstructionsView() }
+                NavigationLink("Still getting texts?") { StillGettingTextsView() }
+            } header: {
+                Text("Activation")
+            }
+
+            Section {
+                Toggle("Filtering rules", isOn: Binding(
+                    get: { model.config.enabled },
+                    set: { model.config.enabled = $0; LFWHaptics.selection() }))
+            } header: {
+                Text("App controls")
+            } footer: {
+                Text("Pauses the app's rules. This does not remove the app as your SMS filter in iOS Settings.")
             }
 
             Section("Strictness") {
