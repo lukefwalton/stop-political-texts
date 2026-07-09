@@ -23,6 +23,8 @@ struct StillGettingTextsView: View {
             Section {
                 Text("Paste a political text that still reached your inbox. This checks whether the filter *would* catch it, which tells us where the problem is.")
                     .font(.subheadline)
+            } footer: {
+                Text("Use one from an unknown sender. iOS never routes texts from your contacts to the filter, so a text from someone you know isn't a setup problem — it's simply out of scope.")
             }
 
             Section {

@@ -2,6 +2,17 @@ import SwiftUI
 import UIKit
 import LFWDesignSystem
 
+/// The sample the onboarding verify step runs through the classifier. Exposed
+/// (internal, not private) so a unit test can pin that it still classifies as
+/// filtered under the shipped `FilterConfig.defaults` — the onboarding verify
+/// shows its success message only when it does.
+enum OnboardingVerification {
+    /// Clearly trips the built-in rules (FEC disclaimer + fundraising + SMS
+    /// mechanics) under the default Aggressive / all-categories config.
+    static let sampleText =
+        "Paid for by Friends of Jane. Donate $25 before midnight to help us win — reply STOP to opt out."
+}
+
 /// First-run walkthrough. Shown once, then never again (gated by the
 /// `hasCompletedOnboarding` flag in `RootView`). Built from the shared
 /// `LFWDesignSystem` onboarding kit so this app's welcome flow matches its
@@ -147,15 +158,10 @@ private struct ActivateScreen: View {
     /// so people engage with the check instead of tapping straight past setup.
     @State private var sampleFiltered: Bool?
 
-    /// A message that clearly trips the built-in rules under the default
-    /// (Aggressive, all categories) config the app ships with.
-    private let verifySample =
-        "Paid for by Friends of Jane. Donate $25 before midnight to help us win — reply STOP to opt out."
-
     private func runVerify() {
         let result = PoliticalTextClassifier().classify(
             sender: "12345",
-            body: verifySample,
+            body: OnboardingVerification.sampleText,
             config: .defaults
         )
         sampleFiltered = result.isFiltered
