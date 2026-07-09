@@ -3,7 +3,7 @@ import XCTest
 
 /// Guard tests for `RuleSet.rules` shape.
 ///
-/// `TestMessageView.friendlyMatches` calls
+/// `MatchedRuleLabels.friendly(for:)` calls
 /// `Dictionary(uniqueKeysWithValues: RuleSet.rules.map { ($0.id, $0.displayName) })`
 /// which **traps** on duplicate keys. A duplicate `Rule.id` slipping in
 /// would crash the test message screen at first render. Catch it here.

@@ -27,7 +27,7 @@ struct OnboardingView: View {
                     symbol: "eye.slash",
                     eyebrow: "No catch",
                     title: "We're not lurkers\nor a subscription.",
-                    message: "Pay once and you're done. There's no account to make and nothing to cancel later.",
+                    message: "It's free — pay nothing, ever. There's no account to make and nothing to cancel later.",
                     action: advance
                 )
                 .tag(1)
@@ -98,7 +98,7 @@ private struct WelcomeScreen: View {
 
     var body: some View {
         LFWOnboardingScaffold(symbol: "shield.lefthalf.filled", eyebrow: "Enough already", title: "We hate\npolitical spam.") {
-            LFWOnboardingMessage("Let's rescue you from it.")
+            LFWOnboardingMessage("Let's move it out of your inbox.")
         } footer: {
             Button("Get started", action: action)
                 .buttonStyle(.lfwCTA)
@@ -128,7 +128,7 @@ private struct InstallScreen: View {
 
     var body: some View {
         LFWOnboardingScaffold(symbol: "square.and.arrow.down", eyebrow: "Let's do it", title: "Tap here\nto install.") {
-            LFWOnboardingMessage("One short trip to Settings and you're protected. We'll show you exactly what to tap.")
+            LFWOnboardingMessage("One short trip to Settings switches it on. iOS only hands us texts from unknown senders, so your contacts are never touched.")
         } footer: {
             Button("Tap here to install", action: action)
                 .buttonStyle(.lfwCTA)
@@ -142,6 +142,25 @@ private struct ActivateScreen: View {
     let onTrouble: () -> Void
 
     private let steps = SetupInstructions.steps
+
+    /// nil = not yet checked. Set once the user taps Verify. Gates "All done"
+    /// so people engage with the check instead of tapping straight past setup.
+    @State private var sampleFiltered: Bool?
+
+    /// A message that clearly trips the built-in rules under the default
+    /// (Aggressive, all categories) config the app ships with.
+    private let verifySample =
+        "Paid for by Friends of Jane. Donate $25 before midnight to help us win — reply STOP to opt out."
+
+    private func runVerify() {
+        let result = PoliticalTextClassifier().classify(
+            sender: "12345",
+            body: verifySample,
+            config: .defaults
+        )
+        sampleFiltered = result.isFiltered
+        LFWHaptics.selection()
+    }
 
     var body: some View {
         ScrollView {
@@ -200,8 +219,34 @@ private struct ActivateScreen: View {
                 .padding(.horizontal, 24)
                 .padding(.top, 22)
 
+                VStack(spacing: 10) {
+                    Button(action: runVerify) {
+                        Label("Verify it recognizes political texts", systemImage: "checkmark.shield")
+                    }
+                    .buttonStyle(.lfwCTA(filled: false))
+
+                    if let sampleFiltered {
+                        VStack(spacing: 8) {
+                            Text(sampleFiltered
+                                 ? "✓ The filter flagged a sample campaign text — it would go to Junk."
+                                 : "The sample wasn't flagged — check your category settings later in the app.")
+                                .font(.footnote.weight(.semibold))
+                                .foregroundStyle(sampleFiltered ? BrandColor.gold : BrandColor.paper)
+                            Text("This only confirms the app's rules work — we can't see your iOS Settings. If texts keep coming, revisit the steps above. You'll know it's really on when filtered texts start showing up in your Junk folder.")
+                                .font(.footnote)
+                                .foregroundStyle(BrandColor.paper.opacity(0.6))
+                        }
+                        .multilineTextAlignment(.center)
+                        .transition(.opacity)
+                    }
+                }
+                .padding(.horizontal, 24)
+                .padding(.top, 20)
+
                 Button("All done", action: onDone)
                     .buttonStyle(.lfwCTA)
+                    .disabled(sampleFiltered == nil)
+                    .opacity(sampleFiltered == nil ? 0.5 : 1)
                     .padding(.horizontal, 24)
                     .padding(.top, 18)
 

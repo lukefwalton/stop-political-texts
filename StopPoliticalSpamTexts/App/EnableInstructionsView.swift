@@ -10,7 +10,7 @@ struct EnableInstructionsView: View {
                 VStack(alignment: .leading, spacing: 8) {
                     Text("What this does")
                         .font(.headline)
-                    Text("Lets iOS send unknown texts to this app. The app then moves likely political campaign texts to Junk.")
+                    Text(SetupInstructions.scopeNote)
                         .font(.subheadline)
                 }
                 .padding(.vertical, 4)

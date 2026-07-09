@@ -20,7 +20,7 @@ struct CommonFixesView: View {
         ),
         (
             "Not enough is filtered",
-            "Switch Strictness to Aggressive or add a blocked term."
+            "You're already on the most aggressive setting by default. Add a blocked term for the wording it's missing, or run \u{201C}Still getting texts?\u{201D} to check whether it's actually a setup issue."
         )
     ]
 
@@ -29,6 +29,16 @@ struct CommonFixesView: View {
             Section {
                 Text("Most setup problems come from iOS Settings, not the in-app toggle.")
                     .font(.subheadline)
+            }
+
+            Section {
+                NavigationLink {
+                    StillGettingTextsView()
+                } label: {
+                    Label("Still getting texts? Run the check", systemImage: "text.magnifyingglass")
+                }
+            } footer: {
+                Text("Paste a text that got through and we'll tell you whether it's a setup problem or a rule gap.")
             }
 
             Section("Common fixes") {
