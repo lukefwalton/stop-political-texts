@@ -2,10 +2,10 @@
   "schemaVersion": 1,
   "knownFailures": {
     "aggressive": [
-      "neg_civic_005"
+      "pos_fund_np_003"
     ],
     "normal": [
-      "neg_civic_005"
+      "pos_fund_np_003"
     ]
   }
 }

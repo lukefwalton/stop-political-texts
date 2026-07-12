@@ -70,14 +70,23 @@ struct StillGettingTextsView: View {
                     title: "Looks like a setup problem",
                     message: "The filter would send this to Junk — so if it still reached you, it isn't switched on in iOS Settings yet. Most setup problems come from iOS Settings, not the in-app toggle."
                 )
+                // Steps first: the deep link below can only land on this
+                // app's own Settings page, so the steps are the real fix.
+                NavigationLink {
+                    EnableInstructionsView()
+                } label: {
+                    Label("See the setup steps", systemImage: "list.number")
+                        .fontWeight(.semibold)
+                }
                 Button {
                     if let url = URL(string: UIApplication.openSettingsURLString) {
                         openURL(url)
                     }
                 } label: {
-                    Label("Open Settings", systemImage: "arrow.up.forward.app")
+                    Label(SetupInstructions.settingsButtonLabel, systemImage: "arrow.up.forward.app")
                 }
-                NavigationLink("See the setup steps") { EnableInstructionsView() }
+            } footer: {
+                Text(SetupInstructions.settingsButtonNote)
             }
 
         case .disabledInApp:

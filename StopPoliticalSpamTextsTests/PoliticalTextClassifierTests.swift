@@ -253,6 +253,64 @@ final class PoliticalTextClassifierTests: XCTestCase {
         ))
     }
 
+    func testOfficialBallotStatusNoticeAllowed() {
+        // BallotTrax-style confirmation from a county election office. Before
+        // the election-admin allowlist this scored electionTerms ("ballot") +
+        // ballotMeasureAction ("mail ballot") = 6 and was junked in both modes
+        // (eval case neg_civic_005).
+        let message = "Your mail ballot has been received and counted. — County Elections"
+        XCTAssertFalse(filtered(message, strictness: .normal))
+        XCTAssertFalse(filtered(message, strictness: .aggressive))
+    }
+
+    func testBallotStatusCallToActionStillScores() {
+        // GOTV spam built on the same nouns must not ride the allowlist: its
+        // entries are past-tense confirmations, and "has not been received"
+        // is not one of them.
+        XCTAssertTrue(filtered(
+            "Records show your mail ballot has not been received. Vote today — the election is close!",
+            strictness: .normal
+        ))
+    }
+
+    func testBallotStatusDoesNotBypassHardPolitical() {
+        // An allowlist phrase never overrides a hard-political marker — the
+        // safety valve of the exemption, pinned in both modes.
+        let message = "Your ballot has been counted! Now chip in at secure.actblue.com to win."
+        XCTAssertTrue(filtered(message, strictness: .normal))
+        XCTAssertTrue(filtered(message, strictness: .aggressive))
+    }
+
+    func testBallotStatusMixedContentIsStillExempt() {
+        // Pinned deliberately in both modes: like the commerce allowlist
+        // ("Your order shipped. Donate!"), a status phrase exempts mixed
+        // content unless a hard-political marker appears. Voiding the
+        // exemption on soft political signal would junk real election-office
+        // mail — see the signature-cure test below, which trips "match" and
+        // "deadline". The eval twin is pos_fund_np_003 (baselined FN).
+        let message = "Your ballot has been counted. Donate before midnight to help Democrats!"
+        XCTAssertFalse(filtered(message, strictness: .aggressive))
+        XCTAssertFalse(filtered(message, strictness: .normal))
+    }
+
+    func testFutureTenseBallotLanguageStillScores() {
+        // Near-miss boundary: the allowlist is past-tense confirmations only,
+        // so future-tense/imperative language over the same nouns still scores.
+        XCTAssertTrue(filtered(
+            "Your ballot will be counted soon — but only if you return it! Vote yes on Prop 22 today.",
+            strictness: .normal
+        ))
+    }
+
+    func testSignatureCureNoticeAllowed() {
+        // The real-world message the phrase-hit semantics protect: an official
+        // cure notice whose wording ("does not match", "deadline") would score
+        // as fundraising if the allowlist required a clean message.
+        let message = "Your ballot was received but the signature does not match. Respond by the deadline to cure it."
+        XCTAssertFalse(filtered(message, strictness: .aggressive))
+        XCTAssertFalse(filtered(message, strictness: .normal))
+    }
+
     func testDisabledAllowsEverything() {
         let result = classifier.classify(
             sender: nil,

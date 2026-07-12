@@ -191,10 +191,29 @@ enum RuleSet {
         "public safety", "wildfire", "earthquake", "flood warning"
     ]
 
+    /// Official election-administration phrases: the transactional ballot-status
+    /// confirmations county election offices send (BallotTrax-style). Every entry
+    /// is a past-tense confirmation that something already happened to *your*
+    /// ballot — never a call to action — so GOTV spam built on the same nouns
+    /// ("your ballot has not been received — vote now!") still scores normally.
+    /// Like the other allowlists, a hard-political marker still overrides —
+    /// and, like them, a phrase hit exempts mixed content by design: voiding
+    /// the exemption on soft political signal would junk official cure notices
+    /// ("signature does not match — respond by the deadline"), whose wording
+    /// trips the fundraising terms.
+    static let electionAdminAllowlist: [String] = [
+        "ballot has been received", "ballot was received",
+        "ballot has been counted", "ballot was counted",
+        "ballot has been accepted", "ballot was accepted",
+        "we have received your ballot", "we have counted your ballot",
+        "we have accepted your ballot"
+    ]
+
     /// True if the text trips any allowlist (auth phrase, auth code regex,
-    /// commerce, or emergency).
+    /// commerce, emergency, or election administration).
     static func matchesCriticalAllowlist(_ normalizedText: String) -> Bool {
-        let phraseLists = [authAllowlist, commerceAllowlist, emergencyAllowlist]
+        let phraseLists = [authAllowlist, commerceAllowlist, emergencyAllowlist,
+                           electionAdminAllowlist]
         for list in phraseLists {
             if list.contains(where: { TermMatcher.matches(term: $0, in: normalizedText) }) {
                 return true

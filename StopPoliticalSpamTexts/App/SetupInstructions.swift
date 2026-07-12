@@ -45,4 +45,18 @@ enum SetupInstructions {
     /// Blunt one-liner on scope + destination, shared so the app and onboarding
     /// set the same expectation: unknown senders only, sorted to Junk (not blocked).
     static let scopeNote = "This only filters texts from unknown senders — never your contacts — and moves the likely-political ones to your Junk folder rather than blocking them."
+
+    /// Honest label for the Settings deep-link button.
+    /// `UIApplication.openSettingsURLString` can only open this app's own page
+    /// in Settings — never the Messages filter picker — so the label must say
+    /// where the user will actually land. Activation confusion is this app's
+    /// number-one support problem; the setup steps, not this button, are the
+    /// primary action everywhere it appears.
+    static let settingsButtonLabel = "Open this app's page in Settings"
+
+    /// Companion footnote for the button: where it lands and how to get from
+    /// there to the filter picker. Deliberately doesn't name the screen Back
+    /// leads to — it's the Apps list on iOS 18+ but the main Settings list on
+    /// the iOS 16/17 versions this app still supports.
+    static let settingsButtonNote = "iOS only lets us open this app's own Settings page — not the Messages filter. Go back from there and follow the setup steps."
 }
