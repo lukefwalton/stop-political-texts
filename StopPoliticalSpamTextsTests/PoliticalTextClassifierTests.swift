@@ -293,6 +293,15 @@ final class PoliticalTextClassifierTests: XCTestCase {
         ))
     }
 
+    func testFutureTenseBallotLanguageStillScores() {
+        // Near-miss boundary: the allowlist is past-tense confirmations only,
+        // so future-tense/imperative language over the same nouns still scores.
+        XCTAssertTrue(filtered(
+            "Your ballot will be counted soon — but only if you return it! Vote yes on Prop 22 today.",
+            strictness: .normal
+        ))
+    }
+
     func testSignatureCureNoticeAllowed() {
         // The real-world message the phrase-hit semantics protect: an official
         // cure notice whose wording ("does not match", "deadline") would score

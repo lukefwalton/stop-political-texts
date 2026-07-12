@@ -1832,6 +1832,21 @@
       "note": "Authored synthetic hard negative."
     },
     {
+      "id": "neg_civic_009",
+      "body": "Your ballot was received but the signature does not match. Respond by the deadline to cure it. — County Elections",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "civic_noncampaign",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic hard negative. Signature-cure notice: 'match' and 'deadline' are fundraising terms, so this case pins the election-admin allowlist's phrase-hit semantics at the eval level."
+    },
+    {
       "id": "neg_union_001",
       "body": "Local 100: vote on the contract ratification Thursday.",
       "sender": null,
