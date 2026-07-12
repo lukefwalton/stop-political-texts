@@ -55,6 +55,8 @@ enum SetupInstructions {
     static let settingsButtonLabel = "Open this app's page in Settings"
 
     /// Companion footnote for the button: where it lands and how to get from
-    /// there to the filter picker.
-    static let settingsButtonNote = "iOS only lets us open this app's own Settings page — not the Messages filter. From there, tap Back to reach Apps, then follow the setup steps."
+    /// there to the filter picker. Deliberately doesn't name the screen Back
+    /// leads to — it's the Apps list on iOS 18+ but the main Settings list on
+    /// the iOS 16/17 versions this app still supports.
+    static let settingsButtonNote = "iOS only lets us open this app's own Settings page — not the Messages filter. Go back from there and follow the setup steps."
 }

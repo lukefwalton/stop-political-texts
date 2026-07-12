@@ -306,10 +306,9 @@ final class PoliticalTextClassifierTests: XCTestCase {
         // The real-world message the phrase-hit semantics protect: an official
         // cure notice whose wording ("does not match", "deadline") would score
         // as fundraising if the allowlist required a clean message.
-        XCTAssertFalse(filtered(
-            "Your ballot was received but the signature does not match. Respond by the deadline to cure it.",
-            strictness: .aggressive
-        ))
+        let message = "Your ballot was received but the signature does not match. Respond by the deadline to cure it."
+        XCTAssertFalse(filtered(message, strictness: .aggressive))
+        XCTAssertFalse(filtered(message, strictness: .normal))
     }
 
     func testDisabledAllowsEverything() {
