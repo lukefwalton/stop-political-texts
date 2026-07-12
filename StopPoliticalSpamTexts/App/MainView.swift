@@ -49,17 +49,27 @@ struct MainView: View {
                         .foregroundStyle(.secondary)
                 }
                 .padding(.vertical, 4)
+                // The setup steps are the primary action: the deep link below
+                // can only land on this app's own Settings page, so the steps
+                // are what actually get people to the filter picker.
+                NavigationLink {
+                    EnableInstructionsView()
+                } label: {
+                    Label("See the setup steps", systemImage: "list.number")
+                        .fontWeight(.semibold)
+                }
                 Button {
                     if let url = URL(string: UIApplication.openSettingsURLString) {
                         openURL(url)
                     }
                 } label: {
-                    Label("Open Settings", systemImage: "arrow.up.forward.app")
+                    Label(SetupInstructions.settingsButtonLabel, systemImage: "arrow.up.forward.app")
                 }
-                NavigationLink("Setup steps") { EnableInstructionsView() }
                 NavigationLink("Still getting texts?") { StillGettingTextsView() }
             } header: {
                 Text("Activation")
+            } footer: {
+                Text(SetupInstructions.settingsButtonNote)
             }
 
             Section {

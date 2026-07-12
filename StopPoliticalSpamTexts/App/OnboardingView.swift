@@ -213,11 +213,11 @@ private struct ActivateScreen: View {
 
                 VStack(spacing: 8) {
                     Button(action: openSettings) {
-                        Label("Open Settings", systemImage: "arrow.up.forward.app")
+                        Label(SetupInstructions.settingsButtonLabel, systemImage: "arrow.up.forward.app")
                     }
                     .buttonStyle(.lfwCTA(filled: false))
 
-                    Text("Opens the Settings app to save you a step. iOS won't let us jump straight to the Messages filter, so tap through from there.")
+                    Text(SetupInstructions.settingsButtonNote)
                         .font(.footnote)
                         .foregroundStyle(BrandColor.paper.opacity(0.6))
                         .multilineTextAlignment(.center)
