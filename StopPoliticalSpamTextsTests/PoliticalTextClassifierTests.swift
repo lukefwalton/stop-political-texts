@@ -282,15 +282,15 @@ final class PoliticalTextClassifierTests: XCTestCase {
     }
 
     func testBallotStatusMixedContentIsStillExempt() {
-        // Pinned deliberately: like the commerce allowlist ("Your order
-        // shipped. Donate!"), a status phrase exempts mixed content unless a
-        // hard-political marker appears. Voiding the exemption on soft
-        // political signal would junk real election-office mail — see the
-        // signature-cure test below, which trips "match" and "deadline".
-        XCTAssertFalse(filtered(
-            "Your ballot has been counted. Donate before midnight to help Democrats!",
-            strictness: .aggressive
-        ))
+        // Pinned deliberately in both modes: like the commerce allowlist
+        // ("Your order shipped. Donate!"), a status phrase exempts mixed
+        // content unless a hard-political marker appears. Voiding the
+        // exemption on soft political signal would junk real election-office
+        // mail — see the signature-cure test below, which trips "match" and
+        // "deadline". The eval twin is pos_fund_np_003 (baselined FN).
+        let message = "Your ballot has been counted. Donate before midnight to help Democrats!"
+        XCTAssertFalse(filtered(message, strictness: .aggressive))
+        XCTAssertFalse(filtered(message, strictness: .normal))
     }
 
     func testFutureTenseBallotLanguageStillScores() {
