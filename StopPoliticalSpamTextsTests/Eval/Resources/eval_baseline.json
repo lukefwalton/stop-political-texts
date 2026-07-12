@@ -1,11 +1,7 @@
 {
   "schemaVersion": 1,
   "knownFailures": {
-    "aggressive": [
-      "neg_civic_005"
-    ],
-    "normal": [
-      "neg_civic_005"
-    ]
+    "aggressive": [],
+    "normal": []
   }
 }

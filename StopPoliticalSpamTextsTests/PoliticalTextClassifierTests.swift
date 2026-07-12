@@ -253,6 +253,34 @@ final class PoliticalTextClassifierTests: XCTestCase {
         ))
     }
 
+    func testOfficialBallotStatusNoticeAllowed() {
+        // BallotTrax-style confirmation from a county election office. Before
+        // the election-admin allowlist this scored electionTerms ("ballot") +
+        // ballotMeasureAction ("mail ballot") = 6 and was junked in both modes
+        // (eval case neg_civic_005).
+        let message = "Your mail ballot has been received and counted. — County Elections"
+        XCTAssertFalse(filtered(message, strictness: .normal))
+        XCTAssertFalse(filtered(message, strictness: .aggressive))
+    }
+
+    func testBallotStatusCallToActionStillScores() {
+        // GOTV spam built on the same nouns must not ride the allowlist: its
+        // entries are past-tense confirmations, and "has not been received"
+        // is not one of them.
+        XCTAssertTrue(filtered(
+            "Records show your mail ballot has not been received. Vote today — the election is close!",
+            strictness: .normal
+        ))
+    }
+
+    func testBallotStatusDoesNotBypassHardPolitical() {
+        // An allowlist phrase never overrides a hard-political marker.
+        XCTAssertTrue(filtered(
+            "Your ballot has been counted! Now chip in at secure.actblue.com to win.",
+            strictness: .normal
+        ))
+    }
+
     func testDisabledAllowsEverything() {
         let result = classifier.classify(
             sender: nil,
