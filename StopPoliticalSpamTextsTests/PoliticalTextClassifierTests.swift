@@ -274,11 +274,11 @@ final class PoliticalTextClassifierTests: XCTestCase {
     }
 
     func testBallotStatusDoesNotBypassHardPolitical() {
-        // An allowlist phrase never overrides a hard-political marker.
-        XCTAssertTrue(filtered(
-            "Your ballot has been counted! Now chip in at secure.actblue.com to win.",
-            strictness: .normal
-        ))
+        // An allowlist phrase never overrides a hard-political marker — the
+        // safety valve of the exemption, pinned in both modes.
+        let message = "Your ballot has been counted! Now chip in at secure.actblue.com to win."
+        XCTAssertTrue(filtered(message, strictness: .normal))
+        XCTAssertTrue(filtered(message, strictness: .aggressive))
     }
 
     func testBallotStatusMixedContentIsStillExempt() {

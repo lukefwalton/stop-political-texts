@@ -797,6 +797,21 @@
       "note": "Authored synthetic."
     },
     {
+      "id": "pos_gotv_np_003",
+      "body": "Records show your mail ballot has not been received. Vote today — the election is close!",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_gotv",
+      "party": "nonpartisan",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic. Near-miss for the election-admin allowlist: 'has not been received' must NOT match the past-tense confirmation phrases, so this GOTV pressure text keeps scoring."
+    },
+    {
       "id": "pos_mob_np_002",
       "body": "Phone bank tonight: call voters about the special election.",
       "sender": null,
