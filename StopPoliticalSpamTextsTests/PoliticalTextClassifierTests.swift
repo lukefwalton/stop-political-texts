@@ -281,6 +281,28 @@ final class PoliticalTextClassifierTests: XCTestCase {
         ))
     }
 
+    func testBallotStatusMixedContentIsStillExempt() {
+        // Pinned deliberately: like the commerce allowlist ("Your order
+        // shipped. Donate!"), a status phrase exempts mixed content unless a
+        // hard-political marker appears. Voiding the exemption on soft
+        // political signal would junk real election-office mail — see the
+        // signature-cure test below, which trips "match" and "deadline".
+        XCTAssertFalse(filtered(
+            "Your ballot has been counted. Donate before midnight to help Democrats!",
+            strictness: .aggressive
+        ))
+    }
+
+    func testSignatureCureNoticeAllowed() {
+        // The real-world message the phrase-hit semantics protect: an official
+        // cure notice whose wording ("does not match", "deadline") would score
+        // as fundraising if the allowlist required a clean message.
+        XCTAssertFalse(filtered(
+            "Your ballot was received but the signature does not match. Respond by the deadline to cure it.",
+            strictness: .aggressive
+        ))
+    }
+
     func testDisabledAllowsEverything() {
         let result = classifier.classify(
             sender: nil,

@@ -196,7 +196,11 @@ enum RuleSet {
     /// is a past-tense confirmation that something already happened to *your*
     /// ballot — never a call to action — so GOTV spam built on the same nouns
     /// ("your ballot has not been received — vote now!") still scores normally.
-    /// Like the other allowlists, a hard-political marker still overrides.
+    /// Like the other allowlists, a hard-political marker still overrides —
+    /// and, like them, a phrase hit exempts mixed content by design: voiding
+    /// the exemption on soft political signal would junk official cure notices
+    /// ("signature does not match — respond by the deadline"), whose wording
+    /// trips the fundraising terms.
     static let electionAdminAllowlist: [String] = [
         "ballot has been received", "ballot was received",
         "ballot has been counted", "ballot was counted",
