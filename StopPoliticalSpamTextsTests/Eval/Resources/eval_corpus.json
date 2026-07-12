@@ -902,6 +902,21 @@
       "note": "Authored synthetic."
     },
     {
+      "id": "pos_fund_np_003",
+      "body": "Your ballot has been counted. Now donate before midnight to help our campaign win!",
+      "sender": null,
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "nonpartisan",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic. Fundraising ask hiding behind a fake ballot-status line: rides the election-admin allowlist's phrase-hit exemption, so it is a DELIBERATE baselined false negative — the accepted cost of never junking official ballot-status and signature-cure mail (see neg_civic_005, neg_civic_009)."
+    },
+    {
       "id": "pos_fund_issue_001",
       "body": "Clean Water PAC: chip in $10 before the midnight deadline.",
       "sender": null,

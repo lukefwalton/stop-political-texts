@@ -1,7 +1,11 @@
 {
   "schemaVersion": 1,
   "knownFailures": {
-    "aggressive": [],
-    "normal": []
+    "aggressive": [
+      "pos_fund_np_003"
+    ],
+    "normal": [
+      "pos_fund_np_003"
+    ]
   }
 }
