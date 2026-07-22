@@ -167,19 +167,20 @@ final class PoliticalTextClassifierTests: XCTestCase {
         }
     }
 
-    func testChamberPhraseAcrossSentenceBoundaryScoresButNeverFiltersAlone() {
-        // The matcher deliberately allows punctuation between the tokens of
-        // any multi-word phrase, so "house. Majority" DOES trip the chamber
-        // phrase. The guarantee is threshold behavior: the hit stays below
-        // both thresholds on its own.
+    func testChamberPhraseDoesNotBridgeSentences() {
+        // "Open house. Majority…" must not assemble into the chamber phrase:
+        // the matcher's separator excludes sentence-terminal punctuation. Even
+        // combined with SMS-mechanics copy and a 10DLC sender — the exact
+        // stack the news-bait positive relies on — a non-political message
+        // stays allowed in both modes.
         for strictness in [Strictness.normal, .aggressive] {
             let result = classifier.classify(
-                sender: nil,
-                body: "Open house. Majority of the units are already sold.",
+                sender: "+12135550143",
+                body: "Open house. Majority of the units are already sold. Reply STOP to opt out.",
                 config: config(strictness: strictness)
             )
-            XCTAssertFalse(result.isFiltered, "\(strictness) must not filter on the phrase alone")
-            XCTAssertTrue(result.matchedRules.contains("electionTerms"))
+            XCTAssertFalse(result.isFiltered, "\(strictness) must not filter non-political 10DLC traffic")
+            XCTAssertFalse(result.matchedRules.contains("electionTerms"))
         }
     }
 

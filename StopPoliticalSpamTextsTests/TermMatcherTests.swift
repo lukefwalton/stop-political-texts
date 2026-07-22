@@ -4,9 +4,10 @@ import XCTest
 /// Direct coverage of `TermMatcher` — the boundary-aware token matcher built-in
 /// rules and the allowlist both run through. Tests live here (not embedded in
 /// `PoliticalTextClassifierTests`) so the classifier tests stay focused on
-/// user-visible classification decisions, while the matcher's `[\s\p{Punct}]+`
-/// separator behavior and `(?<![a-z])…(?![a-z])` letter-boundary rule are pinned
-/// independently of any scoring/threshold change.
+/// user-visible classification decisions, while the matcher's phrase-separator
+/// behavior (whitespace/mid-sentence punctuation only) and
+/// `(?<![a-z])…(?![a-z])` letter-boundary rule are pinned independently of any
+/// scoring/threshold change.
 final class TermMatcherTests: XCTestCase {
 
     override func setUp() {
@@ -27,6 +28,30 @@ final class TermMatcherTests: XCTestCase {
         for body in bodies {
             XCTAssertTrue(TermMatcher.matches(term: "vote", in: body),
                           "TermMatcher should match 'vote' in: \(body)")
+        }
+    }
+
+    func testPhraseTokensMatchAcrossMidSentencePunctuation() {
+        // Hyphens, commas, parens, and colons between phrase tokens must not
+        // defeat a multi-word term.
+        XCTAssertTrue(TermMatcher.matches(term: "chip in", in: "Chip-in $5 before midnight."))
+        XCTAssertTrue(TermMatcher.matches(term: "yes on", in: "Vote yes, on Prop 12."))
+        XCTAssertTrue(TermMatcher.matches(term: "house majority", in: "a House (majority) miracle"))
+    }
+
+    func testPhraseTokensDoNotBridgeSentenceTerminalPunctuation() {
+        // A phrase must never assemble itself out of two adjacent sentences —
+        // "Open house. Majority of units sold." is not a chamber-control
+        // phrase. Pinned for . ! ? ; and the ellipsis.
+        for body in [
+            "Open house. Majority of the units are already sold.",
+            "What a house! Majority approval from every visitor.",
+            "Want the house? Majority of buyers toured it twice.",
+            "Sold the house; majority of proceeds go to savings.",
+            "Loved the house… majority of the family agrees."
+        ] {
+            XCTAssertFalse(TermMatcher.matches(term: "house majority", in: body.lowercased()),
+                           "phrase should not bridge sentences in: \(body)")
         }
     }
 

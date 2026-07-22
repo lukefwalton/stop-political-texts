@@ -67,7 +67,11 @@ struct Rule {
 /// codes match (e.g. `maga` in `MAGA2026`) while substrings inside real words
 /// do not (`maga` in `magazine`, `pac` in `package`, `prop` in `proper`).
 /// Multi-word phrases match as a contiguous sequence with flexible
-/// whitespace/punctuation between tokens.
+/// whitespace/punctuation between tokens — except sentence-terminal
+/// punctuation (`.` `!` `?` `;` `…`), so `chip-in` and `yes, on` still match
+/// while `"Open house. Majority sold."` cannot bridge two sentences into
+/// `house majority`. In-word punctuation stuffing (`d.o.n.a.t.e`) is handled
+/// upstream by `Deobfuscator`, not by this separator.
 enum TermMatcher {
     private static var cache: [String: NSRegularExpression] = [:]
     /// Insertion order for FIFO eviction. Built-in rules + allowlists carry roughly
@@ -105,8 +109,9 @@ enum TermMatcher {
 
         // Letters may not directly abut the term on either side; digits and
         // punctuation may. Tokens of a phrase are separated by one or more
-        // whitespace/punctuation characters.
-        let body = tokens.joined(separator: "[\\s\\p{Punct}]+")
+        // whitespace or mid-sentence punctuation characters; sentence-terminal
+        // punctuation is excluded so a phrase never spans two sentences.
+        let body = tokens.joined(separator: "(?:\\s|(?![.!?;\u{2026}])\\p{Punct})+")
         let pattern = "(?<![a-z])" + body + "(?![a-z])"
         let compiled = try? NSRegularExpression(pattern: pattern, options: [.caseInsensitive])
 

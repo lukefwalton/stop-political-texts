@@ -2339,7 +2339,22 @@
       "technique": null,
       "baseId": null,
       "pairId": null,
-      "note": "Authored synthetic boundary case. house majority matched across a sentence boundary (the matcher allows punctuation between phrase tokens) scores electionTerms alone and must stay below both thresholds."
+      "note": "Authored synthetic boundary case. The phrase separator excludes sentence-terminal punctuation, so house. Majority never assembles into the chamber-control phrase at all."
+    },
+    {
+      "id": "bnd_018",
+      "body": "Open house. Majority of the units are already sold. The end2end virtual tour link is below. Reply STOP to opt out.",
+      "sender": "+12135550143",
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "boundary",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic boundary case stacking every broad signal at once: 10DLC sender, tech end2end, opt-out copy, and a cross-sentence house/Majority adjacency. Only smsMechanics scores, which never filters alone, so the message stays allowed in both modes."
     },
     {
       "id": "adv_leet_dem_001",
