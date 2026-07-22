@@ -111,6 +111,86 @@ final class PoliticalTextClassifierTests: XCTestCase {
 
     // MARK: - Regression scenarios
 
+    func testNewsBaitBlastFiltersBothModes() {
+        // User-reported miss (2026-07): celebrity news-bait with no
+        // fundraising or GOTV wording. The political signal is the
+        // chamber-control phrase, the DemocracyHQ sign-off, and the
+        // End2End opt-out.
+        let body = "Barack Obama just inspired a House majority MIRACLE! "
+            + "(Trump is FREAKING OUT!!) Look at Obama's MAJOR comeback: "
+            + "saveusadem.com/l/DNGV3y DemocracyHQ End2End"
+        for strictness in [Strictness.normal, .aggressive] {
+            let result = classifier.classify(
+                sender: "+12135550143",
+                body: body,
+                config: config(strictness: strictness)
+            )
+            XCTAssertTrue(result.isFiltered, "\(strictness) should filter news-bait blast")
+            XCTAssertTrue(result.matchedRules.contains("politicalOrg"))
+            XCTAssertTrue(result.matchedRules.contains("electionTerms"))
+            XCTAssertTrue(result.matchedRules.contains("smsMechanics"))
+        }
+    }
+
+    func testNewsBaitBlastFiltersWithoutOrgToggle() {
+        // With the party/committee toggle off, DemocracyHQ stops scoring;
+        // chamber phrase + End2End + 10DLC sender must still reach Normal.
+        var toggles = CategoryToggles.allOn
+        toggles.pacPartyCommittee = false
+        let result = classifier.classify(
+            sender: "+12135550143",
+            body: "Obama just inspired a House majority MIRACLE! saveusadem.com/l/DNGV3y DemocracyHQ End2End",
+            config: config(strictness: .normal, toggles: toggles)
+        )
+        XCTAssertTrue(result.isFiltered)
+        // Prove the outcome came from the intended signals, not a
+        // toggle-wiring bug that lets the org rule keep scoring.
+        XCTAssertFalse(result.matchedRules.contains("politicalOrg"))
+        XCTAssertTrue(result.matchedRules.contains("electionTerms"))
+        XCTAssertTrue(result.matchedRules.contains("smsMechanics"))
+        XCTAssertTrue(result.matchedRules.contains("sender_10dlc"))
+    }
+
+    func testEnd2EndAloneNeverFilters() {
+        // end2end as a tech term is SMS mechanics only, which never filters
+        // alone — and sender shape only boosts when political context
+        // exists, so even a 10DLC sender adds nothing here.
+        for sender in [nil, "+12135550143"] {
+            let result = classifier.classify(
+                sender: sender,
+                body: "Heads up: the end2end test suite is green again.",
+                config: config(strictness: .aggressive)
+            )
+            XCTAssertFalse(result.isFiltered)
+            XCTAssertTrue(result.matchedRules.contains("smsMechanics"))
+            XCTAssertFalse(result.matchedRules.contains("sender_10dlc"))
+        }
+    }
+
+    func testChamberPhraseNeverAssemblesFromPunctuatedProse() {
+        // "Open house. Majority…" / "Open house: majority…" must not assemble
+        // into the chamber phrase: strict phrases join tokens across
+        // whitespace alone. Even combined with SMS-mechanics copy and a 10DLC
+        // sender — the exact stack the news-bait positive relies on — a
+        // non-political message stays allowed in both modes.
+        let bodies = [
+            "Open house. Majority of the units are already sold. Reply STOP to opt out.",
+            "Open house: majority of the units are already sold. Reply STOP to opt out.",
+            "Open house, majority of the units are already sold. Reply STOP to opt out."
+        ]
+        for strictness in [Strictness.normal, .aggressive] {
+            for body in bodies {
+                let result = classifier.classify(
+                    sender: "+12135550143",
+                    body: body,
+                    config: config(strictness: strictness)
+                )
+                XCTAssertFalse(result.isFiltered, "\(strictness) must not filter: \(body)")
+                XCTAssertFalse(result.matchedRules.contains("electionTerms"))
+            }
+        }
+    }
+
     func testCustomAllowDoesNotBypassHardPolitical() {
         let result = classifier.classify(
             sender: nil,

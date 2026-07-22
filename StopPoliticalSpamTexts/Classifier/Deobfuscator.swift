@@ -157,16 +157,20 @@ enum Deobfuscator {
 extension TermMatcher {
     /// Boundary-aware match against the canonical view, falling back to the
     /// de-obfuscated view when one exists.
-    static func matches(term: String, in views: MatchableText) -> Bool {
-        if matches(term: term, in: views.text) { return true }
+    static func matches(term: String, in views: MatchableText,
+                        separator: PhraseSeparator = .flexible) -> Bool {
+        if matches(term: term, in: views.text, separator: separator) { return true }
         guard let deobfuscated = views.deobfuscated else { return false }
-        return matches(term: term, in: deobfuscated)
+        return matches(term: term, in: deobfuscated, separator: separator)
     }
 }
 
 extension Rule {
-    /// True if any term matches either view.
+    /// True if any term or strict phrase matches either view.
     func matches(_ views: MatchableText) -> Bool {
         terms.contains { TermMatcher.matches(term: $0, in: views) }
+            || strictPhrases.contains {
+                TermMatcher.matches(term: $0, in: views, separator: .whitespaceOnly)
+            }
     }
 }

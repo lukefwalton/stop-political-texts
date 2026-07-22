@@ -4,9 +4,10 @@ import XCTest
 /// Direct coverage of `TermMatcher` — the boundary-aware token matcher built-in
 /// rules and the allowlist both run through. Tests live here (not embedded in
 /// `PoliticalTextClassifierTests`) so the classifier tests stay focused on
-/// user-visible classification decisions, while the matcher's `[\s\p{Punct}]+`
-/// separator behavior and `(?<![a-z])…(?![a-z])` letter-boundary rule are pinned
-/// independently of any scoring/threshold change.
+/// user-visible classification decisions, while the matcher's phrase-separator
+/// behavior (whitespace/mid-sentence punctuation only) and
+/// `(?<![a-z])…(?![a-z])` letter-boundary rule are pinned independently of any
+/// scoring/threshold change.
 final class TermMatcherTests: XCTestCase {
 
     override func setUp() {
@@ -27,6 +28,49 @@ final class TermMatcherTests: XCTestCase {
         for body in bodies {
             XCTAssertTrue(TermMatcher.matches(term: "vote", in: body),
                           "TermMatcher should match 'vote' in: \(body)")
+        }
+    }
+
+    func testFlexiblePhraseTokensMatchAcrossMidSentencePunctuation() {
+        // Hyphens, commas, parens, and colons between phrase tokens must not
+        // defeat a flexible multi-word term.
+        XCTAssertTrue(TermMatcher.matches(term: "chip in", in: "Chip-in $5 before midnight."))
+        XCTAssertTrue(TermMatcher.matches(term: "yes on", in: "Vote yes, on Prop 12."))
+        XCTAssertTrue(TermMatcher.matches(term: "chip in", in: "chip (in) $5 today"))
+    }
+
+    func testFlexiblePhraseTokensDoNotBridgeSentenceTerminalPunctuation() {
+        // Even a flexible phrase must never assemble itself out of two
+        // adjacent sentences. Pinned for . ! ? ; and the ellipsis.
+        for body in [
+            "Bring a chip. In the bag, please.",
+            "What a chip! In other news, hello.",
+            "Got a chip? In that case, celebrate.",
+            "One more chip; in moderation, of course.",
+            "Last chip… in the end it was worth it."
+        ] {
+            XCTAssertFalse(TermMatcher.matches(term: "chip in", in: body.lowercased()),
+                           "phrase should not bridge sentences in: \(body)")
+        }
+    }
+
+    func testWhitespaceOnlyPhrasesRejectAllPunctuationBetweenTokens() {
+        // Strict phrases (Rule.strictPhrases) join tokens across whitespace
+        // alone: "House majority" in real political copy is contiguous, so
+        // any punctuation between the tokens signals unrelated prose.
+        XCTAssertTrue(TermMatcher.matches(
+            term: "house majority", in: "a house majority miracle tonight",
+            separator: .whitespaceOnly))
+        for body in [
+            "open house: majority of the units are already sold.",
+            "open house, majority of the units are already sold.",
+            "a house (majority) of cards",
+            "house-majority pricing ends friday",
+            "open house. majority of the units are already sold."
+        ] {
+            XCTAssertFalse(TermMatcher.matches(term: "house majority", in: body,
+                                               separator: .whitespaceOnly),
+                           "strict phrase should not match in: \(body)")
         }
     }
 
