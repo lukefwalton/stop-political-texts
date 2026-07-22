@@ -143,14 +143,44 @@ final class PoliticalTextClassifierTests: XCTestCase {
             config: config(strictness: .normal, toggles: toggles)
         )
         XCTAssertTrue(result.isFiltered)
+        // Prove the outcome came from the intended signals, not a
+        // toggle-wiring bug that lets the org rule keep scoring.
+        XCTAssertFalse(result.matchedRules.contains("politicalOrg"))
+        XCTAssertTrue(result.matchedRules.contains("electionTerms"))
+        XCTAssertTrue(result.matchedRules.contains("smsMechanics"))
+        XCTAssertTrue(result.matchedRules.contains("sender_10dlc"))
     }
 
-    func testEnd2EndAndChamberPhraseNeverFilterAlone() {
+    func testEnd2EndAloneNeverFilters() {
         // end2end as a tech term is SMS mechanics only, which never filters
-        // alone; "house. Majority" across a sentence boundary trips the
-        // chamber phrase but stays below both thresholds on its own.
-        XCTAssertFalse(filtered("Heads up: the end2end test suite is green again.", strictness: .aggressive))
-        XCTAssertFalse(filtered("Open house. Majority of the units are already sold.", strictness: .aggressive))
+        // alone — and sender shape only boosts when political context
+        // exists, so even a 10DLC sender adds nothing here.
+        for sender in [nil, "+12135550143"] {
+            let result = classifier.classify(
+                sender: sender,
+                body: "Heads up: the end2end test suite is green again.",
+                config: config(strictness: .aggressive)
+            )
+            XCTAssertFalse(result.isFiltered)
+            XCTAssertTrue(result.matchedRules.contains("smsMechanics"))
+            XCTAssertFalse(result.matchedRules.contains("sender_10dlc"))
+        }
+    }
+
+    func testChamberPhraseAcrossSentenceBoundaryScoresButNeverFiltersAlone() {
+        // The matcher deliberately allows punctuation between the tokens of
+        // any multi-word phrase, so "house. Majority" DOES trip the chamber
+        // phrase. The guarantee is threshold behavior: the hit stays below
+        // both thresholds on its own.
+        for strictness in [Strictness.normal, .aggressive] {
+            let result = classifier.classify(
+                sender: nil,
+                body: "Open house. Majority of the units are already sold.",
+                config: config(strictness: strictness)
+            )
+            XCTAssertFalse(result.isFiltered, "\(strictness) must not filter on the phrase alone")
+            XCTAssertTrue(result.matchedRules.contains("electionTerms"))
+        }
     }
 
     func testCustomAllowDoesNotBypassHardPolitical() {
