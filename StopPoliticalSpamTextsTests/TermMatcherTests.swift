@@ -31,27 +31,46 @@ final class TermMatcherTests: XCTestCase {
         }
     }
 
-    func testPhraseTokensMatchAcrossMidSentencePunctuation() {
+    func testFlexiblePhraseTokensMatchAcrossMidSentencePunctuation() {
         // Hyphens, commas, parens, and colons between phrase tokens must not
-        // defeat a multi-word term.
+        // defeat a flexible multi-word term.
         XCTAssertTrue(TermMatcher.matches(term: "chip in", in: "Chip-in $5 before midnight."))
         XCTAssertTrue(TermMatcher.matches(term: "yes on", in: "Vote yes, on Prop 12."))
-        XCTAssertTrue(TermMatcher.matches(term: "house majority", in: "a House (majority) miracle"))
+        XCTAssertTrue(TermMatcher.matches(term: "chip in", in: "chip (in) $5 today"))
     }
 
-    func testPhraseTokensDoNotBridgeSentenceTerminalPunctuation() {
-        // A phrase must never assemble itself out of two adjacent sentences —
-        // "Open house. Majority of units sold." is not a chamber-control
-        // phrase. Pinned for . ! ? ; and the ellipsis.
+    func testFlexiblePhraseTokensDoNotBridgeSentenceTerminalPunctuation() {
+        // Even a flexible phrase must never assemble itself out of two
+        // adjacent sentences. Pinned for . ! ? ; and the ellipsis.
         for body in [
-            "Open house. Majority of the units are already sold.",
-            "What a house! Majority approval from every visitor.",
-            "Want the house? Majority of buyers toured it twice.",
-            "Sold the house; majority of proceeds go to savings.",
-            "Loved the house… majority of the family agrees."
+            "Bring a chip. In the bag, please.",
+            "What a chip! In other news, hello.",
+            "Got a chip? In that case, celebrate.",
+            "One more chip; in moderation, of course.",
+            "Last chip… in the end it was worth it."
         ] {
-            XCTAssertFalse(TermMatcher.matches(term: "house majority", in: body.lowercased()),
+            XCTAssertFalse(TermMatcher.matches(term: "chip in", in: body.lowercased()),
                            "phrase should not bridge sentences in: \(body)")
+        }
+    }
+
+    func testWhitespaceOnlyPhrasesRejectAllPunctuationBetweenTokens() {
+        // Strict phrases (Rule.strictPhrases) join tokens across whitespace
+        // alone: "House majority" in real political copy is contiguous, so
+        // any punctuation between the tokens signals unrelated prose.
+        XCTAssertTrue(TermMatcher.matches(
+            term: "house majority", in: "a house majority miracle tonight",
+            separator: .whitespaceOnly))
+        for body in [
+            "open house: majority of the units are already sold.",
+            "open house, majority of the units are already sold.",
+            "a house (majority) of cards",
+            "house-majority pricing ends friday",
+            "open house. majority of the units are already sold."
+        ] {
+            XCTAssertFalse(TermMatcher.matches(term: "house majority", in: body,
+                                               separator: .whitespaceOnly),
+                           "strict phrase should not match in: \(body)")
         }
     }
 

@@ -75,10 +75,14 @@ enum RuleSet {
                 "election", "vote", "voter", "voters", "voting", "ballot", "poll",
                 "polling", "primary", "senate", "congress", "congressional",
                 "campaign", "endorse", "endorsement", "election day", "early voting",
-                "absentee ballot", "mail-in ballot", "mail in ballot",
-                // Chamber-control phrases carried by news-bait blasts that
-                // avoid every fundraising/GOTV word ("a House majority
-                // MIRACLE!"). Bare "house"/"majority" stay off the list.
+                "absentee ballot", "mail-in ballot", "mail in ballot"
+            ],
+            // Chamber-control phrases carried by news-bait blasts that avoid
+            // every fundraising/GOTV word ("a House majority MIRACLE!").
+            // Strict because real copy always writes them contiguously —
+            // "Open house: majority of units sold" must not assemble into
+            // one. Bare "house"/"majority" stay off the list entirely.
+            strictPhrases: [
                 "house majority", "senate majority",
                 "majority in the house", "majority in the senate"
             ],

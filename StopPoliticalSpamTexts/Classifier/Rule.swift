@@ -40,17 +40,25 @@ struct Rule {
     /// Lives on the rule so a new rule can't slip into the UI as a raw id.
     let displayName: String
     let terms: [String]
+    /// Phrases matched with `.whitespaceOnly` token separation. For phrases
+    /// real copy always writes contiguously ("House majority"), any
+    /// punctuation between the tokens signals unrelated prose ("Open house:
+    /// majority of units sold"), so these opt out of the flexible separator
+    /// `terms` get.
+    let strictPhrases: [String]
     let weight: Int
     let category: Category
     /// Pairing-required rules (ballot measures) only score when another
     /// political/election/fundraising/mechanics signal is also present.
     let requiresPairing: Bool
 
-    init(id: String, displayName: String, terms: [String], weight: Int,
+    init(id: String, displayName: String, terms: [String],
+         strictPhrases: [String] = [], weight: Int,
          category: Category, requiresPairing: Bool = false) {
         self.id = id
         self.displayName = displayName
         self.terms = terms
+        self.strictPhrases = strictPhrases
         self.weight = weight
         self.category = category
         self.requiresPairing = requiresPairing
@@ -58,6 +66,9 @@ struct Rule {
 
     func matches(_ normalizedText: String) -> Bool {
         terms.contains { TermMatcher.matches(term: $0, in: normalizedText) }
+            || strictPhrases.contains {
+                TermMatcher.matches(term: $0, in: normalizedText, separator: .whitespaceOnly)
+            }
     }
 }
 
@@ -73,6 +84,15 @@ struct Rule {
 /// `house majority`. In-word punctuation stuffing (`d.o.n.a.t.e`) is handled
 /// upstream by `Deobfuscator`, not by this separator.
 enum TermMatcher {
+    /// How the tokens of a multi-word term may be separated in the text.
+    enum PhraseSeparator: String {
+        /// Whitespace or mid-sentence punctuation (the default): `chip-in`
+        /// and `yes, on` match; sentence-terminal punctuation never joins.
+        case flexible
+        /// Whitespace only — for `Rule.strictPhrases`.
+        case whitespaceOnly
+    }
+
     private static var cache: [String: NSRegularExpression] = [:]
     /// Insertion order for FIFO eviction. Built-in rules + allowlists carry roughly
     /// 200 unique terms; the cap is sized to cover those plus a buffer for
@@ -82,15 +102,23 @@ enum TermMatcher {
     private static let cacheLimit = 256
     private static let lock = NSLock()
 
-    static func matches(term: String, in normalizedText: String) -> Bool {
+    static func matches(term: String, in normalizedText: String,
+                        separator: PhraseSeparator = .flexible) -> Bool {
         guard !normalizedText.isEmpty else { return false }
-        guard let regex = regex(for: term) else { return false }
+        guard let regex = regex(for: term, separator: separator) else { return false }
         let range = NSRange(normalizedText.startIndex..., in: normalizedText)
         return regex.firstMatch(in: normalizedText, options: [], range: range) != nil
     }
 
-    private static func regex(for term: String) -> NSRegularExpression? {
-        let key = term.lowercased()
+    private static func cacheKey(for term: String, separator: PhraseSeparator) -> String {
+        // Flexible keys stay bare so the cache the app has always built is
+        // unchanged; strict keys get a NUL-prefixed key no normalized term
+        // (built-in or user-typed) can collide with.
+        separator == .flexible ? term.lowercased() : "\u{0}ws:" + term.lowercased()
+    }
+
+    private static func regex(for term: String, separator: PhraseSeparator) -> NSRegularExpression? {
+        let key = cacheKey(for: term, separator: separator)
 
         // Fast path: a cache hit returns under the lock without compiling anything.
         lock.lock()
@@ -108,10 +136,18 @@ enum TermMatcher {
         guard !tokens.isEmpty else { return nil }
 
         // Letters may not directly abut the term on either side; digits and
-        // punctuation may. Tokens of a phrase are separated by one or more
-        // whitespace or mid-sentence punctuation characters; sentence-terminal
-        // punctuation is excluded so a phrase never spans two sentences.
-        let body = tokens.joined(separator: "(?:\\s|(?![.!?;\u{2026}])\\p{Punct})+")
+        // punctuation may. Flexible phrases join tokens across whitespace or
+        // mid-sentence punctuation — sentence-terminal punctuation is excluded
+        // so a phrase never spans two sentences. Whitespace-only phrases
+        // (`Rule.strictPhrases`) join across whitespace alone.
+        let tokenSeparator: String
+        switch separator {
+        case .flexible:
+            tokenSeparator = "(?:\\s|(?![.!?;\u{2026}])\\p{Punct})+"
+        case .whitespaceOnly:
+            tokenSeparator = "\\s+"
+        }
+        let body = tokens.joined(separator: tokenSeparator)
         let pattern = "(?<![a-z])" + body + "(?![a-z])"
         let compiled = try? NSRegularExpression(pattern: pattern, options: [.caseInsensitive])
 

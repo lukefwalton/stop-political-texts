@@ -167,20 +167,27 @@ final class PoliticalTextClassifierTests: XCTestCase {
         }
     }
 
-    func testChamberPhraseDoesNotBridgeSentences() {
-        // "Open house. Majority…" must not assemble into the chamber phrase:
-        // the matcher's separator excludes sentence-terminal punctuation. Even
-        // combined with SMS-mechanics copy and a 10DLC sender — the exact
-        // stack the news-bait positive relies on — a non-political message
-        // stays allowed in both modes.
+    func testChamberPhraseNeverAssemblesFromPunctuatedProse() {
+        // "Open house. Majority…" / "Open house: majority…" must not assemble
+        // into the chamber phrase: strict phrases join tokens across
+        // whitespace alone. Even combined with SMS-mechanics copy and a 10DLC
+        // sender — the exact stack the news-bait positive relies on — a
+        // non-political message stays allowed in both modes.
+        let bodies = [
+            "Open house. Majority of the units are already sold. Reply STOP to opt out.",
+            "Open house: majority of the units are already sold. Reply STOP to opt out.",
+            "Open house, majority of the units are already sold. Reply STOP to opt out."
+        ]
         for strictness in [Strictness.normal, .aggressive] {
-            let result = classifier.classify(
-                sender: "+12135550143",
-                body: "Open house. Majority of the units are already sold. Reply STOP to opt out.",
-                config: config(strictness: strictness)
-            )
-            XCTAssertFalse(result.isFiltered, "\(strictness) must not filter non-political 10DLC traffic")
-            XCTAssertFalse(result.matchedRules.contains("electionTerms"))
+            for body in bodies {
+                let result = classifier.classify(
+                    sender: "+12135550143",
+                    body: body,
+                    config: config(strictness: strictness)
+                )
+                XCTAssertFalse(result.isFiltered, "\(strictness) must not filter: \(body)")
+                XCTAssertFalse(result.matchedRules.contains("electionTerms"))
+            }
         }
     }
 

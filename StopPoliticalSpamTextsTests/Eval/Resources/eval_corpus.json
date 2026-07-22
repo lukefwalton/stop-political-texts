@@ -2339,7 +2339,7 @@
       "technique": null,
       "baseId": null,
       "pairId": null,
-      "note": "Authored synthetic boundary case. The phrase separator excludes sentence-terminal punctuation, so house. Majority never assembles into the chamber-control phrase at all."
+      "note": "Authored synthetic boundary case. Chamber-control phrases are strict (whitespace-only between tokens), so house. Majority never assembles into one."
     },
     {
       "id": "bnd_018",
@@ -2355,6 +2355,21 @@
       "baseId": null,
       "pairId": null,
       "note": "Authored synthetic boundary case stacking every broad signal at once: 10DLC sender, tech end2end, opt-out copy, and a cross-sentence house/Majority adjacency. Only smsMechanics scores, which never filters alone, so the message stays allowed in both modes."
+    },
+    {
+      "id": "bnd_019",
+      "body": "Open house: majority of the units are already sold. Reply STOP to opt out.",
+      "sender": "+12135550143",
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "boundary",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic boundary case. Mid-sentence punctuation variant of bnd_018: chamber-control phrases are strict (whitespace-only between tokens), so house: majority never assembles into one even with opt-out copy and a 10DLC sender present."
     },
     {
       "id": "adv_leet_dem_001",
