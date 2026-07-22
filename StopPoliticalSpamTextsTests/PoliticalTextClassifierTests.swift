@@ -191,6 +191,21 @@ final class PoliticalTextClassifierTests: XCTestCase {
         }
     }
 
+    func testIdiomaticMajorityProseDoesNotScoreElectionTerms() {
+        // "majority in the house" is idiomatic English, not an observed spam
+        // phrase — it is deliberately NOT a chamber-control term. A benign
+        // 10DLC message using it with opt-out copy must stay allowed.
+        for strictness in [Strictness.normal, .aggressive] {
+            let result = classifier.classify(
+                sender: "+12135550143",
+                body: "The majority in the house agreed to repaint the lobby. Reply STOP to opt out.",
+                config: config(strictness: strictness)
+            )
+            XCTAssertFalse(result.isFiltered, "\(strictness) must not filter idiomatic majority prose")
+            XCTAssertFalse(result.matchedRules.contains("electionTerms"))
+        }
+    }
+
     func testCustomAllowDoesNotBypassHardPolitical() {
         let result = classifier.classify(
             sender: nil,
