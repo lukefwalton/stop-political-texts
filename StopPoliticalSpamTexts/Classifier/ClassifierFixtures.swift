@@ -95,6 +95,12 @@ enum ClassifierFixtures {
             expectation: .filtered
         ),
         ClassifierFixture(
+            id: "news_bait",
+            label: "News-bait political blast",
+            body: "Obama just inspired a House majority MIRACLE! Look at his MAJOR comeback: saveusadem.com/l/DNGV3y DemocracyHQ End2End",
+            expectation: .filtered
+        ),
+        ClassifierFixture(
             id: "shortcode_fundraise",
             label: "Short code + fundraising",
             body: "Donate before midnight to help Democrats.",

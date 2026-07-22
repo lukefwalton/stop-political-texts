@@ -111,6 +111,48 @@ final class PoliticalTextClassifierTests: XCTestCase {
 
     // MARK: - Regression scenarios
 
+    func testNewsBaitBlastFiltersBothModes() {
+        // User-reported miss (2026-07): celebrity news-bait with no
+        // fundraising or GOTV wording. The political signal is the
+        // chamber-control phrase, the DemocracyHQ sign-off, and the
+        // End2End opt-out.
+        let body = "Barack Obama just inspired a House majority MIRACLE! "
+            + "(Trump is FREAKING OUT!!) Look at Obama's MAJOR comeback: "
+            + "saveusadem.com/l/DNGV3y DemocracyHQ End2End"
+        for strictness in [Strictness.normal, .aggressive] {
+            let result = classifier.classify(
+                sender: "+12135550143",
+                body: body,
+                config: config(strictness: strictness)
+            )
+            XCTAssertTrue(result.isFiltered, "\(strictness) should filter news-bait blast")
+            XCTAssertTrue(result.matchedRules.contains("politicalOrg"))
+            XCTAssertTrue(result.matchedRules.contains("electionTerms"))
+            XCTAssertTrue(result.matchedRules.contains("smsMechanics"))
+        }
+    }
+
+    func testNewsBaitBlastFiltersWithoutOrgToggle() {
+        // With the party/committee toggle off, DemocracyHQ stops scoring;
+        // chamber phrase + End2End + 10DLC sender must still reach Normal.
+        var toggles = CategoryToggles.allOn
+        toggles.pacPartyCommittee = false
+        let result = classifier.classify(
+            sender: "+12135550143",
+            body: "Obama just inspired a House majority MIRACLE! saveusadem.com/l/DNGV3y DemocracyHQ End2End",
+            config: config(strictness: .normal, toggles: toggles)
+        )
+        XCTAssertTrue(result.isFiltered)
+    }
+
+    func testEnd2EndAndChamberPhraseNeverFilterAlone() {
+        // end2end as a tech term is SMS mechanics only, which never filters
+        // alone; "house. Majority" across a sentence boundary trips the
+        // chamber phrase but stays below both thresholds on its own.
+        XCTAssertFalse(filtered("Heads up: the end2end test suite is green again.", strictness: .aggressive))
+        XCTAssertFalse(filtered("Open house. Majority of the units are already sold.", strictness: .aggressive))
+    }
+
     func testCustomAllowDoesNotBypassHardPolitical() {
         let result = classifier.classify(
             sender: nil,

@@ -242,6 +242,36 @@
       "note": "Authored synthetic; shares its template with its dem/rep twin (entities swapped). Short-code sender."
     },
     {
+      "id": "pos_fund_dem_009",
+      "body": "Barack Obama just inspired a House majority MIRACLE! (Trump is FREAKING OUT!!) Look at Obama's MAJOR comeback: saveusadem.com/l/DNGV3y DemocracyHQ End2End",
+      "sender": "+12135550143",
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "dem",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_fund_rep_009",
+      "note": "Synthetic re-creation of a user-reported real-world miss (2026-07): celebrity news-bait funneling to a donation page, no fundraising or GOTV wording. Signals are the chamber-control phrase, the brand sign-off, and the End2End opt-out. Shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_fund_rep_009",
+      "body": "Donald Trump just inspired a House majority MIRACLE! (Obama is FREAKING OUT!!) Look at Trump's MAJOR comeback: saveusagop.com/l/DNGV3y GOP HQ End2End",
+      "sender": "+12135550143",
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "rep",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_fund_dem_009",
+      "note": "Synthetic re-creation of a user-reported real-world miss (2026-07); shares its template with its dem/rep twin (entities swapped). GOP HQ mirrors the DemocracyHQ sign-off at identical rule weight (politicalOrg) so the pair scores symmetrically."
+    },
+    {
       "id": "pos_gotv_dem_001",
       "body": "Election Day is tomorrow. Democrats need your vote — find your polling place.",
       "sender": null,
@@ -2280,6 +2310,36 @@
       "baseId": null,
       "pairId": null,
       "note": "Authored synthetic boundary case. vote inside devote/pivotal."
+    },
+    {
+      "id": "bnd_016",
+      "body": "Heads up: the end2end test suite is green again.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "boundary",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic boundary case. end2end as a tech term trips only smsMechanics, which never filters alone."
+    },
+    {
+      "id": "bnd_017",
+      "body": "Open house. Majority of the units are already sold.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "boundary",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic boundary case. house majority matched across a sentence boundary (the matcher allows punctuation between phrase tokens) scores electionTerms alone and must stay below both thresholds."
     },
     {
       "id": "adv_leet_dem_001",

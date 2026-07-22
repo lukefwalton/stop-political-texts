@@ -52,7 +52,11 @@ enum RuleSet {
                 "house republicans", "senate republicans",
                 "congressional republicans", "congressional democrats",
                 // FEC-mandated disclaimers are near-perfect campaign-SMS markers.
-                "paid for by", "not authorized by any candidate"
+                "paid for by", "not authorized by any candidate",
+                // Sign-off brand of a prolific political news-bait SMS
+                // operation — an org marker like ActBlue/WinRed, not a
+                // candidate name.
+                "democracyhq"
             ],
             weight: 4,
             category: .politicalOrganization
@@ -71,7 +75,12 @@ enum RuleSet {
                 "election", "vote", "voter", "voters", "voting", "ballot", "poll",
                 "polling", "primary", "senate", "congress", "congressional",
                 "campaign", "endorse", "endorsement", "election day", "early voting",
-                "absentee ballot", "mail-in ballot", "mail in ballot"
+                "absentee ballot", "mail-in ballot", "mail in ballot",
+                // Chamber-control phrases carried by news-bait blasts that
+                // avoid every fundraising/GOTV word ("a House majority
+                // MIRACLE!"). Bare "house"/"majority" stay off the list.
+                "house majority", "senate majority",
+                "majority in the house", "majority in the senate"
             ],
             weight: 3,
             category: .electionTerms
@@ -141,9 +150,9 @@ enum RuleSet {
             id: "smsMechanics",
             displayName: "SMS mechanics",
             terms: [
-                "reply stop", "stop to end", "stop2end", "txt stop", "text stop",
-                "msg&data rates", "message and data rates", "msg frequency",
-                "reply help", "opt out", "unsubscribe"
+                "reply stop", "stop to end", "stop2end", "end2end", "txt stop",
+                "text stop", "msg&data rates", "message and data rates",
+                "msg frequency", "reply help", "opt out", "unsubscribe"
             ],
             weight: 2,
             category: .smsMechanics
