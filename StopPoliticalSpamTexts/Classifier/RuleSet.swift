@@ -81,11 +81,9 @@ enum RuleSet {
             // every fundraising/GOTV word ("a House majority MIRACLE!").
             // Strict because real copy always writes them contiguously —
             // "Open house: majority of units sold" must not assemble into
-            // one. Bare "house"/"majority" stay off the list entirely.
-            strictPhrases: [
-                "house majority", "senate majority",
-                "majority in the house", "majority in the senate"
-            ],
+            // one. Only the observed forms: idiomatic variants ("majority in
+            // the house") and bare "house"/"majority" stay off the list.
+            strictPhrases: ["house majority", "senate majority"],
             weight: 3,
             category: .electionTerms
         ),

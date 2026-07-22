@@ -2372,6 +2372,21 @@
       "note": "Authored synthetic boundary case. Mid-sentence punctuation variant of bnd_018: chamber-control phrases are strict (whitespace-only between tokens), so house: majority never assembles into one even with opt-out copy and a 10DLC sender present."
     },
     {
+      "id": "bnd_020",
+      "body": "The majority in the house agreed to repaint the lobby. Reply STOP to opt out.",
+      "sender": "+12135550143",
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "boundary",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic boundary case. Idiomatic majority in the house is deliberately not a chamber-control term (only the observed contiguous forms house majority / senate majority are), so opt-out copy plus a 10DLC sender leaves only smsMechanics, which never filters alone."
+    },
+    {
       "id": "adv_leet_dem_001",
       "body": "Dem0crats need your help. D0nate before m1dnight to flip the seat.",
       "sender": null,
