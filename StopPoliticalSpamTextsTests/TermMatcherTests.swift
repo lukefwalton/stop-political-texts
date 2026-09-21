@@ -74,6 +74,30 @@ final class TermMatcherTests: XCTestCase {
         }
     }
 
+    func testStrictAndFlexibleSeparatorsCompileIndependentPatterns() {
+        // Regression: the strict cache key carries a "\0ws:" prefix, and the
+        // pattern builder used to tokenize that key instead of the term. The
+        // first token became "\0ws:house", which no message can contain, so
+        // every Rule.strictPhrases entry matched nothing at all — while the
+        // flexible path, whose key is the bare term, kept working and hid it.
+        // Both directions, and both cache orders, are pinned here.
+        for flexibleFirst in [true, false] {
+            TermMatcher.resetCacheForTesting()
+            if flexibleFirst {
+                XCTAssertTrue(TermMatcher.matches(
+                    term: "house majority", in: "open house: majority of units sold"))
+            }
+            XCTAssertTrue(TermMatcher.matches(
+                term: "house majority", in: "a house majority miracle tonight",
+                separator: .whitespaceOnly))
+            XCTAssertFalse(TermMatcher.matches(
+                term: "house majority", in: "open house: majority of units sold",
+                separator: .whitespaceOnly))
+            XCTAssertTrue(TermMatcher.matches(
+                term: "house majority", in: "open house: majority of units sold"))
+        }
+    }
+
     func testTermDoesNotMatchInsideAWordWithLetterBoundary() {
         // Letter boundaries: substrings inside real words must not match — the
         // contrast with the punctuation cases above is the whole point of the

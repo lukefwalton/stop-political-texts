@@ -130,7 +130,10 @@ enum TermMatcher {
 
         // Slow path: build the pattern and compile NSRegularExpression *outside* the
         // lock, so a slow compile doesn't serialize unrelated classify() calls.
-        let tokens = key
+        // Tokenize the TERM, never the cache key: a strict key carries a
+        // "\0ws:" prefix, and splitting that produced a first token no text
+        // can contain, which silently disabled every strict phrase.
+        let tokens = term.lowercased()
             .split(whereSeparator: { $0 == " " })
             .map { NSRegularExpression.escapedPattern(for: String($0)) }
         guard !tokens.isEmpty else { return nil }
