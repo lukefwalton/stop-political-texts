@@ -872,6 +872,21 @@
       "note": "Authored synthetic. Near-miss for the election-admin allowlist: 'has not been received' must NOT match the past-tense confirmation phrases, so this GOTV pressure text keeps scoring."
     },
     {
+      "id": "pos_gotv_np_004",
+      "body": "Polls close at 8pm - head to the polls before they do. Reply STOP to opt out.",
+      "sender": "+12135550143",
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_gotv",
+      "party": "nonpartisan",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic. Plural-only GOTV idiom: term matching forbids a trailing letter, so the singular poll never covered polls and this shape scored zero on the election rule until the plural was listed."
+    },
+    {
       "id": "pos_mob_np_002",
       "body": "Phone bank tonight: call voters about the special election.",
       "sender": null,
@@ -945,6 +960,21 @@
       "baseId": null,
       "pairId": null,
       "note": "Authored synthetic."
+    },
+    {
+      "id": "pos_survey_np_004",
+      "body": "Hi, it's Ellie with a national research firm. We'd like to include your opinions on current issues in California. Can you answer a few questions and tell us what you think? Start here: statewidepolls.com/RL6vxOQx STOP2END.",
+      "sender": "+17602036456",
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_survey",
+      "party": "nonpartisan",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Synthetic re-creation of a user-reported real-world miss (2026-09): public-opinion poll recruitment carrying no party, election, or fundraising word. The firm name and host are synthetic and score nothing; the signal is the current-issues recruitment phrase plus the STOP2END peer-to-peer sign-off, which together go hard political."
     },
     {
       "id": "pos_fund_np_001",
@@ -2057,6 +2087,21 @@
       "note": "Authored synthetic hard negative."
     },
     {
+      "id": "neg_research_005",
+      "body": "Hi, it's Dana with Northlake Research. We'd like your opinions on your recent hotel stay. Reply STOP to opt out.",
+      "sender": "+17602036456",
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "market_research",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic. Named-interviewer survey recruitment in the same shape as pos_survey_np_004, but about a stay rather than current issues and with the commercial reply STOP convention: recruitment phrasing on its own must never be the political signal."
+    },
+    {
       "id": "neg_gotvcom_001",
       "body": "Election Day Sale! 40% off mattresses, this Tuesday only.",
       "sender": null,
@@ -2445,6 +2490,21 @@
       "baseId": null,
       "pairId": null,
       "note": "Authored synthetic boundary case. Academic midterms score electionTerms alone (3) and must stay below both thresholds. The term carries the same weight-3 ambiguity as primary / poll / campaign: a school or tutoring blast that adds opt-out copy from a 10DLC sender reaches the Normal threshold exactly as those terms already do."
+    },
+    {
+      "id": "bnd_023",
+      "body": "Our Instagram polls are open all week - pick the next flavor.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "boundary",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic boundary case. Non-election polls score electionTerms alone (3) and must stay below both thresholds, the same standing the singular poll already had."
     },
     {
       "id": "adv_leet_dem_001",

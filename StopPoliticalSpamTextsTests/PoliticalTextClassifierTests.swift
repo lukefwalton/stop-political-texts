@@ -337,6 +337,70 @@ final class PoliticalTextClassifierTests: XCTestCase {
         XCTAssertFalse(filtered("Reply STOP2END to unsubscribe.", strictness: .aggressive))
     }
 
+    func testPollsterRecruitmentWithStop2EndIsHardPolitical() {
+        // User-reported miss (2026-09): public-opinion poll recruitment with
+        // no party, election, or fundraising word anywhere in it. Neither half
+        // is political alone — the current-issues recruitment phrase is survey
+        // context, STOP2END is SMS mechanics — but the pair is the signature
+        // of the peer-to-peer platforms pollsters text campaigns from.
+        let body = "Hi, it's Ellie with a national research firm. We'd like to "
+            + "include your opinions on current issues in California. Can you "
+            + "answer a few questions and tell us what you think? "
+            + "Start here: statewidepolls.com/RL6vxOQx STOP2END."
+        for strictness in [Strictness.normal, .aggressive] {
+            let result = classifier.classify(
+                sender: "+17602036456",
+                body: body,
+                config: config(strictness: strictness)
+            )
+            XCTAssertTrue(result.isFiltered, "\(strictness) should filter pollster recruitment")
+            XCTAssertEqual(result.confidence, .high)
+            XCTAssertEqual(result.reason, "hard_political")
+            XCTAssertTrue(result.matchedRules.contains("campaignSurveys"))
+        }
+    }
+
+    func testSurveyRecruitmentAloneIsNotPolitical() {
+        // Same interviewer-introduces-themselves shape, but about a hotel stay
+        // and with the commercial opt-out convention. Recruitment phrasing is
+        // never the political signal on its own — that is what keeps market
+        // research out of Junk.
+        for strictness in [Strictness.normal, .aggressive] {
+            let result = classifier.classify(
+                sender: "+17602036456",
+                body: "Hi, it's Dana with Northlake Research. We'd like your "
+                    + "opinions on your recent hotel stay. Reply STOP to opt out.",
+                config: config(strictness: strictness)
+            )
+            XCTAssertFalse(result.isFiltered, "\(strictness) must not filter market research")
+            XCTAssertFalse(result.matchedRules.contains("campaignSurveys"))
+        }
+    }
+
+    func testPluralPollsScoresElectionTerms() {
+        // Term matching forbids a trailing letter, so "poll" never covered
+        // "polls" — the plural GOTV idiom scored zero on the election rule.
+        let result = classifier.classify(
+            sender: "+12135550143",
+            body: "Polls close at 8pm - head to the polls before they do. Reply STOP to opt out.",
+            config: config(strictness: .normal)
+        )
+        XCTAssertTrue(result.isFiltered)
+        XCTAssertTrue(result.matchedRules.contains("electionTerms"))
+
+        // Non-election plural polls keep the same standing the singular has:
+        // the election rule scores, and 3 alone clears neither threshold.
+        for strictness in [Strictness.normal, .aggressive] {
+            let benign = classifier.classify(
+                sender: nil,
+                body: "Our Instagram polls are open all week - pick the next flavor.",
+                config: config(strictness: strictness)
+            )
+            XCTAssertFalse(benign.isFiltered, "\(strictness) must not filter non-election polls")
+            XCTAssertTrue(benign.matchedRules.contains("electionTerms"))
+        }
+    }
+
     func testShortCodeAloneDoesNotFilter() {
         XCTAssertFalse(filtered("Your appointment is tomorrow at 9am.", sender: "12345", strictness: .aggressive))
     }
