@@ -206,6 +206,105 @@ final class PoliticalTextClassifierTests: XCTestCase {
         }
     }
 
+    /// The reported blast, with the real sender and link swapped for synthetic
+    /// stand-ins (neither is a scoring signal: the number is only a 10DLC
+    /// shape, the host is not in `politicalDomains`).
+    private let shorthandNewsBait = "10X IMPACT 10X IMPACT 10X IMPACT "
+        + "Rachel Maddow spoke out! Read ASAP to learn how you can make "
+        + "10X THE IMPACT on Dems' Midterms >> saveusadem.com/l/H2KUQF End2End"
+
+    func testPartyShorthandNewsBaitFiltersBothModes() {
+        // User-reported miss (2026-09): pundit news-bait with no fundraising,
+        // GOTV, or party-committee wording. The political signal is the
+        // "Dems" shorthand, the "Midterms" election-cycle noun, and the
+        // End2End opt-out sign-off.
+        for strictness in [Strictness.normal, .aggressive] {
+            let result = classifier.classify(
+                sender: "+12025550117",
+                body: shorthandNewsBait,
+                config: config(strictness: strictness)
+            )
+            XCTAssertTrue(result.isFiltered, "\(strictness) should filter party-shorthand news-bait")
+            XCTAssertEqual(result.confidence, .high)
+            XCTAssertTrue(result.matchedRules.contains("politicalOrg"))
+            XCTAssertTrue(result.matchedRules.contains("electionTerms"))
+            XCTAssertTrue(result.matchedRules.contains("smsMechanics"))
+        }
+    }
+
+    func testPartyShorthandScoresSymmetrically() {
+        // The gap this closed was one-sided: "gop" was already an org term,
+        // "dems" was not, so the same template filtered for one party and
+        // sailed through for the other. Both shorthands must land on
+        // politicalOrg at the same weight.
+        let gopMirror = "10X IMPACT 10X IMPACT 10X IMPACT "
+            + "Sean Hannity spoke out! Read ASAP to learn how you can make "
+            + "10X THE IMPACT on the GOP's Midterms >> saveusagop.com/l/H2KUQF End2End"
+        let dem = classifier.classify(
+            sender: "+12025550117", body: shorthandNewsBait, config: config(strictness: .normal)
+        )
+        let rep = classifier.classify(
+            sender: "+12025550117", body: gopMirror, config: config(strictness: .normal)
+        )
+        XCTAssertTrue(dem.isFiltered)
+        XCTAssertTrue(rep.isFiltered)
+        XCTAssertEqual(dem.internalScore, rep.internalScore)
+        XCTAssertEqual(dem.matchedRules, rep.matchedRules)
+    }
+
+    func testPartyShorthandNewsBaitFiltersWithoutOrgToggle() {
+        // With the party/committee toggle off, "Dems" stops scoring; the
+        // election-cycle noun + End2End + 10DLC sender must still reach Normal.
+        var toggles = CategoryToggles.allOn
+        toggles.pacPartyCommittee = false
+        let result = classifier.classify(
+            sender: "+12025550117",
+            body: shorthandNewsBait,
+            config: config(strictness: .normal, toggles: toggles)
+        )
+        XCTAssertTrue(result.isFiltered)
+        // Prove the outcome came from the intended signals, not a toggle-wiring
+        // bug that lets the org rule keep scoring.
+        XCTAssertFalse(result.matchedRules.contains("politicalOrg"))
+        XCTAssertTrue(result.matchedRules.contains("electionTerms"))
+        XCTAssertTrue(result.matchedRules.contains("smsMechanics"))
+        XCTAssertTrue(result.matchedRules.contains("sender_10dlc"))
+    }
+
+    func testDemsShorthandIsBoundaryMatched() {
+        // "dems" inside "modems" / "tandems" must not score politicalOrg —
+        // even with the opt-out copy and 10DLC sender the positive relies on.
+        let bodies = [
+            "We swapped both modems and the wifi is back up. Reply STOP to opt out.",
+            "The bike shop has two tandems left. Reply STOP to opt out."
+        ]
+        for strictness in [Strictness.normal, .aggressive] {
+            for body in bodies {
+                let result = classifier.classify(
+                    sender: "+12135550143",
+                    body: body,
+                    config: config(strictness: strictness)
+                )
+                XCTAssertFalse(result.isFiltered, "\(strictness) must not filter: \(body)")
+                XCTAssertFalse(result.matchedRules.contains("politicalOrg"))
+            }
+        }
+    }
+
+    func testAcademicMidtermsAloneDoesNotFilter() {
+        // "midterms" scores electionTerms (3) like "primary" or "poll" and, on
+        // its own, stays under both thresholds.
+        for strictness in [Strictness.normal, .aggressive] {
+            let result = classifier.classify(
+                sender: nil,
+                body: "Midterms start Monday - the library is open until 2am.",
+                config: config(strictness: strictness)
+            )
+            XCTAssertFalse(result.isFiltered, "\(strictness) must not filter academic midterms")
+            XCTAssertTrue(result.matchedRules.contains("electionTerms"))
+        }
+    }
+
     func testCustomAllowDoesNotBypassHardPolitical() {
         let result = classifier.classify(
             sender: nil,

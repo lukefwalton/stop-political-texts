@@ -272,6 +272,36 @@
       "note": "Synthetic re-creation of a user-reported real-world miss (2026-07); shares its template with its dem/rep twin (entities swapped). GOP HQ mirrors the DemocracyHQ sign-off at identical rule weight (politicalOrg) so the pair scores symmetrically."
     },
     {
+      "id": "pos_fund_dem_010",
+      "body": "10X IMPACT 10X IMPACT 10X IMPACT Rachel Maddow spoke out! Read ASAP to learn how you can make 10X THE IMPACT on Dems' Midterms >> saveusadem.com/l/H2KUQF End2End",
+      "sender": "+12025550117",
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "dem",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_fund_rep_010",
+      "note": "Synthetic re-creation of a user-reported real-world miss (2026-09): pundit news-bait funneling to a match-drive page, with no fundraising, GOTV, or party-committee wording. Signals are the party shorthand, the election-cycle noun, and the End2End opt-out sign-off. Shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_fund_rep_010",
+      "body": "10X IMPACT 10X IMPACT 10X IMPACT Sean Hannity spoke out! Read ASAP to learn how you can make 10X THE IMPACT on the GOP's Midterms >> saveusagop.com/l/H2KUQF End2End",
+      "sender": "+12025550117",
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "rep",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_fund_dem_010",
+      "note": "Synthetic re-creation of a user-reported real-world miss (2026-09); shares its template with its dem/rep twin (entities swapped). GOP mirrors the Dems shorthand at identical rule weight (politicalOrg) so the pair scores symmetrically."
+    },
+    {
       "id": "pos_gotv_dem_001",
       "body": "Election Day is tomorrow. Democrats need your vote — find your polling place.",
       "sender": null,
@@ -2385,6 +2415,36 @@
       "baseId": null,
       "pairId": null,
       "note": "Authored synthetic boundary case. Idiomatic majority in the house is deliberately not a chamber-control term (only the observed contiguous forms house majority / senate majority are), so opt-out copy plus a 10DLC sender leaves only smsMechanics, which never filters alone."
+    },
+    {
+      "id": "bnd_021",
+      "body": "We swapped both modems and the wifi is back up. Reply STOP to opt out.",
+      "sender": "+12135550143",
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "boundary",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic boundary case. dems inside modems (and tandems) must not score politicalOrg, so opt-out copy plus a 10DLC sender leaves only smsMechanics, which never filters alone."
+    },
+    {
+      "id": "bnd_022",
+      "body": "Midterms start Monday - the library is open until 2am.",
+      "sender": null,
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "boundary",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic boundary case. Academic midterms score electionTerms alone (3) and must stay below both thresholds. The term carries the same weight-3 ambiguity as primary / poll / campaign: a school or tutoring blast that adds opt-out copy from a 10DLC sender reaches the Normal threshold exactly as those terms already do."
     },
     {
       "id": "adv_leet_dem_001",

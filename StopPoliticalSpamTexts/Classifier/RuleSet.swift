@@ -44,8 +44,11 @@ enum RuleSet {
             id: "politicalOrg",
             displayName: "Political organization",
             terms: [
-                "democrat", "democrats", "democratic", "republican", "republicans",
-                "gop"
+                // "dems" is the party shorthand campaign SMS actually writes,
+                // and the dem-side mirror of "gop". Letter-boundary matching
+                // keeps it out of "modems" / "tandems".
+                "democrat", "democrats", "democratic", "dems",
+                "republican", "republicans", "gop"
             ] + partyCommitteeMarkers + [
                 "pac", "super pac", "grassroots",
                 "campaign committee", "senate democrats", "house democrats",
@@ -75,7 +78,11 @@ enum RuleSet {
                 "election", "vote", "voter", "voters", "voting", "ballot", "poll",
                 "polling", "primary", "senate", "congress", "congressional",
                 "campaign", "endorse", "endorsement", "election day", "early voting",
-                "absentee ballot", "mail-in ballot", "mail in ballot"
+                "absentee ballot", "mail-in ballot", "mail in ballot",
+                // The election-cycle noun news-bait blasts lean on ("10X THE
+                // IMPACT on Dems' Midterms"). Plural only: a bare "midterm" is
+                // more often an exam than an election.
+                "midterms"
             ],
             // Chamber-control phrases carried by news-bait blasts that avoid
             // every fundraising/GOTV word ("a House majority MIRACLE!").
