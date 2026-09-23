@@ -306,16 +306,24 @@ struct PoliticalTextClassifier {
         if RuleSet.hardPoliticalTerms.contains(where: { TermMatcher.matches(term: $0, in: views) }) {
             return true
         }
-        // stop2end paired with fundraising/political context is also hard.
+        // stop2end paired with fundraising, party, or survey-recruitment
+        // context is also hard. "stop2end" is the opt-out convention of the
+        // peer-to-peer texting platforms campaigns and their pollsters run on;
+        // commercial SMS writes "reply STOP" instead, so the pairing carries
+        // the political weight that neither half carries alone.
         if TermMatcher.matches(term: "stop2end", in: views),
            RuleSet.rules.contains(where: { rule in
-               (rule.category == .fundraising || rule.category == .politicalOrganization)
-               && rule.matches(views)
+               Self.stop2endPairingCategories.contains(rule.category) && rule.matches(views)
            }) {
             return true
         }
         return false
     }
+
+    /// Content categories that turn a `stop2end` sign-off hard political.
+    private static let stop2endPairingCategories: Set<Category> = [
+        .fundraising, .politicalOrganization, .campaignSurveys
+    ]
 
     /// Any non-ballot signal is enough to "pair" a ballot-measure rule.
     private func hasPairingContext(_ matches: [String]) -> Bool {

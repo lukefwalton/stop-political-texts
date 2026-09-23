@@ -44,8 +44,11 @@ enum RuleSet {
             id: "politicalOrg",
             displayName: "Political organization",
             terms: [
-                "democrat", "democrats", "democratic", "republican", "republicans",
-                "gop"
+                // "dems" is the party shorthand campaign SMS actually writes,
+                // and the dem-side mirror of "gop". Letter-boundary matching
+                // keeps it out of "modems" / "tandems".
+                "democrat", "democrats", "democratic", "dems",
+                "republican", "republicans", "gop"
             ] + partyCommitteeMarkers + [
                 "pac", "super pac", "grassroots",
                 "campaign committee", "senate democrats", "house democrats",
@@ -72,10 +75,17 @@ enum RuleSet {
             id: "electionTerms",
             displayName: "Election terms",
             terms: [
+                // "polls" is listed beside "poll": term matching forbids a
+                // trailing letter, so the singular never covered the plural
+                // GOTV idiom ("polls close at 8", "head to the polls").
                 "election", "vote", "voter", "voters", "voting", "ballot", "poll",
-                "polling", "primary", "senate", "congress", "congressional",
+                "polls", "polling", "primary", "senate", "congress", "congressional",
                 "campaign", "endorse", "endorsement", "election day", "early voting",
-                "absentee ballot", "mail-in ballot", "mail in ballot"
+                "absentee ballot", "mail-in ballot", "mail in ballot",
+                // The election-cycle noun news-bait blasts lean on ("10X THE
+                // IMPACT on Dems' Midterms"). Plural only: a bare "midterm" is
+                // more often an exam than an election.
+                "midterms"
             ],
             // Chamber-control phrases carried by news-bait blasts that avoid
             // every fundraising/GOTV word ("a House majority MIRACLE!").
@@ -143,7 +153,12 @@ enum RuleSet {
             terms: [
                 "take our survey", "official survey", "take this survey",
                 "political survey", "official poll", "respond yes", "reply yes",
-                "are you voting", "who are you voting", "who has your vote"
+                "are you voting", "who are you voting", "who has your vote",
+                // Public-opinion recruitment copy. Commercial research asks
+                // about a product, a visit, or a delivery; "current issues" is
+                // the political pollster's subject, not the market
+                // researcher's. The bare word "issues" stays off the list.
+                "opinions on current issues"
             ],
             weight: 3,
             category: .campaignSurveys
