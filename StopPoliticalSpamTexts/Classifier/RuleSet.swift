@@ -77,11 +77,13 @@ enum RuleSet {
         // Kept party-symmetric: both sides' figureheads, same rule, same weight.
         // Same toggle and weight as politicalOrg, so a name alone reaches
         // Aggressive but needs a second signal for Normal. Known cost: the
-        // "trump card" idiom scores too (bnd_024).
+        // "trump card" idiom scores too (bnd_024). Harris is listed as
+        // "kamala": the bare surname is too common (Harris Teeter, Harris
+        // County, "Dr. Harris") — bnd_005 pins that.
         Rule(
             id: "politicalFigure",
             displayName: "Political figure",
-            terms: ["obama", "barack", "trump"],
+            terms: ["obama", "barack", "trump", "biden", "kamala", "vance"],
             weight: 4,
             category: .politicalOrganization
         ),

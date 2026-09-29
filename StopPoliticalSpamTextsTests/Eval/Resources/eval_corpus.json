@@ -2552,6 +2552,21 @@
       "note": "Authored synthetic boundary case, baselined as a known false positive. The trump card idiom scores politicalFigure (4); with opt-out copy and a 10DLC sender it reaches both thresholds. Accepted cost of listing the name; recorded here so it stays visible."
     },
     {
+      "id": "bnd_025",
+      "body": "Hi it's Vance from Acme Roofing, your estimate is ready. Reply STOP to opt out.",
+      "sender": "+12135550143",
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "boundary",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic boundary case, baselined as a known false positive. Vance as a first name scores politicalFigure (4); with opt-out copy and a 10DLC sender it reaches both thresholds. Accepted cost of listing the name; recorded here so it stays visible."
+    },
+    {
       "id": "adv_leet_dem_001",
       "body": "Dem0crats need your help. D0nate before m1dnight to flip the seat.",
       "sender": null,

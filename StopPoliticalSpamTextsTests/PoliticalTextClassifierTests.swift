@@ -301,7 +301,7 @@ final class PoliticalTextClassifierTests: XCTestCase {
     func testFigureheadNewsBaitFiltersBothModes() {
         // User-reported miss (2026-09): "Barack's message" news-bait. Without
         // "Dems" / "Midterms" the figurehead is the only political signal.
-        for name in ["Barack", "Obama", "Trump"] {
+        for name in ["Barack", "Obama", "Trump", "Biden", "Kamala", "Vance"] {
             for strictness in [Strictness.normal, .aggressive] {
                 let result = classifier.classify(
                     sender: "+12025550117",
@@ -488,7 +488,8 @@ final class PoliticalTextClassifierTests: XCTestCase {
         XCTAssertTrue(filtered("Donate before midnight: bit.ly/example", strictness: .normal))
     }
 
-    func testNoBuiltInCandidateNames() {
+    func testHarrisSurnameDoesNotFilter() {
+        // The politicalFigure list carries "kamala", never the bare surname.
         XCTAssertFalse(filtered("Dr. Harris appointment tomorrow.", strictness: .aggressive))
         XCTAssertFalse(filtered("Harris County flood warning.", strictness: .aggressive))
     }
