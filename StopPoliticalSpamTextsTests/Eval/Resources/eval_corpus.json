@@ -302,6 +302,36 @@
       "note": "Synthetic re-creation of a user-reported real-world miss (2026-09); shares its template with its dem/rep twin (entities swapped). GOP mirrors the Dems shorthand at identical rule weight (politicalOrg) so the pair scores symmetrically."
     },
     {
+      "id": "pos_fund_dem_011",
+      "body": "Read ASAP to see Barack's message that we CAN'T IGNORE & make 10X THE IMPACT >> saveusadem.com/l/1SeW0b End2End",
+      "sender": "+12025550117",
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "dem",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_fund_rep_011",
+      "note": "Synthetic variant of a user-reported real-world miss (2026-09): figurehead news-bait with the party shorthand and election noun stripped, so the name is the only political signal beside the End2End opt-out and 10DLC sender. Shares its template with its dem/rep twin (entities swapped)."
+    },
+    {
+      "id": "pos_fund_rep_011",
+      "body": "Read ASAP to see Trump's message that we CAN'T IGNORE & make 10X THE IMPACT >> saveusagop.com/l/1SeW0b End2End",
+      "sender": "+12025550117",
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "rep",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_fund_dem_011",
+      "note": "Synthetic variant of a user-reported real-world miss (2026-09); shares its template with its dem/rep twin (entities swapped). Both names score politicalFigure at identical weight."
+    },
+    {
       "id": "pos_gotv_dem_001",
       "body": "Election Day is tomorrow. Democrats need your vote — find your polling place.",
       "sender": null,
@@ -2505,6 +2535,36 @@
       "baseId": null,
       "pairId": null,
       "note": "Authored synthetic boundary case. Non-election polls score electionTerms alone (3) and must stay below both thresholds, the same standing the singular poll already had."
+    },
+    {
+      "id": "bnd_024",
+      "body": "Play your trump card: 20% off all shoes this weekend. Reply STOP to opt out.",
+      "sender": "+12135550143",
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "boundary",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic boundary case, baselined as a known false positive. The trump card idiom scores politicalFigure (4); with opt-out copy and a 10DLC sender it reaches both thresholds. Accepted cost of listing the name; recorded here so it stays visible."
+    },
+    {
+      "id": "bnd_025",
+      "body": "Hi it's Vance from Acme Roofing, your estimate is ready. Reply STOP to opt out.",
+      "sender": "+12135550143",
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "boundary",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic boundary case, baselined as a known false positive. Vance as a first name scores politicalFigure (4); with opt-out copy and a 10DLC sender it reaches both thresholds. Accepted cost of listing the name; recorded here so it stays visible."
     },
     {
       "id": "adv_leet_dem_001",

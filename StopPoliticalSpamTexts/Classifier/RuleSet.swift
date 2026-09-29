@@ -2,7 +2,8 @@ import Foundation
 
 /// The built-in classifier knowledge: weighted rules, hard-political markers,
 /// and the critical allowlist. This is the only place term lists live, so the
-/// app and the extension always agree. There are no candidate-name lists.
+/// app and the extension always agree. The only names are the short,
+/// party-symmetric `politicalFigure` list — never a candidate roster.
 enum RuleSet {
 
     // MARK: - Shared markers
@@ -59,7 +60,9 @@ enum RuleSet {
                 // Sign-off brand of a prolific political news-bait SMS
                 // operation — an org marker like ActBlue/WinRed, not a
                 // candidate name.
-                "democracyhq"
+                "democracyhq",
+                // Phrase only: bare "heritage" is Heritage Month, banks, tours.
+                "heritage foundation", "heritage action"
             ],
             weight: 4,
             category: .politicalOrganization
@@ -70,6 +73,31 @@ enum RuleSet {
             terms: magaSlogan + ["blue wave", "red wave"],
             weight: 4,
             category: .politicalSlogan
+        ),
+        // The figureheads news-bait blasts front with instead of any party or
+        // election word ("Read ASAP to see Barack's message ... End2End").
+        // Kept party-symmetric: both sides' figureheads, same rule, same weight.
+        // Same toggle and weight as politicalOrg, so a name alone reaches
+        // Aggressive but needs a second signal for Normal. Known cost: the
+        // "trump card" idiom scores too (bnd_024). Harris is listed as
+        // "kamala": the bare surname is too common (Harris Teeter, Harris
+        // County, "Dr. Harris") — bnd_005 pins that.
+        Rule(
+            id: "politicalFigure",
+            displayName: "Political figure",
+            // Beyond the headliners, only surnames near-unique to their
+            // politician; common ones (Sanders, Cruz, Johnson) stay off.
+            // "ocasio cortez" matches the hyphenated form too.
+            terms: [
+                "obama", "barack", "trump", "biden", "kamala", "vance",
+                "pelosi", "schumer", "buttigieg", "ocasio cortez", "newsom",
+                "fetterman", "warnock", "ossoff", "mamdani", "pritzker",
+                "whitmer", "walz",
+                "desantis", "boebert", "gaetz", "hegseth", "tuberville",
+                "ramaswamy", "mcconnell", "soros"
+            ],
+            weight: 4,
+            category: .politicalOrganization
         ),
         Rule(
             id: "electionTerms",
