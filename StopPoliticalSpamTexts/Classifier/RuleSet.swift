@@ -60,7 +60,9 @@ enum RuleSet {
                 // Sign-off brand of a prolific political news-bait SMS
                 // operation — an org marker like ActBlue/WinRed, not a
                 // candidate name.
-                "democracyhq"
+                "democracyhq",
+                // Phrase only: bare "heritage" is Heritage Month, banks, tours.
+                "heritage foundation", "heritage action"
             ],
             weight: 4,
             category: .politicalOrganization
@@ -83,7 +85,17 @@ enum RuleSet {
         Rule(
             id: "politicalFigure",
             displayName: "Political figure",
-            terms: ["obama", "barack", "trump", "biden", "kamala", "vance"],
+            // Beyond the headliners, only surnames near-unique to their
+            // politician; common ones (Sanders, Cruz, Johnson) stay off.
+            // "ocasio cortez" matches the hyphenated form too.
+            terms: [
+                "obama", "barack", "trump", "biden", "kamala", "vance",
+                "pelosi", "schumer", "buttigieg", "ocasio cortez", "newsom",
+                "fetterman", "warnock", "ossoff", "mamdani", "pritzker",
+                "whitmer", "walz",
+                "desantis", "boebert", "gaetz", "hegseth", "tuberville",
+                "ramaswamy", "mcconnell", "soros"
+            ],
             weight: 4,
             category: .politicalOrganization
         ),

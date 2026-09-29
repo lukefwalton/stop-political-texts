@@ -301,7 +301,8 @@ final class PoliticalTextClassifierTests: XCTestCase {
     func testFigureheadNewsBaitFiltersBothModes() {
         // User-reported miss (2026-09): "Barack's message" news-bait. Without
         // "Dems" / "Midterms" the figurehead is the only political signal.
-        for name in ["Barack", "Obama", "Trump", "Biden", "Kamala", "Vance"] {
+        for name in ["Barack", "Obama", "Trump", "Biden", "Kamala", "Vance",
+                     "Pelosi", "Ocasio-Cortez", "DeSantis", "Hegseth"] {
             for strictness in [Strictness.normal, .aggressive] {
                 let result = classifier.classify(
                     sender: "+12025550117",
@@ -353,6 +354,21 @@ final class PoliticalTextClassifierTests: XCTestCase {
                 XCTAssertFalse(result.isFiltered, "\(strictness) must not filter: \(body)")
                 XCTAssertFalse(result.matchedRules.contains("politicalFigure"))
             }
+        }
+    }
+
+    func testHeritageMatchesOnlyAsOrgPhrase() {
+        let org = classifier.classify(
+            sender: nil, body: "Heritage Action alert: tell your senator to act.",
+            config: config(strictness: .aggressive)
+        )
+        XCTAssertTrue(org.matchedRules.contains("politicalOrg"))
+        for body in ["Heritage Month events this weekend. Reply STOP to opt out.",
+                     "Heritage Bank: new savings rates. Reply STOP to opt out."] {
+            let result = classifier.classify(
+                sender: "+12135550143", body: body, config: config(strictness: .aggressive)
+            )
+            XCTAssertFalse(result.isFiltered, "must not filter: \(body)")
         }
     }
 
