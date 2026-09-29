@@ -2,7 +2,8 @@ import Foundation
 
 /// The built-in classifier knowledge: weighted rules, hard-political markers,
 /// and the critical allowlist. This is the only place term lists live, so the
-/// app and the extension always agree. There are no candidate-name lists.
+/// app and the extension always agree. The only names are the short,
+/// party-symmetric `politicalFigure` list — never a candidate roster.
 enum RuleSet {
 
     // MARK: - Shared markers
@@ -70,6 +71,19 @@ enum RuleSet {
             terms: magaSlogan + ["blue wave", "red wave"],
             weight: 4,
             category: .politicalSlogan
+        ),
+        // The figureheads news-bait blasts front with instead of any party or
+        // election word ("Read ASAP to see Barack's message ... End2End").
+        // Kept party-symmetric: both sides' figureheads, same rule, same weight.
+        // Same toggle and weight as politicalOrg, so a name alone reaches
+        // Aggressive but needs a second signal for Normal. Known cost: the
+        // "trump card" idiom scores too (bnd_024).
+        Rule(
+            id: "politicalFigure",
+            displayName: "Political figure",
+            terms: ["obama", "barack", "trump"],
+            weight: 4,
+            category: .politicalOrganization
         ),
         Rule(
             id: "electionTerms",

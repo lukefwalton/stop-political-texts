@@ -291,6 +291,77 @@ final class PoliticalTextClassifierTests: XCTestCase {
         }
     }
 
+    /// The same blast with the party shorthand and election noun stripped:
+    /// only the figurehead, the End2End sign-off, and the 10DLC sender remain.
+    private func figureheadNewsBait(_ name: String) -> String {
+        "Read ASAP to see \(name)'s message that we CAN'T IGNORE & make "
+            + "10X THE IMPACT >> saveusadem.com/l/1SeW0b End2End"
+    }
+
+    func testFigureheadNewsBaitFiltersBothModes() {
+        // User-reported miss (2026-09): "Barack's message" news-bait. Without
+        // "Dems" / "Midterms" the figurehead is the only political signal.
+        for name in ["Barack", "Obama", "Trump"] {
+            for strictness in [Strictness.normal, .aggressive] {
+                let result = classifier.classify(
+                    sender: "+12025550117",
+                    body: figureheadNewsBait(name),
+                    config: config(strictness: strictness)
+                )
+                XCTAssertTrue(result.isFiltered, "\(strictness) should filter \(name) news-bait")
+                XCTAssertTrue(result.matchedRules.contains("politicalFigure"))
+                XCTAssertFalse(result.matchedRules.contains("politicalOrg"))
+            }
+        }
+    }
+
+    func testFigureheadsScoreSymmetrically() {
+        let dem = classifier.classify(
+            sender: "+12025550117", body: figureheadNewsBait("Barack"), config: config(strictness: .normal)
+        )
+        let rep = classifier.classify(
+            sender: "+12025550117", body: figureheadNewsBait("Trump"), config: config(strictness: .normal)
+        )
+        XCTAssertEqual(dem.internalScore, rep.internalScore)
+        XCTAssertEqual(dem.matchedRules, rep.matchedRules)
+    }
+
+    func testFigureheadFollowsOrgToggle() {
+        var toggles = CategoryToggles.allOn
+        toggles.pacPartyCommittee = false
+        let result = classifier.classify(
+            sender: "+12025550117",
+            body: figureheadNewsBait("Trump"),
+            config: config(strictness: .aggressive, toggles: toggles)
+        )
+        XCTAssertFalse(result.isFiltered)
+        XCTAssertFalse(result.matchedRules.contains("politicalFigure"))
+    }
+
+    func testFigureheadNamesAreBoundaryMatched() {
+        // Letters may not abut the name: "trumpet" and "Obamacare" stay clean
+        // even with opt-out copy and a 10DLC sender.
+        let bodies = [
+            "Trumpet lessons start Monday! Reply STOP to opt out.",
+            "Obamacare open enrollment help is free this week. Reply STOP to opt out."
+        ]
+        for strictness in [Strictness.normal, .aggressive] {
+            for body in bodies {
+                let result = classifier.classify(
+                    sender: "+12135550143", body: body, config: config(strictness: strictness)
+                )
+                XCTAssertFalse(result.isFiltered, "\(strictness) must not filter: \(body)")
+                XCTAssertFalse(result.matchedRules.contains("politicalFigure"))
+            }
+        }
+    }
+
+    func testFigureheadAloneFiltersAggressiveOnly() {
+        let body = "Trump wants to hear from you tonight."
+        XCTAssertTrue(filtered(body, strictness: .aggressive))
+        XCTAssertFalse(filtered(body, strictness: .normal))
+    }
+
     func testAcademicMidtermsAloneDoesNotFilter() {
         // "midterms" scores electionTerms (3) like "primary" or "poll" and, on
         // its own, stays under both thresholds.
