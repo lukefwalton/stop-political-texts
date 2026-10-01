@@ -332,6 +332,36 @@
       "note": "Synthetic variant of a user-reported real-world miss (2026-09); shares its template with its dem/rep twin (entities swapped). Both names score politicalFigure at identical weight."
     },
     {
+      "id": "pos_fund_dem_012",
+      "body": "My last-ditch request. - Jordan Avery\n\nI'll be blunt: We're at risk of falling short tonight. If it happens, we'll be forced to make budget cuts. That's a risk we can't afford. So we need folks who want to flip Texas to give in the next hour. Use this link: i.jordanavery.com/K10118uN\n\nStop2End",
+      "sender": "+17375550126",
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "dem",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_fund_rep_012",
+      "note": "Synthetic re-creation of a user-reported real-world miss (2026-10): a candidate-signed fundraising ask with no party, election, or fundraising-list word. Signals are the flip-<state> phrase, the Stop2End sign-off, and the 10DLC sender. Shares its template with its dem/rep twin (state swapped)."
+    },
+    {
+      "id": "pos_fund_rep_012",
+      "body": "My last-ditch request. - Jordan Avery\n\nI'll be blunt: We're at risk of falling short tonight. If it happens, we'll be forced to make budget cuts. That's a risk we can't afford. So we need folks who want to flip Michigan to give in the next hour. Use this link: i.jordanavery.com/K10118uN\n\nStop2End",
+      "sender": "+17375550126",
+      "expect": {
+        "aggressive": "filtered",
+        "normal": "filtered"
+      },
+      "category": "political_fundraising",
+      "party": "rep",
+      "technique": null,
+      "baseId": null,
+      "pairId": "pos_fund_dem_012",
+      "note": "Synthetic re-creation of a user-reported real-world miss (2026-10); shares its template with its dem/rep twin (state swapped). Every state carries the same strict phrase at the same weight."
+    },
+    {
       "id": "pos_gotv_dem_001",
       "body": "Election Day is tomorrow. Democrats need your vote — find your polling place.",
       "sender": null,
@@ -2565,6 +2595,21 @@
       "baseId": null,
       "pairId": null,
       "note": "Authored synthetic boundary case, baselined as a known false positive. Vance as a first name scores politicalFigure (4); with opt-out copy and a 10DLC sender it reaches both thresholds. Accepted cost of listing the name; recorded here so it stays visible."
+    },
+    {
+      "id": "bnd_026",
+      "body": "Want to flip? Texas properties wanted. Reply STOP to opt out.",
+      "sender": "+12135550143",
+      "expect": {
+        "aggressive": "allowed",
+        "normal": "allowed"
+      },
+      "category": "boundary",
+      "party": "none",
+      "technique": null,
+      "baseId": null,
+      "pairId": null,
+      "note": "Authored synthetic boundary case. flip-<state> is a strict phrase: sentence punctuation between flip and the state never assembles it."
     },
     {
       "id": "adv_leet_dem_001",

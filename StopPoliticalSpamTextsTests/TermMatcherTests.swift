@@ -120,10 +120,10 @@ final class TermMatcherTests: XCTestCase {
         // Distinct terms keep the matcher from finding cache hits, so each call
         // forces a regex compile + insert.
         TermMatcher.resetCacheForTesting()
-        for i in 0..<300 {
+        for i in 0..<(TermMatcher.cacheLimit + 44) {
             _ = TermMatcher.matches(term: "term\(i)", in: "irrelevant body")
         }
-        XCTAssertLessThanOrEqual(TermMatcher.cacheCountForTesting, 256,
+        XCTAssertLessThanOrEqual(TermMatcher.cacheCountForTesting, TermMatcher.cacheLimit,
                                  "FIFO cap should keep cache from growing unbounded")
     }
 
@@ -138,18 +138,37 @@ final class TermMatcherTests: XCTestCase {
 
         // Halfway through, re-access "oldest" — a cache hit that does not touch
         // insertionOrder under FIFO. (Under LRU this would promote it to most-recent.)
-        for i in 0..<128 {
+        let half = TermMatcher.cacheLimit / 2
+        for i in 0..<half {
             _ = TermMatcher.matches(term: "filler\(i)", in: "irrelevant")
         }
         _ = TermMatcher.matches(term: "oldest", in: "irrelevant")
-        for i in 128..<256 {
+        for i in half..<TermMatcher.cacheLimit {
             _ = TermMatcher.matches(term: "filler\(i)", in: "irrelevant")
         }
 
         XCTAssertFalse(TermMatcher.cacheContainsForTesting(term: "oldest"),
                        "FIFO eviction should evict the oldest-inserted term even after a cache hit on it")
-        XCTAssertTrue(TermMatcher.cacheContainsForTesting(term: "filler255"),
+        XCTAssertTrue(TermMatcher.cacheContainsForTesting(term: "filler\(TermMatcher.cacheLimit - 1)"),
                       "the newest-inserted filler must still be cached after eviction")
-        XCTAssertLessThanOrEqual(TermMatcher.cacheCountForTesting, 256)
+        XCTAssertLessThanOrEqual(TermMatcher.cacheCountForTesting, TermMatcher.cacheLimit)
+    }
+
+    func testCacheCapCoversBuiltInTermsPlusCustomTerms() {
+        // Every built-in pattern stays cached alongside a full custom-term list,
+        // so the extension never evicts and recompiles on the per-message path.
+        var keys = Set<String>()
+        for rule in RuleSet.rules {
+            rule.terms.forEach { keys.insert($0) }
+            rule.strictPhrases.forEach { keys.insert("strict:" + $0) }
+        }
+        let lists = RuleSet.hardPoliticalTerms + RuleSet.authAllowlist
+            + RuleSet.commerceAllowlist + RuleSet.emergencyAllowlist
+            + RuleSet.electionAdminAllowlist + ["stop2end"]
+        lists.forEach { keys.insert($0) }
+        XCTAssertLessThanOrEqual(
+            keys.count + FilterConfigLimits.maxCustomTerms, TermMatcher.cacheLimit,
+            "Built-in terms (\(keys.count)) plus max custom terms overflow the regex cache"
+        )
     }
 }

@@ -94,12 +94,12 @@ enum TermMatcher {
     }
 
     private static var cache: [String: NSRegularExpression] = [:]
-    /// Insertion order for FIFO eviction. Built-in rules + allowlists carry roughly
-    /// 200 unique terms; the cap is sized to cover those plus a buffer for
-    /// user-supplied custom terms without growing unboundedly across the extension's
-    /// lifetime.
+    /// Insertion order for FIFO eviction. The cap must cover every built-in rule
+    /// and allowlist term plus the maximum custom terms, or the extension
+    /// recompiles regexes on every message; `TermMatcherTests` pins that
+    /// headroom so a growing term list can't silently overflow it.
     private static var insertionOrder: [String] = []
-    private static let cacheLimit = 256
+    static let cacheLimit = 384
     private static let lock = NSLock()
 
     static func matches(term: String, in normalizedText: String,

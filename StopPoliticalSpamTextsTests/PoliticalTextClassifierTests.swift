@@ -378,6 +378,41 @@ final class PoliticalTextClassifierTests: XCTestCase {
         XCTAssertFalse(filtered(body, strictness: .normal))
     }
 
+    private func flipStateAsk(_ state: String) -> String {
+        "My last-ditch request. - Jordan Avery\n\nI'll be blunt: We're at risk of "
+            + "falling short tonight. So we need folks who want to flip \(state) "
+            + "to give in the next hour. Use this link: i.jordanavery.com/K10118uN\n\nStop2End"
+    }
+
+    func testFlipStateAskFiltersBothModes() {
+        // User-reported miss (2026-10): a candidate-signed ask with no party,
+        // election, or fundraising-list word. "flip <state>" is the signal.
+        for state in ["Texas", "North Carolina", "Michigan"] {
+            for strictness in [Strictness.normal, .aggressive] {
+                let result = classifier.classify(
+                    sender: "+17375550126",
+                    body: flipStateAsk(state),
+                    config: config(strictness: strictness)
+                )
+                XCTAssertTrue(result.isFiltered, "\(strictness) should filter flip \(state)")
+                XCTAssertTrue(result.matchedRules.contains("electionTerms"))
+            }
+        }
+    }
+
+    func testFlipStateIsStrictPhrase() {
+        // Sentence punctuation between "flip" and the state never assembles
+        // the phrase, and "flip" alone scores nothing.
+        for body in ["Want to flip? Texas properties wanted. Reply STOP to opt out.",
+                     "Flip the pancakes when bubbles form. Reply STOP to opt out."] {
+            let result = classifier.classify(
+                sender: "+12135550143", body: body, config: config(strictness: .aggressive)
+            )
+            XCTAssertFalse(result.isFiltered, "must not filter: \(body)")
+            XCTAssertFalse(result.matchedRules.contains("electionTerms"))
+        }
+    }
+
     func testAcademicMidtermsAloneDoesNotFilter() {
         // "midterms" scores electionTerms (3) like "primary" or "poll" and, on
         // its own, stays under both thresholds.

@@ -17,6 +17,20 @@ enum RuleSet {
     /// signal (`politicalSlogan`). Declared once for the same reason.
     static let magaSlogan: [String] = ["maga", "make america great again"]
 
+    /// Lowercase US state names, for the "flip <state>" election phrase.
+    static let usStates: [String] = [
+        "alabama", "alaska", "arizona", "arkansas", "california", "colorado",
+        "connecticut", "delaware", "florida", "georgia", "hawaii", "idaho",
+        "illinois", "indiana", "iowa", "kansas", "kentucky", "louisiana",
+        "maine", "maryland", "massachusetts", "michigan", "minnesota",
+        "mississippi", "missouri", "montana", "nebraska", "nevada",
+        "new hampshire", "new jersey", "new mexico", "new york",
+        "north carolina", "north dakota", "ohio", "oklahoma", "oregon",
+        "pennsylvania", "rhode island", "south carolina", "south dakota",
+        "tennessee", "texas", "utah", "vermont", "virginia", "washington",
+        "west virginia", "wisconsin", "wyoming"
+    ]
+
     // MARK: - Hard political (immediate filter, score floor 8)
 
     /// Platform / org markers that filter on their own whenever enabled.
@@ -121,7 +135,14 @@ enum RuleSet {
             // "Open house: majority of units sold" must not assemble into
             // one. Only the observed forms: idiomatic variants ("majority in
             // the house") and bare "house"/"majority" stay off the list.
-            strictPhrases: ["house majority", "senate majority"],
+            //
+            // "flip <state>" is the flip-the-map ask carried by candidate
+            // blasts that avoid every party and fundraising word ("we need
+            // folks who want to flip Texas to give in the next hour").
+            // Every state, not just the one observed: the phrase shape is
+            // fixed and only the slot varies. Strict for the same reason.
+            strictPhrases: ["house majority", "senate majority"]
+                + usStates.map { "flip " + $0 },
             weight: 3,
             category: .electionTerms
         ),
